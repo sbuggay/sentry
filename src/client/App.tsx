@@ -1,6 +1,8 @@
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import Server from "./components/server";
 
 ReactDOM.render(
-	<div>Hello world</div>,
+	<Server></Server>
 	document.getElementById("app")
 );
