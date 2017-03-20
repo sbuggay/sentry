@@ -9,5 +9,4 @@ multiple servers.
 
 ## Server 
 [![npm version](https://badge.fury.io/js/sentryserver.svg)](https://badge.fury.io/js/sentryserver)
-[Sentry Server](https://github.com/sbuggay/sentry/tree/master/server)
 
