@@ -1,2 +1,10 @@
 #!/usr/bin/env node
-require("../src/server.js");
+
+var program = require('commander');
+
+program
+	.option('-c, --config <config>', 'path to config')
+	.option('-p, --port <port>', 'port number')
+	.parse(process.argv);
+
+require("../src/server.js")(program.port, program.config);
