@@ -1,6 +1,7 @@
-const os = require('os');
-const express = require('express');
-const package = require('../package.json');
+const os = require("os");
+const express = require("express");
+const package = require("../package.json");
+const config = require("./config.json")
 const app = express();
 const port = 3333;
 
@@ -22,13 +23,14 @@ let getServerInfo = () => {
 	});
 };
 
-app.get('/', (request, response) => {
+app.get("/", (request, response) => {
+	console.log(os);
 	response.send(getServerInfo());
 });
 
 app.listen(port, (error) => {
 	if (error) {
-		return console.error('Server error', error);
+		return console.error("Server error", error);
 	}
 	console.log(`${package.name}@${package.version} is running on port ${port}`);
 });
