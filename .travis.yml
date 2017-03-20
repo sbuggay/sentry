@@ -1,0 +1,9 @@
+language: node_js
+
+node_js:
+  - "7"
+
+env:
+  - TEST_DIR=client
+  - TEST_DIR=server
+script: cd $TEST_DIR && npm i && npm test
