@@ -11,5 +11,3 @@ multiple servers.
 [![npm version](https://badge.fury.io/js/sentryserver.svg)](https://badge.fury.io/js/sentryserver)
 [Sentry Server](https://github.com/sbuggay/sentry/tree/master/server)
 
-There is also a thin server that only reports system information and does not host the client. 
-Useful for when you have one client but want to monitor multiple systems.
