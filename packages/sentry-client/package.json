@@ -1,6 +1,6 @@
 {
-  "name": "sentry-client",
-  "version": "0.1.1",
+  "name": "sentry-client-dist",
+  "version": "0.1.2",
   "description": "A dashboard for collecting and displaying data from sentry-server-data.",
   "scripts": {
     "build": "webpack -p",
