@@ -2,12 +2,10 @@
 [![Build Status](https://travis-ci.org/sbuggay/sentry.svg?branch=master)](https://travis-ci.org/sbuggay/sentry)
 [![npm version](https://badge.fury.io/js/sentryserver.svg)](https://badge.fury.io/js/sentryserver)
 
-Sentry comprises of two elements, the client and the server.
-The server simply reports system information while the client can be configured to collect the information from
-multiple servers.
+Sentry comprises of three elements, the client, the data server, and the host server.
 
-## Client
+sentry-client-dist [![npm version](https://badge.fury.io/js/sentry-client-dist.svg)](https://badge.fury.io/js/sentry-client-dist)
 
-## Server 
+sentry-server-data [![npm version](https://badge.fury.io/js/sentry-server-data.svg)](https://badge.fury.io/js/sentry-server-data)
 
-
+sentry-server-host [![npm version](https://badge.fury.io/js/sentry-server-host.svg)](https://badge.fury.io/js/sentry-server-host)
