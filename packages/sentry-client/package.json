@@ -1,7 +1,7 @@
 {
   "name": "sentry-client",
   "version": "0.1.0",
-  "description": "",
+  "description": "A dashboard for collecting and displaying data from sentry-server-data.",
   "scripts": {
     "build": "webpack -p",
     "test": "jest",
@@ -11,6 +11,9 @@
     "type": "git",
     "url": ""
   },
+  "files": [
+    "dist"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {

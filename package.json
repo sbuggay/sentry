@@ -1,0 +1,11 @@
+{
+  "name": "sentry",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+
+  },
+  "devDependencies": {
+    "lerna": "2.0.0-beta.38"
+  }
+}

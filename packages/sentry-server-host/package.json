@@ -1,0 +1,13 @@
+{
+  "name": "sentry-server-host",
+  "version": "0.1.0",
+  "description": "A server that hosts and persists the Sentry client.",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^19.0.2"
+  }
+}

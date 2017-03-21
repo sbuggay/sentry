@@ -1,0 +1,24 @@
+{
+  "name": "sentry-server-data",
+  "version": "0.1.1",
+  "description": "A server that provides system and service information.",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bin": {
+    "sentry-server": "./scripts/sentry-server"
+  },
+  "author": "Devan Buggay",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {
+    "jest": "^19.0.2"
+  }
+}
