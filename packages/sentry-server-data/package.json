@@ -1,6 +1,6 @@
 {
   "name": "sentry-server-data",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A server that provides system and service information.",
   "scripts": {
     "test": "jest"

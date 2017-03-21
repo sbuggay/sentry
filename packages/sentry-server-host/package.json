@@ -1,6 +1,6 @@
 {
   "name": "sentry-server-host",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A server that hosts and persists the Sentry client.",
   "scripts": {
     "test": "jest"
