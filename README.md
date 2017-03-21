@@ -1,5 +1,6 @@
 # Sentry
 [![Build Status](https://travis-ci.org/sbuggay/sentry.svg?branch=master)](https://travis-ci.org/sbuggay/sentry)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 Sentry comprises of three elements, the client, the data server, and the host server.
 
