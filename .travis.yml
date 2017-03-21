@@ -5,5 +5,12 @@ node_js:
 
 script: lerna bootstrap && npm test
 
+cache:
+  directories:
+  - node_modules
+  - packages/sentry-client/node_modules
+  - packages/sentry-server-data/node_modules
+  - packages/sentry-server-host/node_modules
+
 notifications:
   email: false
