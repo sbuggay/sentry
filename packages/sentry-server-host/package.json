@@ -1,6 +1,6 @@
 {
   "name": "sentry-server-host",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A server that hosts and persists the Sentry client.",
   "scripts": {
     "server": "node src/index.js",
@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "express": "^4.15.2",
-    "sentry-client-dist": "^0.1.3"
+    "sentry-client-dist": "^0.1.4"
   }
 }

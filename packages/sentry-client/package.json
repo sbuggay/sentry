@@ -1,6 +1,6 @@
 {
   "name": "sentry-client-dist",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A dashboard for collecting and displaying data from sentry-server-data.",
   "scripts": {
     "build": "webpack",
@@ -16,9 +16,7 @@
   ],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
