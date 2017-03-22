@@ -1,4 +1,4 @@
-# Sentry
+# 👁 Sentry
 [![Build Status](https://travis-ci.org/sbuggay/sentry.svg?branch=master)](https://travis-ci.org/sbuggay/sentry)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -20,6 +20,7 @@ npm i -g sentry-server-host
 ```
 
 ### Installing sentry-server-data
+sentry-server-data provides system and service data for the sentry client.
 
 ```bash
 npm i -g sentry-server-data
@@ -42,6 +43,19 @@ For example:
 ```bash
 $ sentry-server-data -p 8080
 sentry-server-data is running on port 8080
+```
+
+### Contributing
+Clone the repository.
+
+Install lerna.
+```bash
+npm i -g lerna
+```
+
+Install dependencies.
+```bash
+lerna bootstrap
 ```
 
 ## Roadmap
