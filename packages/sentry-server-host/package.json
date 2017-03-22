@@ -1,6 +1,6 @@
 {
   "name": "sentry-server-host",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A server that hosts and persists the Sentry client.",
   "scripts": {
     "test": "jest"
@@ -11,6 +11,6 @@
     "jest": "^19.0.2"
   },
   "dependencies": {
-    "sentry-client-dist": "^0.1.2"
+    "sentry-client-dist": "^0.1.3"
   }
 }
