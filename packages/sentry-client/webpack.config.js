@@ -18,15 +18,6 @@ module.exports = {
       query: {
         presets: ['react', 'es2015']
       }
-    }]
-  },
-  preloaders: [
-    {
-      include: /client\/src\/static/,
-      loader: 'file-loader',
-      query: {
-        name: '[path][name].[ext]'
-      }
-    }
-  ]
+    }],
+  }
 };
