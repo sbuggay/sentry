@@ -5,7 +5,7 @@
   "scripts": {
     "bootstrap": "lerna boostrap",
     "clean": "lerna clean",
-    "publish": "lerna publish",
+    "publish": "lerna publish --skip-git",
     "test": "jest"
   },
   "jest": {
