@@ -1,13 +1,18 @@
 {
+  "name": "sentry",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
+    "bootstrap": "lerna boostrap",
+    "clean": "lerna clean",
+    "publish": "lerna publish",
     "test": "jest"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
     "collectCoverage": true
   },
-  "dependencies": {
+  "devDependencies": {
     "jest": "^19.0.2",
     "lerna": "2.0.0-beta.38"
   }
