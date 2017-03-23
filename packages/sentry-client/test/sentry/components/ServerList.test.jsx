@@ -1,10 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Server from "../src/components/Server";
+import { ServerList } from "../../../src/sentry/components/ServerList";
 
-test("test server component", () => {
+test("test ServerList component", () => {
 	const component = renderer.create(
-		<Server></Server>
+		<ServerList/>
 	);
 
 	let tree = component.toJSON();

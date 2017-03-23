@@ -1,8 +1,8 @@
 import * as React from "react";
 
-class Server extends React.Component {
+export class Server extends React.Component {
 	render() {
-		return <h1>test</h1>;
+		return <h1>{this.props.hostname}</h1>;
 	}
 }
 
