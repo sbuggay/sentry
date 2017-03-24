@@ -5,8 +5,7 @@
   "description": "A dashboard for collecting and displaying data from sentry-server-data.",
   "scripts": {
     "build": "webpack",
-    "test": "jest",
-    "updateSnapshot": "jest updateSnapshot"
+    "serve": "webpack"
   },
   "repository": {
     "type": "git",
@@ -26,7 +25,6 @@
     "babel-preset-react": "^6.16.0",
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
-    "jest": "^19.0.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",

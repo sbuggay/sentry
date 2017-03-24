@@ -8,9 +8,6 @@
   },
   "author": "",
   "license": "MIT",
-  "devDependencies": {
-    "jest": "^19.0.2"
-  },
   "dependencies": {
     "express": "^4.15.2",
     "sentry-client-dist": "^0.1.6"
