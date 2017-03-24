@@ -1,6 +1,7 @@
 {
-  "name": "sentry-client-dist",
-  "version": "0.1.5",
+  "name": "sentry-client",
+  "private": true,
+  "version": "0.0.0",
   "description": "A dashboard for collecting and displaying data from sentry-server-data.",
   "scripts": {
     "build": "webpack",
@@ -15,7 +16,7 @@
     "dist"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.21.0",
@@ -32,6 +33,7 @@
     "react-test-renderer": "^15.4.2",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^2.4.2"
   }
 }

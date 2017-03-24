@@ -3,14 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "bootstrap": "lerna boostrap",
+    "bootstrap": "lerna bootstrap",
     "clean": "lerna clean",
     "publish": "lerna publish --skip-git",
     "test": "jest"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/src/**/*.js",
+      "**/src/**/*.jsx",
+      "!**/test/*.js"
+    ]
   },
   "devDependencies": {
     "babel-preset-stage-2": "^6.22.0",

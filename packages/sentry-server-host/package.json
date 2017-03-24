@@ -1,18 +1,18 @@
 {
   "name": "sentry-server-host",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A server that hosts and persists the Sentry client.",
   "scripts": {
     "server": "node src/index.js",
     "test": "jest"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "jest": "^19.0.2"
   },
   "dependencies": {
     "express": "^4.15.2",
-    "sentry-client-dist": "^0.1.5"
+    "sentry-client-dist": "^0.1.6"
   }
 }

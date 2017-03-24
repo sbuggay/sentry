@@ -1,6 +1,6 @@
 const os = require("os");
 const express = require("express");
-const package = require("../package.json");
+const packageConfig = require("../package.json");
 const config = require("./config.json")
 const app = express();
 
@@ -31,7 +31,7 @@ const server = (port = 3333, config = "./config") => {
 		if (error) {
 			return console.error("Server error", error);
 		}
-		console.log(`${package.name}@${package.version} is running on port ${port}`);
+		console.log(`${packageConfig.name}@${packageConfig.version} is running on port ${port}`);
 	});
 };
 
