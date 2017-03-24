@@ -4,22 +4,22 @@ const package = require("../package.json");
 const config = require("./config.json")
 const app = express();
 
-const server = (port = 3333, config = "./config") => {
-	const staticInfo = {
-		arch: os.arch(),
-		platform: os.platform(),
-		release: os.release(),
-		type: os.type(),
-		endianness: os.endianness()
-	};
+const staticInfo = {
+	arch: os.arch(),
+	platform: os.platform(),
+	release: os.release(),
+	type: os.type(),
+	endianness: os.endianness()
+};
 
+const server = (port = 3333, config = "./config") => {
 	let getServerInfo = () => {
 		return Object.assign({}, staticInfo, {
 			hostname: os.hostname(),
 			uptime: os.uptime(),
 			freemem: os.freemem(),
 			totalmem: os.totalmem(),
-			cpus: os.cpus(),
+			cpus: os.cpus()
 		});
 	};
 
@@ -35,4 +35,7 @@ const server = (port = 3333, config = "./config") => {
 	});
 };
 
-module.exports = server;
+module.exports = {
+	staticInfo,
+	server
+};
