@@ -1,8 +1,9 @@
 import * as React from "react";
+import Status from "./Status";
 
 export class Server extends React.Component {
 	render() {
-		return <h1>{this.props.hostname}</h1>;
+		return <div><Status /> {this.props.info}</div>;
 	}
 }
 

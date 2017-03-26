@@ -1,7 +1,8 @@
 import * as actionTypes from "./actionTypes";
 
 export const initialState = {
-	title: "test title"
+	title: "test title",
+	servers: []
 };
 
 const reducer = (state = initialState, action) => {

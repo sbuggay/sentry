@@ -1,14 +1,18 @@
-require("file-loader?name=[name].[ext]!../static/index.html");
+require("file-loader?name=[name].[ext]!../dist/index.html");
 
 import React from "react";
 import * as ReactDOM from "react-dom";
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+
 import App from "./sentry/components/App";
 
-import reducer from "./sentry/reducer";
+import rootReducer from "./rootReducer";
 
-let store = createStore(reducer);
+const store = createStore(
+	rootReducer,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
 	<Provider store={store}>

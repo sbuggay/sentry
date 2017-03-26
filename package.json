@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "clean": "lerna clean",
+    "bootstrap": "npm i && lerna bootstrap",
+    "clean": "lerna clean --yes",
     "publish": "lerna publish --skip-git",
     "test": "jest"
   },
@@ -12,8 +12,7 @@
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/src/**/*.js",
-      "**/src/**/*.jsx",
+      "**/src/**/*.js*",
       "!**/test/*.js"
     ]
   },

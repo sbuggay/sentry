@@ -1,9 +1,32 @@
 import * as React from "react";
+import { connect } from "react-redux";
+
+import ServerList from "./ServerList";
+import ServerInput from "./ServerInput";
+import Status from "./Status";
+
+import { addServer } from "../actions";
+
 
 class App extends React.Component {
+	onServerInputSubmit(values) {
+		this.props.addServer(values.hostname);
+	}
+
 	render() {
-		return <h1>sentry</h1>;
+		return <div>
+			<ServerInput onSubmit={this.onServerInputSubmit.bind(this)} />
+			<ServerList />
+		</div>;
 	}
 }
 
-export default connect()(App);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addServer: (values) => {
+			dispatch(addServer(values));
+		}
+	};
+};
+
+export default connect(undefined, mapDispatchToProps)(App);
