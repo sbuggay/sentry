@@ -7,9 +7,25 @@ export const addServer = (payload) => {
 	}
 };
 
-export const removeServer = (serverHostname) => {
+export const removeServer = (payload) => {
 	return {
 		type: actionsTypes.REMOVE_SERVER,
 		payload
 	};
-}
+};
+
+export const editServer = (payload) => {
+	return {
+		type: actionsTypes.EDIT_SERVER,
+		payload
+	};
+};
+
+export const pollServer = (payload) => {
+	return {
+		type: actionsTypes.POLL_SERVER,
+		payload
+	};
+};
+
+
