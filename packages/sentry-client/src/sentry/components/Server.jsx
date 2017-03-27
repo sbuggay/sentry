@@ -2,9 +2,6 @@ import * as React from "react";
 import Status from "./Status";
 
 export class Server extends React.Component {
-
-	
-
 	render() {
 		let style = {
 			width: "220px",
