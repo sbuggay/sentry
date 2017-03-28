@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, reduxForm } from "redux-forms";
+import { Field, reduxForm } from "redux-form";
 
 export class ServerInput extends React.Component {
 	render() {

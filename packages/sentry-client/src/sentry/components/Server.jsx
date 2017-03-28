@@ -1,7 +1,14 @@
 import * as React from "react";
 import Status from "./Status";
 
+import { removeServer } from "../actions";
+import { connect } from "react-redux";
+
 export class Server extends React.Component {
+	removeServer(){
+		this.props.removeServer(this.props.index);
+	}
+
 	render() {
 		let style = {
 			width: "220px",
@@ -9,8 +16,24 @@ export class Server extends React.Component {
 			border: "1px solid black",
 			display: "flex"
 		};
-		return <div style={style}><Status /> {this.props.info}</div>;
+		return <div style={style}>
+			<Status />
+			{this.props.server}
+			<div className="fa fa-times" onClick={() => this.removeServer.bind(this)}></div>
+		</div>;
 	}
 }
 
-export default Server;
+const mapStateToProps = (state) => {
+	return {
+		servers: state.app.servers
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		removeServer: () => dispatch(removeServer())
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Server);

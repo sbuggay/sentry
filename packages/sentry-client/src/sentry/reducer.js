@@ -19,7 +19,11 @@ const reducer = (state = initialState, action) => {
 		};
 	case actionTypes.REMOVE_SERVER:
 		return {
-			...state
+			...state,
+			servers: [
+				...state.servers.slice(0, action.payload),
+				...state.servers.slice(action.payload + 1)
+			]
 		};
 	default:
 		return state;

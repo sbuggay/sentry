@@ -22,8 +22,6 @@ class App extends React.Component {
 			<Status status={status.STATUS_MAINTENANCE} />
 			<ServerInput onSubmit={this.onServerInputSubmit.bind(this)} />
 			<ServerList />
-
-			
 		</div>;
 	}
 }
