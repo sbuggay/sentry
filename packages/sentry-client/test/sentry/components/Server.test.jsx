@@ -15,7 +15,6 @@ test('Server', () => {
 	const initialState = {
 		app: {
 			servers: [{}, {}],
-			index: 1
 		}
 	};
 
