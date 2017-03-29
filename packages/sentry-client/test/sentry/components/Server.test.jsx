@@ -18,11 +18,11 @@ test('Server', () => {
 		}
 	};
 
-	let store, container;
+	let store, component;
 
 	beforeEach(()=>{
 		store = mockStore(initialState);
-		container = shallow(<Server store={store} />);
+		component = shallow(<Server store={store} />);
 	})
 
 	it('has a button to remove a server', () => {
