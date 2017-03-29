@@ -14,16 +14,16 @@ test('Server', () => {
 	const mockStore = configureStore();
 	const initialState = {
 		app: {
-			servers: [{}, {}],
+			servers: [{}, {}]
 		}
 	};
 
 	let store, component;
 
-	beforeEach(()=>{
+	beforeEach(() => {
 		store = mockStore(initialState);
 		component = shallow(<Server store={store} />);
-	})
+	});
 
 	it('has a button to remove a server', () => {
 		expect(component.contains(
