@@ -22,7 +22,7 @@ test('Server', () => {
 
 	beforeEach(()=>{
 		store = mockStore(initialState);
-		container = shallow(<ConnectedServer store={store} />);
+		container = shallow(<Server store={store} />);
 	})
 
 	it('has a button to remove a server', () => {
