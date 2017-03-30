@@ -13,6 +13,7 @@ import { createStore } from 'redux';
 test('ConnectedServer', () => {
 	const mockStore = configureStore();
 	const initialState = {
+		index: 0,
 		app: {
 			servers: [{}, {}]
 		}
