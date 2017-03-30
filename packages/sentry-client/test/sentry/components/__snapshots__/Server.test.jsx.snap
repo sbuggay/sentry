@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Server 1`] = `
+<div
+  style={
+    Object {
+      "border": "1px solid black",
+      "display": "flex",
+      "height": "40px",
+      "width": "220px",
+    }
+  }
+>
+  <i
+    aria-hidden="true"
+    className="fa fa-exclamation-triangle"
+    style={
+      Object {
+        "color": "#951A1D",
+      }
+    }
+  />
+  <div
+    className="fa fa-times"
+    onClick={[Function]}
+  />
+</div>
+`;

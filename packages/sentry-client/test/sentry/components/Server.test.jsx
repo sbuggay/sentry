@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
-import Server from '../../../src/sentry/components/Server';
+import ConnectedServer, { Server } from '../../../src/sentry/components/Server';
 
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
@@ -10,7 +10,7 @@ import reducer from '../../../src/sentry/reducer';
 import { removeServer } from '../../../src/sentry/actions';
 import { createStore } from 'redux';
 
-test('Server', () => {
+test('ConnectedServer', () => {
 	const mockStore = configureStore();
 	const initialState = {
 		app: {
@@ -18,15 +18,15 @@ test('Server', () => {
 		}
 	};
 
-	let store, component;
+	let store, wrapper;
 
 	beforeEach(() => {
 		store = mockStore(initialState);
-		component = shallow(<Server store={store} />);
+		wrapper = shallow(<ConnectedServer store={store} />);
 	});
 
 	it('has a button to remove a server', () => {
-		expect(component.contains(
+		expect(wrapper.contains(
 			<div>
 				<div className='fa fa-times'></div>
 			</div>
@@ -39,4 +39,13 @@ test('Server', () => {
 
 		expect(action[0].type).toBe('REMOVE_SERVER');
 	});
+});
+
+test('Server', () => {
+	const component = renderer.create(
+		<Server hostname='TEST_HOSTNAME' />
+	);
+
+	let tree = component.toJSON();
+	expect(tree).toMatchSnapshot();
 });
