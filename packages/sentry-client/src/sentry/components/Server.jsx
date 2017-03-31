@@ -5,8 +5,9 @@ import { removeServer } from "../actions";
 import { connect } from "react-redux";
 
 export class Server extends React.Component {
+
 	removeServer(){
-		this.props.removeServer(this.props.index);
+		this.props.removeServer(this.props.key);
 	}
 
 	render() {
@@ -17,8 +18,8 @@ export class Server extends React.Component {
 			display: "flex"
 		};
 		return <div style={style}>
-			<Status />
-			{this.props.server}
+			<Status status={this.props.server.status} />
+			{this.props.server.url}
 			<div className="fa fa-times" onClick={() => this.removeServer.bind(this)}></div>
 		</div>;
 	}

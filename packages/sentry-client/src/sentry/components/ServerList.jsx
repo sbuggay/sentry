@@ -13,8 +13,8 @@ export class ServerList extends React.Component {
 	render() {
 		return (
 			<div>
-				{this.props.servers.map((server, index) => {
-					return <Server key={index} server={server} index={index} />;
+				{Object.keys(this.props.servers).map((key, index) => {
+					return <Server key={index} server={this.props.servers[key]}/>;
 				})}
 			</div>
 		);
