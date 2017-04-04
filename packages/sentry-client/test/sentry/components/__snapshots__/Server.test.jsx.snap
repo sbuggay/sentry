@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test Server component 1`] = `
+exports[`Server 1`] = `
 <div
   style={
     Object {
@@ -20,6 +20,9 @@ exports[`test Server component 1`] = `
       }
     }
   />
-   
+  <div
+    className="fa fa-times"
+    onClick={[Function]}
+  />
 </div>
 `;
