@@ -2,31 +2,41 @@ import * as actionTypes from "./actionTypes";
 
 export const initialState = {
 	title: "test title",
-	servers: []
+	servers: {}
 };
 
 const reducer = (state = initialState, action) => {
 	let payload = action.payload;
 
 	switch (action.type) {
-	case actionTypes.ADD_SERVER:
-		return {
-			...state,
-			servers: [
-				...state.servers,
-				payload
-			]
-		};
-	case actionTypes.REMOVE_SERVER:
-		return {
-			...state,
-			servers: [
-				...state.servers.slice(0, action.payload),
-				...state.servers.slice(action.payload + 1)
-			]
-		};
-	default:
-		return state;
+		case actionTypes.ADD_SERVER:
+			return {
+				...state,
+				servers: {
+					...state.servers,
+					[payload.id]: {...payload.server, id: payload.id}
+				}
+			};
+		case actionTypes.REMOVE_SERVER:
+			let { [payload.id]: deleted, ...newState } = newState;
+
+			return {
+				...state,
+				servers: newState
+			};
+		case actionTypes.POLL_SERVER:
+			return {
+				...state,
+				servers: {
+					...state.servers,
+					[payload.id]: {
+						...state.servers[payload.id],
+						status: payload.status
+					}
+				}
+			};
+		default:
+			return state;
 	}
 };
 

@@ -21,7 +21,7 @@ export class Server extends React.Component {
 	render() {
 		return <div style={this.getStyles()}>
 			<Status />
-			{this.props.server}
+			{this.props.server.url}
 			<div className="fa fa-times" onClick={() => this.removeServer.bind(this)}></div>
 		</div>;
 	}
