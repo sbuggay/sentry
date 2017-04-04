@@ -1,10 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { ServerList } from "../../../src/sentry/components/ServerList";
+import sinon from "sinon";
 
-test("test ServerList component", () => {
+test("ServerList", () => {
 	const component = renderer.create(
-		<ServerList/>
+		<ServerList servers={[]} />
 	);
 
 	let tree = component.toJSON();
