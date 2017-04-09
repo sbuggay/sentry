@@ -4,7 +4,16 @@ import Status from "./Status";
 import { removeServer } from "../actions";
 import { connect } from "react-redux";
 
-export class Server extends React.Component {
+interface IStateProps {
+	server: any;
+	index: Number;
+};
+
+interface IDispatchProps {
+	removeServer: Function;
+};
+
+export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 	getStyles() {
 		return {
 			width: "220px",
@@ -20,23 +29,18 @@ export class Server extends React.Component {
 
 	render() {
 		return <div style={this.getStyles()}>
-			<Status />
+			<Status status={this.props.server.status} />
 			{this.props.server.url}
 			<div className="fa fa-times" onClick={() => this.removeServer.bind(this)}></div>
 		</div>;
 	}
 }
 
-const mapStateToProps = (state) => {
-	return {
-		servers: state.app.servers
-	};
-};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		removeServer: () => dispatch(removeServer())
+		removeServer: () => dispatch(removeServer)
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Server);
+export default connect<IStateProps, IDispatchProps, any>(undefined, mapDispatchToProps)(Server);

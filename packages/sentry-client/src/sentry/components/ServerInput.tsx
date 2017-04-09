@@ -1,7 +1,11 @@
-import React from "react";
+import * as React from "react";
 import { Field, reduxForm } from "redux-form";
 
-export class ServerInput extends React.Component {
+interface IStateProps {
+	handleSubmit: any;
+}
+
+export class ServerInput extends React.Component<IStateProps, any> {
 	render() {
 		const { handleSubmit } = this.props;
 		return (

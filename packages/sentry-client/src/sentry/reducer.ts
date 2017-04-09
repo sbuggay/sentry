@@ -14,16 +14,14 @@ const reducer = (state = initialState, action) => {
 				...state,
 				servers: {
 					...state.servers,
-					[payload.id]: {...payload.server, id: payload.id}
+					[payload.id]: { ...payload.server, id: payload.id }
 				}
 			};
 		case actionTypes.REMOVE_SERVER:
-			let { [payload.id]: deleted, ...newState } = newState;
-
 			return {
-				...state,
-				servers: newState
+				...state
 			};
+		
 		case actionTypes.POLL_SERVER:
 			return {
 				...state,

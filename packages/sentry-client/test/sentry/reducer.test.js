@@ -4,7 +4,7 @@ import reducer, {
 	initialState
 } from "../../src/sentry/reducer";
 
-test("sentry reducer", () => {
+describe("sentry reducer", () => {
 	it("should return the initial state", () => {
 		expect(reducer(undefined, {})).toEqual(intialState);
 	});

@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import { ServerList } from "../../../src/sentry/components/ServerList";
 
-test("ServerList", () => {
+describe("ServerList", () => {
 	const component = renderer.create(
 		<ServerList/>
 	);

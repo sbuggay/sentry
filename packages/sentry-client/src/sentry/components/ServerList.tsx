@@ -5,7 +5,16 @@ import Server from "./Server";
 
 import { initializePolling } from "../actions";
 
-export class ServerList extends React.Component {
+interface IServerListProps {
+	servers?: Array<any>;
+	initializePolling?: Function;
+};
+
+export class ServerList extends React.Component<IServerListProps, any> {
+	constructor(props: any) {
+		super(props);
+	}
+
 	componentDidMount() {
 		this.props.initializePolling();
 	}
@@ -14,7 +23,7 @@ export class ServerList extends React.Component {
 		return (
 			<div>
 				{Object.keys(this.props.servers).map((key, index) => {
-					return <Server key={index} server={this.props.servers[key]}/>;
+					return <Server key={index} server={this.props.servers[key]} />;
 				})}
 			</div>
 		);
@@ -33,4 +42,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ServerList);
+export default connect<IServerListProps, any, any>(mapStateToProps, mapDispatchToProps)(ServerList);

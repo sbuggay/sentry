@@ -2,7 +2,11 @@ import * as React from "react";
 
 import { STATUS } from "../constants/status";
 
-export class Status extends React.Component {
+interface IStatusProps {
+	status: any;
+}
+
+export class Status extends React.Component<IStatusProps, any> {
 	render() {
 		let className, style;
 

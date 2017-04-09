@@ -10,7 +10,7 @@ import reducer from "../../../src/sentry/reducer";
 import { removeServer } from "../../../src/sentry/actions";
 import { createStore } from "redux";
 
-test("ConnectedServer", () => {
+describe("ConnectedServer", () => {
 	const mockStore = configureStore();
 	const initialState = {
 		index: 0,

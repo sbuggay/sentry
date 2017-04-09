@@ -9,7 +9,12 @@ import { addServer } from "../actions";
 
 import { STATUS } from "../constants/status";
 
-class App extends React.Component {
+interface IDispatchProps {
+	addServer: Function;
+};
+
+
+class App extends React.Component<IDispatchProps, any> {
 	onServerInputSubmit(values) {
 		this.props.addServer(values.hostname);
 	}
@@ -34,4 +39,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(undefined, mapDispatchToProps)(App);
+export default connect<any, IDispatchProps, any>(undefined, mapDispatchToProps)(App);

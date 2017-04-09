@@ -1,7 +1,7 @@
 import * as actions from "../../src/sentry/actions";
 import * as actionTypes from "../../src/sentry/actionTypes";
 
-test("actions", () => {
+describe("actions", () => {
 	it("should create an action to add a server", () => {
 		const text = "TEST_HOSTNAME";
 		console.log(actions.addServer("TEST"));

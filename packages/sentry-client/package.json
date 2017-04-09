@@ -19,6 +19,9 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "@types/react-dom": "^0.14.23",
+    "@types/react-redux": "^4.4.38",
+    "awesome-typescript-loader": "^3.1.2",
     "babel-core": "^6.21.0",
     "babel-jest": "^19.0.0",
     "babel-loader": "^6.2.10",
@@ -36,9 +39,11 @@
     "react-redux": "^5.0.3",
     "react-test-renderer": "^15.4.2",
     "redux": "^3.6.0",
+    "redux-actions": "^2.0.1",
     "redux-form": "^6.6.0",
     "redux-mock-store": "^1.2.2",
     "redux-thunk": "^2.2.0",
+    "typescript": "^2.2.2",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^2.4.2"
   }

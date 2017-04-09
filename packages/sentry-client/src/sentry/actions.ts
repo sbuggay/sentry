@@ -1,8 +1,8 @@
 import * as actionsTypes from "./actionTypes";
 
 import { POLLING_TIME } from "./constants/polling";
-import { guid } from "./lib/utils";
 import { STATUS } from "./constants/status";
+import { guid } from "./lib/utils";
 
 export const addServer = (server) => {
 	let id = guid();
@@ -17,6 +17,7 @@ export const addServer = (server) => {
 				}
 			}
 		});
+		dispatch(pollServer(id));
 	};
 };
 
@@ -84,6 +85,8 @@ export const pollServer = (server) => {
 					body: response.body,
 				}
 			});
+		}).catch(reason => {
+			console.error(reason);
 		});
 	};
 };
