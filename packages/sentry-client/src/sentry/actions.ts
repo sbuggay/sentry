@@ -1,10 +1,12 @@
 import * as actionsTypes from "./actionTypes";
 
+import { Action } from "./actionTypes";
+
 import { POLLING_TIME } from "./constants/polling";
 import { STATUS } from "./constants/status";
 import { guid } from "./lib/utils";
 
-export const addServer = (server) => {
+export const addServer = (server: string) => {
 	let id = guid();
 	return (dispatch) => {
 		dispatch({

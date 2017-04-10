@@ -1,5 +1,7 @@
 import * as actionTypes from "./actionTypes";
 
+import { handleAction } from "redux-actions";
+
 export const initialState = {
 	title: "test title",
 	servers: {}

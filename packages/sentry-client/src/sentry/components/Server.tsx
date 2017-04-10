@@ -37,7 +37,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Function) => {
 	return {
 		removeServer: () => dispatch(removeServer)
 	};

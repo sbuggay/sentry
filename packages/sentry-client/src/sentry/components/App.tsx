@@ -15,7 +15,7 @@ interface IDispatchProps {
 
 
 class App extends React.Component<IDispatchProps, any> {
-	onServerInputSubmit(values) {
+	onServerInputSubmit(values: any) {
 		this.props.addServer(values.hostname);
 	}
 
@@ -31,9 +31,9 @@ class App extends React.Component<IDispatchProps, any> {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
 	return {
-		addServer: (values) => {
+		addServer: (values: any) => {
 			dispatch(addServer(values));
 		}
 	};
