@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import { shallow, mount } from "enzyme";
-import renderer from "react-test-renderer";
+import * as renderer from "react-test-renderer";
 import ConnectedServer, { Server } from "../../../src/sentry/components/Server";
 
 import configureStore from "redux-mock-store";
@@ -19,7 +19,7 @@ describe("ConnectedServer", () => {
 		}
 	};
 
-	let store, wrapper;
+	let store: any, wrapper: any;
 
 	beforeEach(() => {
 		store = mockStore(initialState);
@@ -36,12 +36,12 @@ describe("ConnectedServer", () => {
 
 	it("triggers the action on click", () => {
 		const onClick = sinon.spy();
-    wrapper = mount(
-      <ConnectedServer onClick={onClick} />
-    );
+		wrapper = mount(
+			<ConnectedServer onClick={onClick} />
+		);
 
-    wrapper.find(".fa-times").simulate("click");
-    expect(onButtonClick.calledOnce).to.equal(true);
+		wrapper.find(".fa-times").simulate("click");
+		expect(onButtonClick.calledOnce).to.equal(true);
 	});
 
 	it("checks removeServer on dispatch", () => {
