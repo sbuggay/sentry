@@ -8,19 +8,19 @@ module.exports = {
 	},
 	devtool: "source-map",
 	resolve: {
-		extensions: [".ts", ".tsx", ".js", ".jsx"]
+		extensions: ["", ".ts", ".tsx", ".js", ".jsx"]
 	},
 	module: {
 		loaders: [
 			{
 				test: /\.jsx?/,
 				loader: "babel-loader",
-				exclude: [/node_modules/, /test/]
+				exclude: /node_modules/
 			},
 			{
 				test: /\.tsx?$/,
 				loader: "awesome-typescript-loader",
-				exclude: [/node_modules/, /test/]
+				exclude: /node_modules/
 			}
 		]
 	}

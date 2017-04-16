@@ -1,20 +1,31 @@
 import * as React from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, Form } from "redux-form";
 
 interface IStateProps {
-	handleSubmit: any;
-}
+	onSubmit?: () => void;
+	handleSubmit?: () => void;
+	fields?: {
+		url: string;
+	};
+};
 
 export class ServerInput extends React.Component<IStateProps, any> {
 	render() {
-		const { handleSubmit } = this.props;
+		const {
+			handleSubmit,
+			fields: {
+				url
+			}
+		} = this.props;
 		return (
-			<form onSubmit={handleSubmit}>
+			<Form onSubmit={handleSubmit}>
 				<Field name="hostname" component="input" type="text" />
 				<button type="submit">Submit</button>
-			</form>
+			</Form>
 		);
 	}
 }
 
-export default reduxForm({ form: "hostnameInput" })(ServerInput);
+export default reduxForm({
+	form: "hostnameInput"
+})(ServerInput);

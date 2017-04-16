@@ -1,4 +1,4 @@
-import * as React from "react";
+/*import * as React from "react";
 import { shallow, mount } from "enzyme";
 import * as renderer from "react-test-renderer";
 import ConnectedServer, { Server } from "../../../src/sentry/components/Server";
@@ -10,7 +10,7 @@ import reducer from "../../../src/sentry/reducer";
 import { removeServer } from "../../../src/sentry/actions";
 import { createStore } from "redux";
 
-describe("ConnectedServer", () => {
+xdescribe("ConnectedServer", () => {
 	const mockStore = configureStore();
 	const initialState = {
 		index: 0,
@@ -52,11 +52,11 @@ describe("ConnectedServer", () => {
 	});
 });
 
-test("Server", () => {
+xtest("Server", () => {
 	const component = renderer.create(
 		<Server hostname="TEST_HOSTNAME" />
 	);
 
 	let tree = component.toJSON();
 	expect(tree).toMatchSnapshot();
-});
+});*/

@@ -6,9 +6,9 @@ import { POLLING_TIME } from "./constants/polling";
 import { STATUS } from "./constants/status";
 import { guid } from "./lib/utils";
 
-export const addServer = (server: string) => {
+export const addServer = (server: String) => {
 	let id = guid();
-	return (dispatch) => {
+	return (dispatch: Function, getState: Function) => {
 		dispatch({
 			type: actionsTypes.ADD_SERVER,
 			payload: {
@@ -23,8 +23,8 @@ export const addServer = (server: string) => {
 	};
 };
 
-export const removeServer = (id) => {
-	return (dispatch) => {
+export const removeServer = (id: String) => {
+	return (dispatch: Function, getState: Function) => {
 		dispatch({
 			type: actionsTypes.REMOVE_SERVER,
 			payload: id
@@ -32,8 +32,8 @@ export const removeServer = (id) => {
 	};
 };
 
-export const editServer = (payload) => {
-	return (dispatch) => {
+export const editServer = (payload: any) => {
+	return (dispatch: Function, getState: Function) => {
 		dispatch({
 			type: actionsTypes.EDIT_SERVER,
 			payload
@@ -42,13 +42,13 @@ export const editServer = (payload) => {
 };
 
 export const initializePolling = () => {
-	return (dispatch) => {
+	return (dispatch: Function, getState: Function) => {
 		setInterval(() => dispatch(pollServers()), POLLING_TIME);
 	};
 };
 
 export const pollServers = () => {
-	return (dispatch, getState) => {
+	return (dispatch: Function, getState: Function) => {
 		const state = getState();
 		Object.keys(state.app.servers).map((key) => {
 			dispatch(pollServer(state.app.servers[key]));
@@ -56,8 +56,8 @@ export const pollServers = () => {
 	};
 };
 
-export const pollServer = (server) => {
-	return (dispatch) => {
+export const pollServer = (server: any) => {
+	return (dispatch: Function, getState: Function) => {
 		let requestInit = {
 			method: "GET",
 			headers: new Headers(),
@@ -93,4 +93,13 @@ export const pollServer = (server) => {
 	};
 };
 
+// Saves the state tree to localstorage/other
+export const saveState = () => {
 
+}
+
+
+// Loads the state tree from localstorage/other
+export const loadState = () => {
+
+}

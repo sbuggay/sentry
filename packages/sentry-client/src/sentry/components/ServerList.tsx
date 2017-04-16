@@ -6,7 +6,9 @@ import Server from "./Server";
 import { initializePolling } from "../actions";
 
 interface IServerListProps {
-	servers?: Array<any>;
+	servers?: {
+		[id: string]: Object
+	};
 	initializePolling?: Function;
 };
 
@@ -22,21 +24,21 @@ export class ServerList extends React.Component<IServerListProps, any> {
 	render() {
 		return (
 			<div>
-				{Object.keys(this.props.servers).map((key, index) => {
-					return <Server key={index} server={this.props.servers[key]} />;
+				{Object.keys(this.props.servers).map((id, index) => {
+					return <Server key={index} server={this.props.servers[id]} />;
 				})}
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
 	return {
 		servers: state.app.servers
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Function) => {
 	return {
 		initializePolling: () => dispatch(initializePolling())
 	};
