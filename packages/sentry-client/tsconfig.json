@@ -12,5 +12,8 @@
     "exclude":[
         "node_modules",
         "test"
-    ]
+    ],
+    "awesomeTypescriptLoaderOptions": {
+        "silent": true
+    }
 }

@@ -1,4 +1,5 @@
 var path = require("path");
+var webpack = require("webpack");
 
 module.exports = {
 	entry: "./src/index",
@@ -8,7 +9,7 @@ module.exports = {
 	},
 	devtool: "source-map",
 	resolve: {
-		extensions: ["", ".ts", ".tsx", ".js", ".jsx"]
+		extensions: ["*", ".ts", ".tsx", ".js", ".jsx"]
 	},
 	module: {
 		loaders: [
