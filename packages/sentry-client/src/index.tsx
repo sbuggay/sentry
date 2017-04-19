@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
@@ -12,8 +12,7 @@ import rootReducer from "./rootReducer";
 
 const store = createStore(
 	rootReducer,
-	applyMiddleware(thunk),
-	(window as any).devToolsExtension ? (window as any).devToolsExtension() : undefined
+	applyMiddleware(thunk)
 );
 
 ReactDOM.render(

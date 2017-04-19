@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import ServerList from "./ServerList";
-import ServerInput from "./ServerInput";
+import ServerForm from "./ServerForm";
 import Status from "./Status";
 
 import { addServer } from "../actions";
@@ -15,8 +15,8 @@ interface IDispatchProps {
 
 
 class App extends React.Component<IDispatchProps, any> {
-	onServerInputSubmit(values: any) {
-		this.props.addServer(values.hostname);
+	onServerInputSubmit(values: Object) {
+		this.props.addServer(values);
 	}
 
 	render() {
@@ -25,7 +25,7 @@ class App extends React.Component<IDispatchProps, any> {
 			<Status status={STATUS.ISSUE} />
 			<Status status={STATUS.OUTAGE} />
 			<Status status={STATUS.MAINTENANCE} />
-			<ServerInput onSubmit={this.onServerInputSubmit.bind(this)} />
+			<ServerForm onSubmit={this.onServerInputSubmit.bind(this)} />
 			<ServerList />
 		</div>;
 	}
