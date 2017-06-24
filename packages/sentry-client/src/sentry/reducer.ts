@@ -1,11 +1,20 @@
 import * as actionTypes from "./actionTypes";
 
-export const initialState = {
+import { Action, handleAction } from "redux-actions";
+
+interface IState {
+	title: string;
+	servers: {
+		[id: string]: Object
+	};
+};
+
+export const initialState: IState = {
 	title: "test title",
 	servers: {}
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: any) => {
 	let payload = action.payload;
 
 	switch (action.type) {
@@ -14,16 +23,14 @@ const reducer = (state = initialState, action) => {
 				...state,
 				servers: {
 					...state.servers,
-					[payload.id]: {...payload.server, id: payload.id}
+					[payload.id]: { ...payload }
 				}
 			};
 		case actionTypes.REMOVE_SERVER:
-			let { [payload.id]: deleted, ...newState } = newState;
-
 			return {
-				...state,
-				servers: newState
+				...state
 			};
+
 		case actionTypes.POLL_SERVER:
 			return {
 				...state,
@@ -35,6 +42,13 @@ const reducer = (state = initialState, action) => {
 					}
 				}
 			};
+
+		case actionTypes.LOAD_STATE:
+			return {
+				...state,
+				...payload
+			};
+
 		default:
 			return state;
 	}
