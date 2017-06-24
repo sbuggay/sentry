@@ -1,1 +1,5 @@
 # Sentry Client
+
+```
+webpack
+```
