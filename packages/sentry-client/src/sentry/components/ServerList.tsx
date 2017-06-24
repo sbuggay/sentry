@@ -24,11 +24,11 @@ export class ServerList extends React.Component<IServerListProps, any> {
 	render() {
 		const divStyle = {
 			display: "flex",
-			flexflow: "row wrap",
+			flexFlow: "row wrap",
 			width: "600px",
 			border: "1px solid black"
 		};
-		console.log(divStyle);
+		console.log(this.props.servers);
 		return (
 			<div style={divStyle}>
 				{Object.keys(this.props.servers).map((id, index) => {

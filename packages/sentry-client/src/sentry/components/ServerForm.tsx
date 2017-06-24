@@ -1,39 +1,39 @@
 import * as React from "react";
-import { Field, reduxForm, Form } from "redux-form";
 
 interface IProps {
 	handleSubmit?: Function;
 	onSubmit?: Function;
 };
 
-export class ServerForm extends React.Component<IProps, any> {
+export default class ServerForm extends React.Component<IProps, any> {
+	constructor(props: any) {
+		super(props);
+
+		this.state = {
+			nameValue: "",
+			hostValue: ""
+		}
+	}
+
+	handleChange(event: any) {
+		const target = event.target;
+		const value = target.type === 'checkbox' ? target.checked : target.value;
+		const name = target.name;
+		this.setState({ [name]: target.value });
+	}
+
+	handleSubmit(event: any) {
+		this.props.handleSubmit(this.state);
+		event.preventDefault();
+	}
+
 	render() {
-		const { handleSubmit, onSubmit } = this.props;
 		return (
-			<Form onSubmit={handleSubmit(onSubmit)} style={{ border: "1px solid black" }}>
-				<legend>Server Form</legend>
-				<div>
-					<label>Hostname</label>
-					<Field name="hostname" component="input" type="text" label="hostname" />
-				</div>
-				<div>
-					<label>Auth key</label>
-					<Field name="auth" component="input" type="text" label="hostname" disabled={true} />
-				</div>
-
-				<div>
-					<label>Poll</label>
-					<div>
-						<Field name="poll" component="input" type="checkbox" disabled={true} />
-					</div>
-				</div>
-
-				<button type="submit">Submit</button>
-			</Form>
+			<form onSubmit={this.handleSubmit.bind(this)}>
+				<input placeholder="name" type="text" name="nameValue" value={this.state.nameValue} onChange={this.handleChange.bind(this)}></input>
+				<input placeholder="host" type="text" name="hostValue" value={this.state.hostValue} onChange={this.handleChange.bind(this)}></input>
+				<button type="submit">submit</button>
+			</form>
 		);
 	}
 };
-
-export default reduxForm({
-	form: "hostnameInput"
-})(ServerForm);

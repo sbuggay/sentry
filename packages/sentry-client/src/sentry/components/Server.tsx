@@ -16,22 +16,15 @@ interface IDispatchProps {
 export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 	getStyles() {
 		return {
-			width: "220px",
+			width: "200px",
 			height: "40px",
-			border: "1px solid black",
-			display: "flex"
 		};
-	}
-
-	removeServer() {
-		this.props.removeServer(this.props.index);
 	}
 
 	render() {
 		return <div style={this.getStyles()}>
 			<Status status={this.props.server.status} />
-			{this.props.server.url}
-			<div className="fa fa-times" onClick={() => this.removeServer.bind(this)}></div>
+			{this.props.server.name}
 		</div>;
 	}
 }

@@ -5,11 +5,12 @@ import { Action } from "./actionTypes";
 import { POLLING_TIME } from "./constants/polling";
 import { STATUS } from "./constants/status";
 
-export const addServer = (host: String, id: String) => {
+export const addServer = (name: String, host: String, id: String) => {
 	return {
 		type: actionsTypes.ADD_SERVER,
 		payload: {
 			id: id,
+			name: name,
 			host: host,
 			status: STATUS.OUTAGE
 		}

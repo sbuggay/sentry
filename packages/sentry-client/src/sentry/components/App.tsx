@@ -17,6 +17,7 @@ interface IDispatchProps {
 
 class App extends React.Component<IDispatchProps, any> {
 	onServerInputSubmit(values: Object) {
+		console.log(values);
 		this.props.addServer(values);
 	}
 
@@ -26,7 +27,7 @@ class App extends React.Component<IDispatchProps, any> {
 			<Status status={STATUS.ISSUE} />
 			<Status status={STATUS.OUTAGE} />
 			<Status status={STATUS.MAINTENANCE} />
-			<ServerForm onSubmit={this.onServerInputSubmit.bind(this)} />
+			<ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />
 			<ServerList />
 		</div>;
 	}
@@ -35,7 +36,7 @@ class App extends React.Component<IDispatchProps, any> {
 const mapDispatchToProps = (dispatch: any) => {
 	return {
 		addServer: (values: any) => {
-			dispatch(addServer(values, guid()));
+			dispatch(addServer(values.nameValue, values.hostValue, guid()));
 		}
 	};
 };
