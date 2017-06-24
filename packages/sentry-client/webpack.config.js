@@ -12,14 +12,6 @@ module.exports = {
 		extensions: ["*", ".ts", ".tsx", ".js", ".jsx"]
 	},
 	module: {
-		// rules: [
-		// 	{
-		// 		test: /\.tsx?$/,
-		// 		enforce: "pre",
-		// 		loader: "tslint-loader",
-		// 		options: {}
-		// 	}
-		// ],
 		loaders: [
 			{
 				test: /\.jsx?/,

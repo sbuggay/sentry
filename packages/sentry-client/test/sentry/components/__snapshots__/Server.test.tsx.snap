@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Server 1`] = `
+exports[`Server renders server 1`] = `
 <div
   style={
     Object {

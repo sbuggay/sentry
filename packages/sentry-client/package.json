@@ -39,7 +39,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/enzyme": "^2.7.8",
-    "@types/jest": "^19.2.2",
+    "@types/jest": "^19.2.4",
     "@types/react-dom": "^0.14.23",
     "@types/react-redux": "^4.4.38",
     "@types/react-test-renderer": "^15.4.3",

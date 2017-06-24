@@ -10,7 +10,7 @@ interface IStateProps {
 };
 
 interface IDispatchProps {
-	removeServer: Function;
+	removeServer?: Function;
 };
 
 export class Server extends React.Component<IStateProps & IDispatchProps, any> {

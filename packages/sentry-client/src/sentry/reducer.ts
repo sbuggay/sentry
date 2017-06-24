@@ -23,7 +23,7 @@ const reducer = (state = initialState, action: any) => {
 				...state,
 				servers: {
 					...state.servers,
-					[payload.id]: { ...payload.server, id: payload.id }
+					[payload.id]: { ...payload }
 				}
 			};
 		case actionTypes.REMOVE_SERVER:

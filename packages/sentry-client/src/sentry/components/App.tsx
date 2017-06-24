@@ -7,12 +7,13 @@ import Status from "./Status";
 
 import { addServer } from "../actions";
 
+import { guid } from "../lib/utils";
+
 import { STATUS } from "../constants/status";
 
 interface IDispatchProps {
-	addServer: Function;
+	addServer?: Function;
 };
-
 
 class App extends React.Component<IDispatchProps, any> {
 	onServerInputSubmit(values: Object) {
@@ -34,7 +35,7 @@ class App extends React.Component<IDispatchProps, any> {
 const mapDispatchToProps = (dispatch: any) => {
 	return {
 		addServer: (values: any) => {
-			dispatch(addServer(values));
+			dispatch(addServer(values, guid()));
 		}
 	};
 };

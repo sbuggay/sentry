@@ -4,31 +4,22 @@ import { Action } from "./actionTypes";
 
 import { POLLING_TIME } from "./constants/polling";
 import { STATUS } from "./constants/status";
-import { guid } from "./lib/utils";
 
-export const addServer = (server: String) => {
-	let id = guid();
-	return (dispatch: Function, getState: Function) => {
-		dispatch({
-			type: actionsTypes.ADD_SERVER,
-			payload: {
-				id: id,
-				server: {
-					url: server,
-					status: STATUS.OUTAGE
-				}
-			}
-		});
-		dispatch(pollServer(id));
-	};
+export const addServer = (host: String, id: String) => {
+	return {
+		type: actionsTypes.ADD_SERVER,
+		payload: {
+			id: id,
+			host: host,
+			status: STATUS.OUTAGE
+		}
+	}
 };
 
 export const removeServer = (id: String) => {
-	return (dispatch: Function, getState: Function) => {
-		dispatch({
-			type: actionsTypes.REMOVE_SERVER,
-			payload: id
-		});
+	return {
+		type: actionsTypes.REMOVE_SERVER,
+		payload: id
 	};
 };
 
@@ -58,14 +49,14 @@ export const pollServers = () => {
 
 export const pollServer = (server: any) => {
 	return (dispatch: Function, getState: Function) => {
-		let requestInit = {
+		let requestInit: RequestInit = {
 			method: "GET",
 			headers: new Headers(),
 			mode: "cors",
 			cache: "default"
 		};
 
-		fetch(server.url, requestInit).then(response => {
+		fetch(server.url, requestInit).then((response: Response) => {
 			// We care about the responseCode and the body
 
 			// Go ahead and set status to unavailable
@@ -87,7 +78,7 @@ export const pollServer = (server: any) => {
 					body: response.body,
 				}
 			});
-		}).catch(reason => {
+		}).catch((reason: Error) => {
 			console.error(reason);
 		});
 	};
