@@ -11,12 +11,14 @@ describe("sentry reducer", () => {
 
 	it("should reduce add server", () => {
 		const id = guid();
-		const host = "test.server.hostname";
-		expect(reducer(undefined, actions.addServer(host, id))).toEqual({
+		const name = "test_name";
+		const host = "test_host";
+		expect(reducer(undefined, actions.addServer(name, host, id))).toEqual({
 			...initialState,
 			servers: {
 				[id]: {
 					id: id,
+					name: name,
 					host: host,
 					status: 2
 				}

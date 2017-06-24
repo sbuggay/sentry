@@ -28,7 +28,7 @@ export class ServerList extends React.Component<IServerListProps, any> {
 			width: "600px",
 			border: "1px solid black"
 		};
-		console.log(this.props.servers);
+
 		return (
 			<div style={divStyle}>
 				{Object.keys(this.props.servers).map((id, index) => {

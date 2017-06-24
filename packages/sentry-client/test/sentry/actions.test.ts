@@ -6,12 +6,14 @@ import { guid } from "../../src/sentry/lib/utils";
 
 describe("actions", () => {
 	it("should create an action to add a server", () => {
-		const host = "TEST_HOSTNAME";
+		const name = "test_name";
+		const host = "test_host";
 		const id = guid();
-		expect(actions.addServer(host, id)).toEqual({
+		expect(actions.addServer(name, host, id)).toEqual({
 			type: actionTypes.ADD_SERVER,
 			payload: {
 				id: id,
+				name: name,
 				host: host,
 				status: 2
 			}

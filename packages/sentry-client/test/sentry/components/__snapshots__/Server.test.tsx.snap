@@ -4,10 +4,8 @@ exports[`Server renders server 1`] = `
 <div
   style={
     Object {
-      "border": "1px solid black",
-      "display": "flex",
       "height": "40px",
-      "width": "220px",
+      "width": "200px",
     }
   }
 >
@@ -19,10 +17,6 @@ exports[`Server renders server 1`] = `
         "color": "#951A1D",
       }
     }
-  />
-  <div
-    className="fa fa-times"
-    onClick={[Function]}
   />
 </div>
 `;
