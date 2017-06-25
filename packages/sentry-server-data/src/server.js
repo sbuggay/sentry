@@ -15,47 +15,56 @@ const staticInfo = {
 	endianness: os.endianness()
 };
 
-class Server {
-	constructor(port = 3333) {
-		this.port = 3333;
-		this.cache = new Cache();
-	}
-
-	// This is asynchronous, should we hold the request until they complete?
-	runServerScripts() {
-		const services = config.services;
-		let promises = [];
-		Object.keys(services).forEach((key) => {
-			let service = services[key];
-			const scriptPromise = new Promise((resolve, reject) => {
-				exec(service.script, (error, stdout, stderr) => {
-					resolve(Object.assign({}, service,
-						{ result: (stdout.indexOf(service.test) > -1) }
-					));
-				});
-			});
-			promises.push(scriptPromise);
-		});
-		return Promise.all(promises);
-	};
-
-	getServerInfo() {
-		return Object.assign({}, staticInfo, {
+const dynamicInfo = () => {
+	return new Promise((resolve, reject) => {
+		resolve({
 			hostname: os.hostname(),
 			uptime: os.uptime(),
 			freemem: os.freemem(),
 			totalmem: os.totalmem(),
 			cpus: os.cpus()
 		});
-	};
+	});
+}
+
+
+const serverScripts = () => {
+	const services = config.services;
+	let promises = [];
+	Object.keys(services).forEach((key) => {
+		let service = services[key];
+		const scriptPromise = new Promise((resolve, reject) => {
+			exec(service.script, (error, stdout, stderr) => {
+				resolve(Object.assign({}, service,
+					{ result: (stdout.indexOf(service.test) > -1) }
+				));
+			});
+		});
+		promises.push(scriptPromise);
+	});
+	return Promise.all(promises);
+};
+
+class Server {
+	constructor(port = 3333) {
+		this.port = port;
+		this.cache = new Cache();
+		this.cache.set("staticInfo", staticInfo);
+		this.cache.addAction("dynamicInfo", dynamicInfo());
+		this.cache.addAction("services", serverScripts());
+	}
+
+	serverInfo() {
+		return {
+			"staticInfo": this.cache.get("staticInfo"),
+			"dynamicInfo": this.cache.get("dynamicInfo"),
+			"services": this.cache.get("services")
+		}
+	}
 
 	start() {
 		app.get("/", (request, response) => {
-			// Caching?
-			this.runServerScripts().then(services => {
-				console.log(services);
-				response.send(Object.assign({}, { services: services }, this.getServerInfo()));
-			});
+			response.send(this.serverInfo());
 		});
 
 		app.listen(this.port, (error) => {

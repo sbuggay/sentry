@@ -1,27 +1,40 @@
 class Cache {
-    constructor(interval = 10000) {
+    constructor(interval = 5000) {
         this.store = {};
-        this.actions = [];
-        this.interval = setInterval(this.runActions, interval);
+        this.intervalFunctions = [];
+        this.interval = setInterval(this.runActions.bind(this), interval);
     }
 
+    /** Get a key. */
     set(key, value) {
         this.store[key] = value;
     }
 
+    /** Set a key. */
     get(key) {
         return this.store[key];
     }
 
+    /** Clear the cache. */
     clear() {
         this.store = {};
-        this.actions = [];
+        this.intervalFunctions = [];
     }
 
+    /** Add an action to the action queue, must be a Promise. */
+    addAction(key, action) {
+        if (typeof action.then == "function") {
+            this.intervalFunctions.push({ key, action });
+        }
+    }
+
+    /** Run all actions and update cache. */
     runActions() {
-        this.actions.forEach(action => {
-            action();
-        })
+        this.intervalFunctions.forEach(intervalFunction => {
+            intervalFunction.action.then(values => {
+                this.set(intervalFunction.key, values);
+            });
+        });
     }
 }
 
