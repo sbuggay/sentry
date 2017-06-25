@@ -50,8 +50,8 @@ class Server {
 		this.port = port;
 		this.cache = new Cache();
 		this.cache.set("staticInfo", staticInfo);
-		this.cache.addAction("dynamicInfo", dynamicInfo());
-		this.cache.addAction("services", serverScripts());
+		this.cache.addAction("dynamicInfo", dynamicInfo);
+		this.cache.addAction("services", serverScripts);
 	}
 
 	serverInfo() {

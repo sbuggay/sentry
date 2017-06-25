@@ -23,15 +23,13 @@ class Cache {
 
     /** Add an action to the action queue, must be a Promise. */
     addAction(key, action) {
-        if (typeof action.then == "function") {
-            this.intervalFunctions.push({ key, action });
-        }
+        this.intervalFunctions.push({ key, action });
     }
 
     /** Run all actions and update cache. */
     runActions() {
         this.intervalFunctions.forEach(intervalFunction => {
-            intervalFunction.action.then(values => {
+            intervalFunction.action().then(values => {
                 this.set(intervalFunction.key, values);
             });
         });
