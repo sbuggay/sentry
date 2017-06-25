@@ -5,6 +5,8 @@ const packageConfig = require("../package.json");
 const config = require("./config.json")
 const app = express();
 
+const Cache = require("./Cache");
+
 const staticInfo = {
 	arch: os.arch(),
 	platform: os.platform(),
@@ -13,20 +15,23 @@ const staticInfo = {
 	endianness: os.endianness()
 };
 
-const server = (port = 3333) => {
+class Server {
+	constructor(port = 3333) {
+		this.port = 3333;
+		this.cache = new Cache();
+	}
 
 	// This is asynchronous, should we hold the request until they complete?
-	const runServerScripts = () => {
+	runServerScripts() {
 		const services = config.services;
 		let promises = [];
 		Object.keys(services).forEach((key) => {
 			let service = services[key];
 			const scriptPromise = new Promise((resolve, reject) => {
 				exec(service.script, (error, stdout, stderr) => {
-					resolve({
-						service,
-						result: (stdout.indexOf(service.test) > -1)
-					});
+					resolve(Object.assign({}, service,
+						{ result: (stdout.indexOf(service.test) > -1) }
+					));
 				});
 			});
 			promises.push(scriptPromise);
@@ -34,7 +39,7 @@ const server = (port = 3333) => {
 		return Promise.all(promises);
 	};
 
-	const getServerInfo = () => {
+	getServerInfo() {
 		return Object.assign({}, staticInfo, {
 			hostname: os.hostname(),
 			uptime: os.uptime(),
@@ -44,24 +49,26 @@ const server = (port = 3333) => {
 		});
 	};
 
-	app.get("/", (request, response) => {
-		// Caching?
-		runServerScripts().then(services => {
-			console.log(services);
-			response.send(Object.assign({}, { services: services }, getServerInfo()));
+	start() {
+		app.get("/", (request, response) => {
+			// Caching?
+			this.runServerScripts().then(services => {
+				console.log(services);
+				response.send(Object.assign({}, { services: services }, this.getServerInfo()));
+			});
 		});
-		// response.send(getServerInfo());
-	});
 
-	app.listen(port, (error) => {
-		if (error) {
-			return console.error("Server error", error);
-		}
-		console.log(`${packageConfig.name}@${packageConfig.version} is running on port ${port}`);
-	});
+		app.listen(this.port, (error) => {
+			if (error) {
+				return console.error("Server error", error);
+			}
+			console.log(`${packageConfig.name}@${packageConfig.version} is running on port ${this.port}`);
+		});
+	}
 };
 
-server();
+const server = new Server();
+server.start();
 
 module.exports = {
 	staticInfo,
