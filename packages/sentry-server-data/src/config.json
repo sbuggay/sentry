@@ -1,3 +1,15 @@
 {
-    
+    "authKey": "zr+EEsRtdU3rZyvvovJ+lggFMNY0+I/ZyyhpwcuTO6U=",
+    "services": [
+        {
+            "name": "brew",
+            "script": "brew doctor",
+            "test": "Your system is ready to brew."
+        },
+        {
+            "name": "npm",
+            "script": "npm --version",
+            "test": "5.0.3"
+        }
+    ]
 }
