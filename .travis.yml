@@ -3,10 +3,11 @@ language: node_js
 node_js:
   - "7"
 
-script: npm run bootstrap
-script: jest packages/sentry-client
-script: jest packages/sentry-server-data
-script: jest packages/sentry-server-host
+script: 
+  - npm run bootstrap
+  - jest packages/sentry-client
+  - jest packages/sentry-server-data
+  - jest packages/sentry-server-host
 
 cache:
   directories:
