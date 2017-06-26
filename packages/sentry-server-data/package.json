@@ -6,6 +6,9 @@
     "type": "git",
     "url": ""
   },
+  "scripts":{
+    "test": "jest"
+  },
   "bin": {
     "sentry-server": "./scripts/sentry-server"
   },

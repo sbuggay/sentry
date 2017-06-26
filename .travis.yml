@@ -5,9 +5,7 @@ node_js:
 
 script: 
   - npm run bootstrap
-  - jest packages/sentry-client
-  - jest packages/sentry-server-data
-  - jest packages/sentry-server-host
+  - lerna run test
 
 cache:
   directories:
