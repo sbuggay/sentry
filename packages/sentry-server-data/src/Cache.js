@@ -39,8 +39,10 @@ class Cache {
     /** Run all actions and update cache. */
     runIntervalFunctions() {
         this.intervalFunctions.forEach(intervalFunction => {
-            intervalFunction.action().then(values => {
+            intervalFunction.action().then((values) => {
                 this.set(intervalFunction.key, values);
+            }, (reject) => {
+                this.set(intervalFunction.key, "timeout");
             });
         });
     }

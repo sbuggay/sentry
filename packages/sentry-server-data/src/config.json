@@ -10,6 +10,11 @@
             "name": "npm",
             "script": "npm --version",
             "test": "5.0.3"
+        },
+        {
+            "name": "man timeout test",
+            "script": "man man",
+            "test": "12341234"
         }
     ]
 }

@@ -33,6 +33,7 @@ const serviceInfo = () => {
     Object.keys(services).forEach((key) => {
         let service = services[key];
         const scriptPromise = new Promise((resolve, reject) => {
+            setTimeout(reject, config.timeout);
             exec(service.script, (error, stdout, stderr) => {
                 resolve(Object.assign({}, service,
                     { result: (stdout.indexOf(service.test) > -1) }
