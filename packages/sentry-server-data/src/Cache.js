@@ -5,6 +5,7 @@ const defaultConfig = {
 
 class Cache {
     constructor(config) {
+        this.setConfig(config);
         this.store = {};
         this.intervalFunctions = [];
         this.interval = setInterval(this.runIntervalFunctions.bind(this), this.config.interval);
@@ -57,7 +58,7 @@ class Cache {
             else {
                 intervalFunction.callback().then((values) => {
                     this.set(intervalFunction.key, values);
-                };
+                });
             }
         });
     }

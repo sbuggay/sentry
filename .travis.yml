@@ -3,7 +3,10 @@ language: node_js
 node_js:
   - "7"
 
-script: lerna bootstrap && npm test
+script: npm run bootstrap
+script: jest packages/sentry-client
+script: jest packages/sentry-server-data
+script: jest packages/sentry-server-host
 
 cache:
   directories:
