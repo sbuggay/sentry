@@ -1,8 +1,14 @@
+const defaultConfig = {
+    interval: 10000,
+    timeout: 5000,
+}
+
 class Cache {
-    constructor(interval = 5000) {
+    constructor(config) {
+        this.config = Object.assign({}, defaultConfig, config);
         this.store = {};
         this.intervalFunctions = [];
-        this.interval = setInterval(this.runActions.bind(this), interval);
+        this.interval = setInterval(this.runIntervalFunctions.bind(this), this.config.interval);
     }
 
     /** Get a key. */
@@ -21,13 +27,17 @@ class Cache {
         this.intervalFunctions = [];
     }
 
+    getConfig() {
+        return this.config;
+    }
+
     /** Add an action to the action queue, must be a Promise. */
-    addAction(key, action) {
+    addIntervalFunction(key, action) {
         this.intervalFunctions.push({ key, action });
     }
 
     /** Run all actions and update cache. */
-    runActions() {
+    runIntervalFunctions() {
         this.intervalFunctions.forEach(intervalFunction => {
             intervalFunction.action().then(values => {
                 this.set(intervalFunction.key, values);
@@ -36,4 +46,7 @@ class Cache {
     }
 }
 
-module.exports = Cache;
+module.exports = {
+    defaultConfig,
+    Cache
+};
