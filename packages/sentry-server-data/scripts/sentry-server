@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var program = require("commander");
+const program = require("commander");
 const Server = require("../src/Server.js").Server;
 
 program

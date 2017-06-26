@@ -29,20 +29,22 @@ const dynamicInfo = () => {
 
 const serviceInfo = () => {
     const services = config.services;
-    let promises = [];
+    let serviceFunctions = [];
     Object.keys(services).forEach((key) => {
-        let service = services[key];
-        const scriptPromise = new Promise((resolve, reject) => {
-            setTimeout(reject, config.timeout);
-            exec(service.script, (error, stdout, stderr) => {
-                resolve(Object.assign({}, service,
-                    { result: (stdout.indexOf(service.test) > -1) }
-                ));
+        function serviceFunction() {
+            let service = services[key];
+            return new Promise((resolve, reject) => {
+                exec(service.script, (error, stdout, stderr) => {
+                    resolve(Object.assign({}, service,
+                        { result: (stdout.indexOf(service.test) > -1) }
+                    ));
+                });
             });
-        });
-        promises.push(scriptPromise);
+        }
+
+        serviceFunctions.push(serviceFunction);
     });
-    return Promise.all(promises);
+    return serviceFunctions;
 };
 
 class Server {
@@ -51,7 +53,8 @@ class Server {
         this.cache = new Cache();
         this.cache.set("staticInfo", staticInfo);
         this.cache.addIntervalFunction("dynamicInfo", dynamicInfo);
-        this.cache.addIntervalFunction("serviceInfo", serviceInfo);
+        this.cache.addIntervalFunctionArray("serviceInfo", serviceInfo());
+        this.cache.runIntervalFunctions();
     }
 
     serverInfo() {
