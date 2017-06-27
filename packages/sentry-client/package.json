@@ -5,7 +5,7 @@
   "description": "A dashboard for collecting and displaying data from sentry-server-data.",
   "scripts": {
     "build": "webpack",
-    "serve": "webpack",
+    "serve": "webpack-dev-server --content-base dist/",
     "test": "jest"
   },
   "repository": {
