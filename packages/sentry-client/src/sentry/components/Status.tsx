@@ -3,41 +3,41 @@ import * as React from "react";
 import { STATUS } from "../constants/status";
 
 interface IStatusProps {
-	status: any;
+    status: any;
 }
 
 export class Status extends React.Component<IStatusProps, any> {
-	render() {
-		let className, color;
+    render() {
+        let className, color;
 
-		let style = {
-			marginRight: "10px"
-		}
+        let style = {
+            marginRight: "10px"
+        }
 
-		switch (this.props.status) {
-			case STATUS.AVAILABLE:
-				className = "fa fa-circle";
-				color = { color: "#229926" };
-				break;
-			case STATUS.ISSUE:
-				className = "fa fa-exclamation-circle";
-				color = { color: "#FEE032" };
-				break;
-			case STATUS.MAINTENANCE:
-				className = "fa fa-square";
-				color = { color: "#1172C6" };
-				break;
-			default:
-			case STATUS.OUTAGE:
-				className = "fa fa-exclamation-triangle";
-				color = { color: "#951A1D" };
-				break;
-		}
-		
-		style = {...style, ...color};
+        switch (this.props.status) {
+            case STATUS.AVAILABLE:
+                className = "fa fa-circle";
+                color = { color: "#229926" };
+                break;
+            case STATUS.ISSUE:
+                className = "fa fa-exclamation-circle";
+                color = { color: "#FEE032" };
+                break;
+            case STATUS.MAINTENANCE:
+                className = "fa fa-square";
+                color = { color: "#1172C6" };
+                break;
+            default:
+            case STATUS.OUTAGE:
+                className = "fa fa-exclamation-triangle";
+                color = { color: "#951A1D" };
+                break;
+        }
+        
+        style = {...style, ...color};
 
-		return <i className={className} style={style} aria-hidden="true"></i>;
-	}
+        return <i className={className} style={style} aria-hidden="true"></i>;
+    }
 }
 
 export default Status;

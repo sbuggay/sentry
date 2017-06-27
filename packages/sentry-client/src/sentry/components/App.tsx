@@ -12,29 +12,29 @@ import { guid } from "../lib/utils";
 import { STATUS } from "../constants/status";
 
 interface IDispatchProps {
-	addServer?: Function;
+    addServer?: Function;
 };
 
 class App extends React.Component<IDispatchProps, any> {
-	onServerInputSubmit(values: Object) {
-		console.log(values);
-		this.props.addServer(values);
-	}
+    onServerInputSubmit(values: Object) {
+        console.log(values);
+        this.props.addServer(values);
+    }
 
-	render() {
-		return <div>
-			<ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />
-			<ServerList />
-		</div>;
-	}
+    render() {
+        return <div>
+            <ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />
+            <ServerList />
+        </div>;
+    }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
-	return {
-		addServer: (values: any) => {
-			dispatch(addServer(values.nameValue, values.hostValue, guid()));
-		}
-	};
+    return {
+        addServer: (values: any) => {
+            dispatch(addServer(values.nameValue, values.hostValue, guid()));
+        }
+    };
 };
 
 export default connect<any, IDispatchProps, any>(undefined, mapDispatchToProps)(App);

@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 interface IStateProps {
     server: any;
     index: Number;
+    selected?: Boolean;
 };
 
 interface IDispatchProps {
@@ -14,11 +15,27 @@ interface IDispatchProps {
 };
 
 export class Server extends React.Component<IStateProps & IDispatchProps, any> {
+    constructor(props: any) {
+        super(props);
+        // this.style = this.getStyles();
+    }
+
     getStyles() {
         return {
             width: "280px",
             padding: "5px 10px"
         };
+    }
+
+    getHoverStyle(selected: Boolean) {
+        if (selected) {
+            return {
+                backgroundColor: "blue"
+            }
+        }
+        else {
+            return {};
+        }
     }
 
     renderData(): JSX.Element {
@@ -54,8 +71,8 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
     render() {
         return (
-
-            <div style={this.getStyles()}>
+            <div 
+            style={this.getStyles()}>
                 <div>
                     <Status status={this.props.server.status} />
                     {this.props.server.name}

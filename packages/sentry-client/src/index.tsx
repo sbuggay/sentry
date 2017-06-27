@@ -11,13 +11,13 @@ import App from "./sentry/components/App";
 import rootReducer from "./rootReducer";
 
 const store = createStore(
-	rootReducer,
-	applyMiddleware(thunk)
+    rootReducer,
+    applyMiddleware(thunk)
 );
 
 ReactDOM.render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
-	document.getElementById("app")
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById("app")
 );
