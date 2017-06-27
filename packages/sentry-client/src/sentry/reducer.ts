@@ -11,7 +11,13 @@ interface IState {
 
 export const initialState: IState = {
 	title: "test title",
-	servers: {}
+	servers: {
+		id: {
+			id: "id",
+			name: "macbook",
+			host: "http://127.0.0.1:3333"
+		} 
+	}
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -38,7 +44,8 @@ const reducer = (state = initialState, action: any) => {
 					...state.servers,
 					[payload.id]: {
 						...state.servers[payload.id],
-						status: payload.status
+						status: payload.status,
+						data: payload.data
 					}
 				}
 			};

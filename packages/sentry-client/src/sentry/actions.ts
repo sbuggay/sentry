@@ -53,32 +53,43 @@ export const pollServer = (server: any) => {
 		let requestInit: RequestInit = {
 			method: "GET",
 			headers: new Headers(),
-			mode: "cors",
 			cache: "default"
 		};
 
-		fetch(server.url, requestInit).then((response: Response) => {
+		fetch(server.host, requestInit).then((response: Response) => {
 			// We care about the responseCode and the body
 
 			// Go ahead and set status to unavailable
 			let status = STATUS.OUTAGE;
 
-			// If responseCode is 200, elevate to issue
-			if (response.status === 200) {
-				status = STATUS.ISSUE;
-			}
-
 			// If response body is in expected format, read it
 			// Set to issue, availble, or maintainence accordingly
 
-			dispatch({
-				type: actionsTypes.POLL_SERVER,
-				payload: {
-					id: server.id,
-					status: status,
-					body: response.body,
-				}
-			});
+			// TODO: Refactor
+			if (response.ok) {
+				response.json().then((json: JSON) => {
+					dispatch({
+						type: actionsTypes.POLL_SERVER,
+						payload: {
+							id: server.id,
+							status: STATUS.AVAILABLE,
+							data: json,
+						}
+					});
+				});
+			}
+			else {
+				dispatch({
+					type: actionsTypes.POLL_SERVER,
+					payload: {
+						id: server.id,
+						status: STATUS.OUTAGE,
+						data: undefined,
+					}
+				});
+			}
+
+
 		}).catch((reason: Error) => {
 			console.error(reason);
 		});
