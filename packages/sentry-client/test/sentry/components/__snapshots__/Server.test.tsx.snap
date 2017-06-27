@@ -15,8 +15,9 @@ exports[`Server renders server 1`] = `
       className="fa fa-exclamation-triangle"
       style={
         Object {
-          "color": "#951A1D",
-          "marginRight": "10px",
+          "color": Object {
+            "color": "#951A1D",
+          },
         }
       }
     />
