@@ -26,7 +26,7 @@ $ sentryserver -p 8080
 sentryserver@0.1.0 is running on port 8080
 ```
 
-### Config
+### Machine information
 By default sentryserver will respond to any request at / with this information from the OS.
 - platform
 - release
@@ -38,4 +38,17 @@ By default sentryserver will respond to any request at / with this information f
 - totalmem
 - cpus
 
-#### Custom Services
+### Services
+sentryserver can be configured to run scripts and test against stdout.
+
+For example, checking if `httpd` is running with `service`
+```JSON
+services: [
+  {
+    "name": "httpd",
+    "script": "service httpd status",
+    "test": "running"
+  }
+]
+```
+sentryservice will run the script `service httpd status` and if `running` is detected as a substring of the stdout the service is considered to be up.
