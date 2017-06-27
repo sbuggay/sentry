@@ -8,27 +8,33 @@ interface IStatusProps {
 
 export class Status extends React.Component<IStatusProps, any> {
 	render() {
-		let className, style;
+		let className, color;
+
+		let style = {
+			marginRight: "10px"
+		}
 
 		switch (this.props.status) {
 			case STATUS.AVAILABLE:
 				className = "fa fa-circle";
-				style = { color: "#229926" };
+				color = { color: "#229926" };
 				break;
 			case STATUS.ISSUE:
 				className = "fa fa-exclamation-circle";
-				style = { color: "#FEE032" };
+				color = { color: "#FEE032" };
 				break;
 			case STATUS.MAINTENANCE:
 				className = "fa fa-square";
-				style = { color: "#1172C6" };
+				color = { color: "#1172C6" };
 				break;
 			default:
 			case STATUS.OUTAGE:
 				className = "fa fa-exclamation-triangle";
-				style = { color: "#951A1D" };
+				color = { color: "#951A1D" };
 				break;
 		}
+		
+		style = {...style, ...color};
 
 		return <i className={className} style={style} aria-hidden="true"></i>;
 	}

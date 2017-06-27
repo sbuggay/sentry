@@ -1,5 +1,10 @@
 {
     "authKey": "",
     "services": [
+        {
+            "name": "brew",
+            "script": "brew doctor",
+            "test": "ready to brew"
+        }
     ]
 }
