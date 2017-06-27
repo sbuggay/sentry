@@ -6,6 +6,7 @@ node_js:
 script: 
   - npm run bootstrap
   - lerna run test
+  - codecov
 
 cache:
   directories:
