@@ -36,7 +36,7 @@ const serviceInfo = () => {
             return new Promise((resolve, reject) => {
                 exec(service.script, (error, stdout, stderr) => {
                     resolve(Object.assign({}, service,
-                        { result: (stdout.indexOf(service.test) > -1) }
+                        { status: (stdout.indexOf(service.test) > -1) }
                     ));
                 });
             });
@@ -67,7 +67,9 @@ class Server {
 
     start() {
         app.get("/", (request, response) => {
-            response.send(this.serverInfo());
+            response.header("Access-Control-Allow-Origin", "*");
+            response.header("Content-Type: application/json");
+            response.send(JSON.stringify(this.serverInfo()));
         });
 
         app.listen(this.port, (error) => {
