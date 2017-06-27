@@ -23,10 +23,6 @@ class App extends React.Component<IDispatchProps, any> {
 
 	render() {
 		return <div>
-			<Status status={STATUS.AVAILABLE} />
-			<Status status={STATUS.ISSUE} />
-			<Status status={STATUS.OUTAGE} />
-			<Status status={STATUS.MAINTENANCE} />
 			<ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />
 			<ServerList />
 		</div>;
