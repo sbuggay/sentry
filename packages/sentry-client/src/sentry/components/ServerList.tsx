@@ -25,7 +25,9 @@ export class ServerList extends React.Component<IServerListProps, any> {
 		const divStyle = {
 			display: "flex",
 			flexFlow: "row wrap",
-			width: "600px",
+			width: "900px",
+			marginLeft: "auto",
+			marginRight: "auto",
 			border: "1px solid black"
 		};
 
