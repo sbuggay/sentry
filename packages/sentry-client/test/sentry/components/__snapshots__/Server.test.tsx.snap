@@ -4,19 +4,22 @@ exports[`Server renders server 1`] = `
 <div
   style={
     Object {
-      "height": "40px",
-      "width": "200px",
+      "padding": "5px 10px",
+      "width": "280px",
     }
   }
 >
-  <i
-    aria-hidden="true"
-    className="fa fa-exclamation-triangle"
-    style={
-      Object {
-        "color": "#951A1D",
+  <div>
+    <i
+      aria-hidden="true"
+      className="fa fa-exclamation-triangle"
+      style={
+        Object {
+          "color": "#951A1D",
+          "marginRight": "10px",
+        }
       }
-    }
-  />
+    />
+  </div>
 </div>
 `;
