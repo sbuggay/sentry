@@ -16,12 +16,6 @@
     "dist"
   ],
   "jest": {
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": false,
-    "collectCoverageFrom": [
-      "src/**/*.js*",
-      "!test/*.js"
-    ],
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "moduleFileExtensions": [
       "ts",
