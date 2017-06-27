@@ -3,6 +3,7 @@ import * as actionTypes from "../../src/sentry/actionTypes";
 import reducer, { initialState } from "../../src/sentry/reducer";
 
 import { guid } from "../../src/sentry/lib/utils";
+import { STATUS } from "../../src/sentry/constants/status";
 
 describe("sentry reducer", () => {
 	it("should return the initial state", () => {
@@ -16,17 +17,18 @@ describe("sentry reducer", () => {
 		expect(reducer(undefined, actions.addServer(name, host, id))).toEqual({
 			...initialState,
 			servers: {
+				...initialState.servers,
 				[id]: {
 					id: id,
 					name: name,
 					host: host,
-					status: 2
+					status: STATUS.OUTAGE
 				}
 			}
 		});
 	});
 
-	it("should reduce remove server", () => {
+	xit("should reduce remove server", () => {
 
 	});
 });

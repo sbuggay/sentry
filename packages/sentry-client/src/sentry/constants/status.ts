@@ -1,6 +1,6 @@
 export enum STATUS {
-	AVAILABLE,
-	ISSUE,
-	OUTAGE,
-	MAINTENANCE
+    OUTAGE,
+    AVAILABLE,
+    ISSUE,
+    MAINTENANCE
 };

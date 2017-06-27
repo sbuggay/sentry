@@ -2,6 +2,7 @@ import * as actions from "../../src/sentry/actions";
 import * as actionTypes from "../../src/sentry/actionTypes";
 
 import { guid } from "../../src/sentry/lib/utils";
+import { STATUS } from "../../src/sentry/constants/status";
 
 
 describe("actions", () => {
@@ -15,7 +16,7 @@ describe("actions", () => {
 				id: id,
 				name: name,
 				host: host,
-				status: 2
+				status: STATUS.OUTAGE
 			}
 		});
 	});

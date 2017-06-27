@@ -7,7 +7,7 @@
     "url": ""
   },
   "scripts":{
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "bin": {
     "sentry-server": "./scripts/sentry-server"

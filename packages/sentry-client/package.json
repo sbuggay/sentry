@@ -5,8 +5,8 @@
   "description": "A dashboard for collecting and displaying data from sentry-server-data.",
   "scripts": {
     "build": "webpack",
-    "serve": "webpack",
-    "test": "jest"
+    "serve": "webpack-dev-server --content-base dist/",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -16,12 +16,6 @@
     "dist"
   ],
   "jest": {
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": false,
-    "collectCoverageFrom": [
-      "src/**/*.js*",
-      "!test/*.js"
-    ],
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "moduleFileExtensions": [
       "ts",

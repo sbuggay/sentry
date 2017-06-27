@@ -6,83 +6,94 @@ import { POLLING_TIME } from "./constants/polling";
 import { STATUS } from "./constants/status";
 
 export const addServer = (name: String, host: String, id: String) => {
-	return {
-		type: actionsTypes.ADD_SERVER,
-		payload: {
-			id: id,
-			name: name,
-			host: host,
-			status: STATUS.OUTAGE
-		}
-	}
+    return {
+        type: actionsTypes.ADD_SERVER,
+        payload: {
+            id: id,
+            name: name,
+            host: host,
+            status: STATUS.OUTAGE
+        }
+    }
 };
 
 export const removeServer = (id: String) => {
-	return {
-		type: actionsTypes.REMOVE_SERVER,
-		payload: id
-	};
+    return {
+        type: actionsTypes.REMOVE_SERVER,
+        payload: id
+    };
 };
 
 export const editServer = (payload: any) => {
-	return (dispatch: Function, getState: Function) => {
-		dispatch({
-			type: actionsTypes.EDIT_SERVER,
-			payload
-		});
-	};
+    return (dispatch: Function, getState: Function) => {
+        dispatch({
+            type: actionsTypes.EDIT_SERVER,
+            payload
+        });
+    };
 };
 
 export const initializePolling = () => {
-	return (dispatch: Function, getState: Function) => {
-		setInterval(() => dispatch(pollServers()), POLLING_TIME);
-	};
+    return (dispatch: Function, getState: Function) => {
+        setInterval(() => dispatch(pollServers()), POLLING_TIME);
+    };
 };
 
 export const pollServers = () => {
-	return (dispatch: Function, getState: Function) => {
-		const state = getState();
-		Object.keys(state.app.servers).map((key) => {
-			dispatch(pollServer(state.app.servers[key]));
-		});
-	};
+    return (dispatch: Function, getState: Function) => {
+        const state = getState();
+        Object.keys(state.app.servers).map((key) => {
+            dispatch(pollServer(state.app.servers[key]));
+        });
+    };
 };
 
 export const pollServer = (server: any) => {
-	return (dispatch: Function, getState: Function) => {
-		let requestInit: RequestInit = {
-			method: "GET",
-			headers: new Headers(),
-			mode: "cors",
-			cache: "default"
-		};
+    return (dispatch: Function, getState: Function) => {
+        let requestInit: RequestInit = {
+            method: "GET",
+            headers: new Headers(),
+            cache: "default"
+        };
 
-		fetch(server.url, requestInit).then((response: Response) => {
-			// We care about the responseCode and the body
+        fetch(server.host, requestInit).then((response: Response) => {
+            // We care about the responseCode and the body
 
-			// Go ahead and set status to unavailable
-			let status = STATUS.OUTAGE;
+            // Go ahead and set status to unavailable
+            let status = STATUS.OUTAGE;
 
-			// If responseCode is 200, elevate to issue
-			if (response.status === 200) {
-				status = STATUS.ISSUE;
-			}
+            // If response body is in expected format, read it
+            // Set to issue, availble, or maintainence accordingly
 
-			// If response body is in expected format, read it
-			// Set to issue, availble, or maintainence accordingly
+            // TODO: Refactor
+            if (response.ok) {
+                response.json().then((json: JSON) => {
+                    dispatch({
+                        type: actionsTypes.POLL_SERVER,
+                        payload: {
+                            id: server.id,
+                            status: STATUS.AVAILABLE,
+                            data: json,
+                        }
+                    });
+                });
+            }
+            else {
+                dispatch({
+                    type: actionsTypes.POLL_SERVER,
+                    payload: {
+                        id: server.id,
+                        status: STATUS.OUTAGE,
+                        data: undefined,
+                    }
+                });
+            }
 
-			dispatch({
-				type: actionsTypes.POLL_SERVER,
-				payload: {
-					id: server.id,
-					status: status,
-					body: response.body,
-				}
-			});
-		}).catch((reason: Error) => {
-			console.error(reason);
-		});
-	};
+
+        }).catch((reason: Error) => {
+            console.error(reason);
+        });
+    };
 };
 
 // Saves the state tree to localstorage/other

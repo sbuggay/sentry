@@ -1,8 +1,8 @@
 export interface Action<T> {
-	type: string;
-	payload: T;
-	error?: boolean;
-	meta?: any;
+    type: string;
+    payload: T;
+    error?: boolean;
+    meta?: any;
 }
 
 export const ADD_SERVER = "ADD_SERVER";

@@ -5,35 +5,79 @@ import { removeServer } from "../actions";
 import { connect } from "react-redux";
 
 interface IStateProps {
-	server: any;
-	index: Number;
+    server: any;
+    index: Number;
+    selected?: Boolean;
 };
 
 interface IDispatchProps {
-	removeServer?: Function;
+    removeServer?: Function;
 };
 
 export class Server extends React.Component<IStateProps & IDispatchProps, any> {
-	getStyles() {
-		return {
-			width: "200px",
-			height: "40px",
-		};
-	}
+    constructor(props: any) {
+        super(props);
+        // this.style = this.getStyles();
+    }
 
-	render() {
-		return <div style={this.getStyles()}>
-			<Status status={this.props.server.status} />
-			{this.props.server.name}
-		</div>;
-	}
+    getStyles() {
+        return {
+            width: "280px",
+            padding: "5px 10px"
+        };
+    }
+
+    renderData(): JSX.Element {
+        if (!this.props.server.data) {
+            return undefined;
+        }
+        return (
+            <span>({this.props.server.data.dynamicInfo.hostname} {this.props.server.data.staticInfo.arch})</span>
+        );
+    }
+
+    renderServiceData(): JSX.Element {
+        if (!this.props.server.data) {
+            return undefined;
+        }
+
+        const services = this.props.server.data.serviceInfo;
+        const serviceKeys = Object.keys(services);
+
+        return (
+            <div>
+                {serviceKeys.map((key, index) => {
+                    return (
+                        <div key={index}>
+                            <Status status={services[key].status}/>
+                            {services[key].name}
+                        </div>
+                    )
+                })}
+            </div>
+        );
+    }
+
+    render() {
+        return (
+            <div 
+            style={this.getStyles()}>
+                <div>
+                    <Status status={this.props.server.status} />
+                    {this.props.server.name}
+                </div>
+                {this.renderData()}
+                {this.renderServiceData()}
+            </div>
+        );
+    }
 }
 
 
 const mapDispatchToProps = (dispatch: Function) => {
-	return {
-		removeServer: () => dispatch(removeServer)
-	};
+    return {
+        removeServer: () => dispatch(removeServer)
+    };
 };
 
 export default connect<IStateProps, IDispatchProps, any>(undefined, mapDispatchToProps)(Server);
