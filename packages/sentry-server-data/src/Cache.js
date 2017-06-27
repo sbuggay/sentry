@@ -4,10 +4,10 @@ const defaultConfig = {
 }
 
 class Cache {
-    constructor(config) {
+    constructor(config = {}) {
         this.setConfig(config);
         this.store = {};
-        this.intervalFunctions = [];
+        this.intervalFunctions = {};
         this.interval = setInterval(this.runIntervalFunctions.bind(this), this.config.interval);
     }
 
@@ -24,40 +24,49 @@ class Cache {
     /** Clear the cache. */
     clear() {
         this.store = {};
-        this.intervalFunctions = [];
+        this.intervalFunctions = {};
     }
 
+    /** Set the config by assigning it to the default config. */
     setConfig(config) {
         this.config = Object.assign({}, defaultConfig, config);
     }
 
+    /** Get the current config. */
     getConfig() {
         return this.config;
     }
 
-    /** Add an function to the function queue. */
+    /** Add a function to the function queue. */
     addIntervalFunction(key, callback) {
-        this.intervalFunctions.push({ key, callback });
+        this.intervalFunctions[key] = callback;
     }
 
+     /** Add a function array to the function queue. */
     addIntervalFunctionArray(key, array) {
-        this.intervalFunctions.push({ key, array });
+        this.intervalFunctions[key] = array;
+    }
+
+     /** Get the interval functions. */
+    getIntervalFunctions() {
+        return this.intervalFunctions;
     }
 
     /** Run all actions and update cache. */
     runIntervalFunctions() {
-        this.intervalFunctions.forEach(intervalFunction => {
-            // If the actions are an array, run each and assign them into the provided IF name.
-            if (intervalFunction.hasOwnProperty("array")) {
-                intervalFunction.array.forEach((element) => {
+        const intervalFunctions = this.getIntervalFunctions();
+        Object.keys(intervalFunctions).forEach((key) => {
+            const func = intervalFunctions[key];
+            if (Array.isArray(func)) {
+                func.forEach((element) => {
                     element().then(values => {
-                        this.set(intervalFunction.key, Object.assign({}, this.get(intervalFunction.key), { [values.name]: values }));
+                        this.set(key, Object.assign({}, this.get(key), { [values.name]: values }));
                     });
                 });
             }
             else {
-                intervalFunction.callback().then((values) => {
-                    this.set(intervalFunction.key, values);
+                func().then((values) => {
+                    this.set(key, values);
                 });
             }
         });
