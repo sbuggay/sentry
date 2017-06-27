@@ -7,13 +7,15 @@ interface IStatusProps {
 }
 
 export class Status extends React.Component<IStatusProps, any> {
-    render() {
-        let className, color;
-
-        let style = {
+    getStyle() {
+        return {
             marginRight: "10px"
         }
+    }
 
+    render() {
+        let className, color;
+        
         switch (this.props.status) {
             case STATUS.AVAILABLE:
                 className = "fa fa-circle";
@@ -33,10 +35,8 @@ export class Status extends React.Component<IStatusProps, any> {
                 color = { color: "#951A1D" };
                 break;
         }
-        
-        style = {...style, ...color};
 
-        return <i className={className} style={style} aria-hidden="true"></i>;
+        return <i className={className} style={{...this.getStyle, color}} aria-hidden="true"></i>;
     }
 }
 

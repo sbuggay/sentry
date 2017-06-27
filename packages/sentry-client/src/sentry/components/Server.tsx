@@ -27,17 +27,6 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         };
     }
 
-    getHoverStyle(selected: Boolean) {
-        if (selected) {
-            return {
-                backgroundColor: "blue"
-            }
-        }
-        else {
-            return {};
-        }
-    }
-
     renderData(): JSX.Element {
         if (!this.props.server.data) {
             return undefined;
