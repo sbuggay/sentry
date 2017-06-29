@@ -1,12 +1,14 @@
 import * as actionTypes from "./actionTypes";
 
-import { Action, handleAction } from "redux-actions";
+// Perhaps transition to redux-actions?
+// import { Action, handleAction } from "redux-actions";
 
-interface IState {
+export interface IState {
     title: string;
     servers: {
         [id: string]: Object
     };
+    lastUpdated?: number;
 };
 
 export const initialState: IState = {
@@ -55,6 +57,12 @@ const reducer = (state = initialState, action: any) => {
                 ...state,
                 ...payload
             };
+
+        case actionTypes.UPDATE_LAST_UPDATED:
+            return {
+                ...state,
+                lastUpdated: payload
+            }
 
         default:
             return state;

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import ServerList from "./ServerList";
 import ServerForm from "./ServerForm";
+import ServerViewSelect from "./ServerViewSelect";
 import Status from "./Status";
 
 import { addServer } from "../actions";
@@ -17,13 +18,18 @@ interface IDispatchProps {
 
 class App extends React.Component<IDispatchProps, any> {
     onServerInputSubmit(values: Object) {
-        console.log(values);
         this.props.addServer(values);
     }
 
     render() {
         return <div>
+            <h1 style={{textAlign: "center"}}>
+                System Status
+            </h1>
+            <div style={{display: "flex", marginRight: "auto", marginLeft: "auto"}}>
             <ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />
+            <ServerViewSelect />
+            </div>
             <ServerList />
         </div>;
     }

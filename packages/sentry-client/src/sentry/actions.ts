@@ -1,13 +1,22 @@
-import * as actionsTypes from "./actionTypes";
+import * as actionTypes from "./actionTypes";
 
 import { Action } from "./actionTypes";
 
 import { POLLING_TIME } from "./constants/polling";
 import { STATUS } from "./constants/status";
+import { load, save } from "./lib/storage";
+
+import { IState } from "./reducer";
+
+export const initialize = () => {
+    return (dispatch: Function, getState: Function) => {
+        dispatch(loadState());
+    }
+}
 
 export const addServer = (name: String, host: String, id: String) => {
     return {
-        type: actionsTypes.ADD_SERVER,
+        type: actionTypes.ADD_SERVER,
         payload: {
             id: id,
             name: name,
@@ -19,7 +28,7 @@ export const addServer = (name: String, host: String, id: String) => {
 
 export const removeServer = (id: String) => {
     return {
-        type: actionsTypes.REMOVE_SERVER,
+        type: actionTypes.REMOVE_SERVER,
         payload: id
     };
 };
@@ -27,7 +36,7 @@ export const removeServer = (id: String) => {
 export const editServer = (payload: any) => {
     return (dispatch: Function, getState: Function) => {
         dispatch({
-            type: actionsTypes.EDIT_SERVER,
+            type: actionTypes.EDIT_SERVER,
             payload
         });
     };
@@ -69,7 +78,7 @@ export const pollServer = (server: any) => {
             if (response.ok) {
                 response.json().then((json: JSON) => {
                     dispatch({
-                        type: actionsTypes.POLL_SERVER,
+                        type: actionTypes.POLL_SERVER,
                         payload: {
                             id: server.id,
                             status: STATUS.AVAILABLE,
@@ -80,7 +89,7 @@ export const pollServer = (server: any) => {
             }
             else {
                 dispatch({
-                    type: actionsTypes.POLL_SERVER,
+                    type: actionTypes.POLL_SERVER,
                     payload: {
                         id: server.id,
                         status: STATUS.OUTAGE,
@@ -104,5 +113,16 @@ export const saveState = () => {
 
 // Loads the state tree from localstorage/other
 export const loadState = () => {
+    const state: IState = load();
+    return {
+        type: actionTypes.LOAD_STATE,
+        payload: state
+    }
+}
 
+export const updateLastUpdated = (date: number) => {
+    return {
+        type: actionTypes.UPDATE_LAST_UPDATED,
+        payload: date
+    }
 }
