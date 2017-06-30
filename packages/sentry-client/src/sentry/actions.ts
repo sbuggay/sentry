@@ -10,7 +10,7 @@ import { IState } from "./reducer";
 
 export const initialize = () => {
     return (dispatch: Function, getState: Function) => {
-        dispatch(loadState());
+        dispatch(updateLastUpdated(Date.now()));
     }
 }
 

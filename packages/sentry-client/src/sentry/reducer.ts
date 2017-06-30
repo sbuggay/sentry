@@ -12,13 +12,9 @@ export interface IState {
 };
 
 export const initialState: IState = {
-    title: "test title",
+    title: "System Status",
     servers: {
-        id: {
-            id: "id",
-            name: "macbook",
-            host: "http://127.0.0.1:3333"
-        } 
+
     }
 };
 
