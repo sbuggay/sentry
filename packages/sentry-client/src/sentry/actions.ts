@@ -10,7 +10,7 @@ import { IState } from "./reducer";
 
 export const initialize = () => {
     return (dispatch: Function, getState: Function) => {
-        dispatch(updateLastUpdated(Date.now()));
+        dispatch(initializePolling());
     }
 }
 
@@ -97,8 +97,7 @@ export const pollServer = (server: any) => {
                     }
                 });
             }
-
-
+            dispatch(updateLastUpdated(Date.now()));
         }).catch((reason: Error) => {
             console.error(reason);
         });
