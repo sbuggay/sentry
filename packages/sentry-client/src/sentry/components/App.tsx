@@ -15,6 +15,7 @@ import { guid } from "../lib/utils";
 import { STATUS } from "../constants/status";
 
 interface IDispatchProps {
+    title?: string;
     initialize?: Function;
     addServer?: Function;
 };
@@ -41,7 +42,7 @@ class App extends React.Component<IDispatchProps, any> {
     render() {
         return <div>
             <h1 style={{ textAlign: "center" }}>
-                System Status
+                {this.props.title}
             </h1>
             <div style={this.getStyle()}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -58,6 +59,12 @@ class App extends React.Component<IDispatchProps, any> {
     }
 }
 
+const mapStateToProps = (state: any) => {
+    return {
+        title: state.app.title
+    }
+}
+
 const mapDispatchToProps = (dispatch: any) => {
     return {
         addServer: (values: any) => {
@@ -67,4 +74,4 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-export default connect<any, IDispatchProps, any>(undefined, mapDispatchToProps)(App);
+export default connect<IDispatchProps, any, any>(mapStateToProps, mapDispatchToProps)(App);
