@@ -14,7 +14,21 @@ export interface IState {
 export const initialState: IState = {
     title: "System Status",
     servers: {
-
+                1: {
+            id: 1,
+            name: "macbook",
+            host: "http://127.0.0.1:3333"
+        },
+        2: {
+            id: 2,
+            name: "devan.space",
+            host: "http://devan.space:3333"
+        },
+        3: {
+            id: 3,
+            name: "bender",
+            host: "http://cocytus.xyz:3333"
+        }
     }
 };
 

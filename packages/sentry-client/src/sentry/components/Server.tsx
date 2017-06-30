@@ -40,18 +40,18 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 this.toggleExpand();
                 break;
         }
-        return false;
     }
 
-    getStyles() {
+    getStyles(): React.CSSProperties{
         return {
             width: "280px",
             padding: "5px 10px",
-            borderBottom: "1px solid #adb0af"
+            borderBottom: "1px solid #adb0af",
+            alignSelf: "flex-start"
         };
     }
 
-    formatBytes(bytes: number) {
+    formatBytes(bytes: number): string {
         if (bytes < 1024) return bytes + "B";
         else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + "KB";
         else if (bytes < 1073741824) return (bytes / 1048576).toFixed(1) +  "MB";
@@ -103,7 +103,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         );
     }
 
-    renderDetails() {
+    renderDetails(): JSX.Element {
         if (!this.props.server.data) {
             return undefined;
         }
@@ -135,15 +135,17 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         const className = this.state.expanded ? "fa fa-chevron-down" : "fa fa-chevron-right";
 
         return (
-            <i style={style} className={className}></i>
+            <i 
+            onClick={() => this.handleClick()}
+            style={style} 
+            className={className}></i>
         );
     }
 
-    render() {
+    render(): JSX.Element {
         return (
             <div
                 tabIndex={0}
-                onClick={() => this.handleClick()}
                 onKeyDown={(e) => this.handleKeyDown(e)}
                 style={this.getStyles()}>
                 <div>
@@ -158,7 +160,6 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         );
     }
 }
-
 
 const mapDispatchToProps = (dispatch: Function) => {
     return {
