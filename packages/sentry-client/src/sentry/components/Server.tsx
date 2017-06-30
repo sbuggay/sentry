@@ -87,11 +87,16 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
             );
         }
 
+        const cpuModel = dynamicInfo.cpus[0].model.split("@")[0];
+        const cpuSpeed = dynamicInfo.cpus[0].model.split("@")[1];
+        const virtualCores = dynamicInfo.cpus.length;
+
         return (
             <div style={{marginTop: "0.5em", overflow: "hidden"}}>
                 {renderRow("hostname:", dynamicInfo.hostname)}
                 {renderRow("uptime:", dynamicInfo.uptime)}
-                {/*{renderRow("cpu:", cpu)}*/}
+                {renderRow("cpu:", cpuModel)}
+                {renderRow("", `${cpuSpeed} (${virtualCores})`)}
                 {renderRow("ram:", `${this.formatBytes(dynamicInfo.freemem)} / ${this.formatBytes(dynamicInfo.totalmem)}`)}
             </div>
         );
