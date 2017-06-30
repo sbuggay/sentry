@@ -1,6 +1,8 @@
 import * as React from "react";
 import Status from "./Status";
 
+import { STATUS } from "../constants/status";
+
 import { removeServer } from "../actions";
 import { connect } from "react-redux";
 
@@ -22,56 +24,77 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         }
     }
 
-    handleClick() {
+    toggleExpand() {
         this.setState({
             expanded: !this.state.expanded
         })
     }
 
+    handleClick() {
+        this.toggleExpand()
+    }
+
+    handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+        switch (e.key) {
+            case "Enter":
+                this.toggleExpand();
+                break;
+        }
+        return false;
+    }
+
     getStyles() {
         return {
             width: "280px",
-            padding: "5px 10px"
+            padding: "5px 10px",
+            borderBottom: "1px solid #adb0af"
         };
     }
 
     formatBytes(bytes: number) {
-        if (bytes < 1024) return bytes + " Bytes";
-        else if (bytes < 1048576) return (bytes / 1024).toFixed(3) + " KB";
-        else if (bytes < 1073741824) return (bytes / 1048576).toFixed(3) + " MB";
-        else return (bytes / 1073741824).toFixed(3) + " GB";
+        if (bytes < 1024) return bytes + "B";
+        else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + "KB";
+        else if (bytes < 1073741824) return (bytes / 1048576).toFixed(1) +  "MB";
+        else return (bytes / 1073741824).toFixed(1) + "GB";
     };
 
     renderData(): JSX.Element {
-        if (!this.props.server.data) {
-            return undefined;
-        }
-
         const staticInfo = this.props.server.data.staticInfo;
         const dynamicInfo = this.props.server.data.dynamicInfo;
+
+        const cpu = dynamicInfo.cpus[0].model;
+
+        const renderRow = (label: string, data: string) => {
+            return (
+                <div style={{display: "flex", justifyContent: "space-between"}}>
+                    <span>{label}</span>
+                    <span>{data}</span>
+                </div>
+            );
+        }
+
         return (
-            <div>
-                <div>{dynamicInfo.hostname}</div>
-                <div>{this.formatBytes(dynamicInfo.freemem)} / {this.formatBytes(dynamicInfo.totalmem)}</div>
+            <div style={{marginTop: "0.5em", overflow: "hidden"}}>
+                {renderRow("hostname:", dynamicInfo.hostname)}
+                {renderRow("uptime:", dynamicInfo.uptime)}
+                {/*{renderRow("cpu:", cpu)}*/}
+                {renderRow("ram:", `${this.formatBytes(dynamicInfo.freemem)} / ${this.formatBytes(dynamicInfo.totalmem)}`)}
             </div>
         );
     }
 
     renderServiceData(): JSX.Element {
-        if (!this.props.server.data) {
-            return undefined;
-        }
-
         const services = this.props.server.data.serviceInfo;
         const serviceKeys = Object.keys(services);
 
         return (
-            <div>
-                <i>Services</i>
+            <div style={{marginTop: "0.5em"}}>
+                <div>services:</div>
                 {serviceKeys.map((key, index) => {
+                    const status = services[key].status ? STATUS.AVAILABLE : STATUS.OUTAGE;
                     return (
                         <div key={index}>
-                            <Status status={services[key].status} />
+                            <Status status={status} />
                             {services[key].name}
                         </div>
                     )
@@ -81,15 +104,29 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     renderDetails() {
+        if (!this.props.server.data) {
+            return undefined;
+        }
+
+        function detailStyle() {
+            return {
+                fontSize: "14px"
+            }
+        }
+
         return (
-            <div>
+            <div style={detailStyle()}>
                 {this.renderData()}
                 {this.renderServiceData()}
             </div>
         );
     }
 
-    renderChevron() {
+    renderChevron(): JSX.Element {
+        if (!this.props.server.data) {
+            return undefined;
+        }
+
         const style = {
             marginLeft: "10px",
             float: "right"
@@ -107,7 +144,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
             <div
                 tabIndex={0}
                 onClick={() => this.handleClick()}
-                onKeyDown={() => this.handleClick()}
+                onKeyDown={(e) => this.handleKeyDown(e)}
                 style={this.getStyles()}>
                 <div>
                     <span>

@@ -5,6 +5,11 @@
             "name": "brew",
             "script": "brew doctor",
             "test": "ready to brew"
+        },
+        {
+            "name": "npm",
+            "script": "npm --version",
+            "test": "version"
         }
     ]
 }
