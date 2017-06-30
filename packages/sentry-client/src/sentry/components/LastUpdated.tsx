@@ -15,7 +15,6 @@ export class LastUpdated extends React.Component<any, any> {
     }
 
     render(): JSX.Element {
-        console.log(this.props.lastUpdated);
         return (
             <div style={this.getStyle()}>
                 Last updated {new Date(this.props.lastUpdated).toTimeString()}
