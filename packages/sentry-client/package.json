@@ -7,7 +7,8 @@
     "build": "webpack",
     "serve": "webpack-dev-server --content-base dist/",
     "test": "jest --coverage",
-    "analyze": "webpack --json | webpack-bundle-size-analyzer"
+    "analyze": "webpack --json | webpack-bundle-size-analyzer",
+    "doc": "jsdoc"
   },
   "repository": {
     "type": "git",
