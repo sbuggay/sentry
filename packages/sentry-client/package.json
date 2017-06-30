@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack",
     "serve": "webpack-dev-server --content-base dist/",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "analyze": "webpack --json | webpack-bundle-size-analyzer"
   },
   "repository": {
     "type": "git",
