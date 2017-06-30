@@ -104,6 +104,11 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
     renderServiceData(): JSX.Element {
         const services = this.props.server.data.serviceInfo;
+
+        if (!services) {
+            return null;
+        }
+
         const serviceKeys = Object.keys(services);
 
         return (
