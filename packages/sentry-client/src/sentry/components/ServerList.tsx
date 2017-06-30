@@ -27,7 +27,6 @@ export class ServerList extends React.Component<IServerListProps, any> {
             flexFlow: "row wrap",
             width: "100%",
             margin: "1.5em 0 1.5em"
-            // border: "1pxx solid black"
         };
 
         return (
