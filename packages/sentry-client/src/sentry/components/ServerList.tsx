@@ -12,13 +12,15 @@ interface IServerListProps {
     initializePolling?: Function;
 };
 
+// TODO: Figure out what the actual type of a component ref is
+interface IServerListState {
+    refs: any[];
+}
+
 export class ServerList extends React.Component<IServerListProps, any> {
     constructor(props: any) {
         super(props);
-    }
-
-    componentDidMount() {
-        this.props.initializePolling();
+        
     }
 
     render() {
@@ -32,7 +34,10 @@ export class ServerList extends React.Component<IServerListProps, any> {
         return (
             <div style={divStyle}>
                 {Object.keys(this.props.servers).map((id, index) => {
-                    return <Server index={index} key={index} server={this.props.servers[id]} />;
+                    return <Server
+                        index={index}
+                        key={index}
+                        server={this.props.servers[id]} />;
                 })}
             </div>
         );

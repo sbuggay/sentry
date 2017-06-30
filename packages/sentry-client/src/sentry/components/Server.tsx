@@ -20,16 +20,12 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            expanded: false
+            expanded: false,
+            hover: false
         }
     }
 
-    toggleExpand() {
-        this.setState({
-            expanded: !this.state.expanded
-        })
-    }
-
+    //Handlers
     handleClick() {
         this.toggleExpand()
     }
@@ -40,6 +36,24 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 this.toggleExpand();
                 break;
         }
+    }
+
+    handleOnMouseEnter() {
+        this.setState({
+            hover: true
+        });
+    }
+
+    handleOnMouseLeave() {
+        this.setState({
+            hover: false
+        });
+    }
+
+    toggleExpand() {
+        this.setState({
+            expanded: !this.state.expanded
+        })
     }
 
     getStyles(): React.CSSProperties{
@@ -146,6 +160,8 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         return (
             <div
                 tabIndex={0}
+                onMouseEnter={() => this.handleOnMouseEnter()}
+                onMouseLeave={() => this.handleOnMouseLeave()}
                 onKeyDown={(e) => this.handleKeyDown(e)}
                 style={this.getStyles()}>
                 <div>
@@ -153,7 +169,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                         <Status status={this.props.server.status} />
                         {this.props.server.name}
                     </span>
-                    {this.renderChevron()}
+                    {this.state.hover ? this.renderChevron() : null}
                 </div>
                 {this.state.expanded ? this.renderDetails() : null}
             </div>
