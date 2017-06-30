@@ -6,6 +6,8 @@ import { STATUS } from "../constants/status";
 import { removeServer } from "../actions";
 import { connect } from "react-redux";
 
+import { formatBytes } from "../lib/utils";
+
 interface IStateProps {
     server: any;
     index: Number;
@@ -60,18 +62,11 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         return {
             width: "280px",
             padding: "5px 10px",
-            borderBottom: "1px solid #adb0af",
-            alignSelf: "flex-start"
+            borderBottom: "1px solid #adb0af"
         };
     }
 
-    formatBytes(bytes: number): string {
-        if (bytes < 1024) return bytes + "B";
-        else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + "KB";
-        else if (bytes < 1073741824) return (bytes / 1048576).toFixed(1) +  "MB";
-        else return (bytes / 1073741824).toFixed(1) + "GB";
-    };
-
+    //Render
     renderData(): JSX.Element {
         const staticInfo = this.props.server.data.staticInfo;
         const dynamicInfo = this.props.server.data.dynamicInfo;
@@ -97,7 +92,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 {renderRow("uptime:", dynamicInfo.uptime)}
                 {renderRow("cpu:", cpuModel)}
                 {renderRow("", `${cpuSpeed} (${virtualCores})`)}
-                {renderRow("ram:", `${this.formatBytes(dynamicInfo.freemem)} / ${this.formatBytes(dynamicInfo.totalmem)}`)}
+                {renderRow("ram:", `${formatBytes(dynamicInfo.freemem)} / ${formatBytes(dynamicInfo.totalmem)}`)}
             </div>
         );
     }
@@ -134,7 +129,8 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
         function detailStyle() {
             return {
-                fontSize: "14px"
+                fontSize: "14px",
+                marginBottom: "10px"
             }
         }
 
