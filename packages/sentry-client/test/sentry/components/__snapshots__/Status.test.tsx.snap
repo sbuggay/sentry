@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Status renders a maintenance status 1`] = `
+<i
+  aria-hidden="true"
+  className="fa fa-square"
+  style={
+    Object {
+      "color": "#1172C6",
+      "marginRight": "0.5em",
+    }
+  }
+/>
+`;
+
+exports[`Status renders an available status 1`] = `
+<i
+  aria-hidden="true"
+  className="fa fa-circle"
+  style={
+    Object {
+      "color": "#229926",
+      "marginRight": "0.5em",
+    }
+  }
+/>
+`;
+
+exports[`Status renders an issue status 1`] = `
+<i
+  aria-hidden="true"
+  className="fa fa-exclamation-circle"
+  style={
+    Object {
+      "color": "#FEE032",
+      "marginRight": "0.5em",
+    }
+  }
+/>
+`;
+
+exports[`Status renders an outage status 1`] = `
+<i
+  aria-hidden="true"
+  className="fa fa-exclamation-triangle"
+  style={
+    Object {
+      "color": "#951A1D",
+      "marginRight": "0.5em",
+    }
+  }
+/>
+`;
