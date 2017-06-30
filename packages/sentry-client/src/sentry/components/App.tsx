@@ -5,32 +5,55 @@ import ServerList from "./ServerList";
 import ServerForm from "./ServerForm";
 import ServerViewSelect from "./ServerViewSelect";
 import Status from "./Status";
+import LastUpdated from "./LastUpdated";
+import Legend from "./Legend";
 
-import { addServer } from "../actions";
+import { initialize, addServer } from "../actions";
 
 import { guid } from "../lib/utils";
 
 import { STATUS } from "../constants/status";
 
 interface IDispatchProps {
+    initialize?: Function;
     addServer?: Function;
 };
 
 class App extends React.Component<IDispatchProps, any> {
+
+    componentDidMount() {
+        this.props.initialize();
+    }
+
     onServerInputSubmit(values: Object) {
         this.props.addServer(values);
     }
 
+    getStyle() {
+        return {
+            maxWidth: "900px",
+            width: "100%",
+            marginLeft: "auto",
+            marginRight: "auto"
+        }
+    }
+
     render() {
         return <div>
-            <h1 style={{textAlign: "center"}}>
+            <h1 style={{ textAlign: "center" }}>
                 System Status
             </h1>
-            <div style={{display: "flex", marginRight: "auto", marginLeft: "auto"}}>
-            <ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />
-            <ServerViewSelect />
+            <div style={this.getStyle()}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />
+                    <ServerViewSelect />
+                </div>
+                <ServerList />
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <LastUpdated />
+                    <Legend />
+                </div>
             </div>
-            <ServerList />
         </div>;
     }
 }
@@ -39,7 +62,8 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         addServer: (values: any) => {
             dispatch(addServer(values.nameValue, values.hostValue, guid()));
-        }
+        },
+        initialize: () => dispatch(initialize())
     };
 };
 
