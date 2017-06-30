@@ -7,10 +7,18 @@ interface ILastUpdatedProps {
 
 export class LastUpdated extends React.Component<any, any> {
 
+    getStyle() {
+        return {
+            fontSize: "14px",
+            color: "#adb0af"
+        }
+    }
+
     render(): JSX.Element {
+        console.log(this.props.lastUpdated);
         return (
-            <div>
-                Last updated {this.props.lastUpdated}
+            <div style={this.getStyle()}>
+                Last updated {new Date(this.props.lastUpdated).toTimeString()}
             </div>
         );
     }
