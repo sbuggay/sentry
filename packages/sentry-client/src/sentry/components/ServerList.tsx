@@ -1,15 +1,16 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import Server from "./Server";
-
-import { initializePolling } from "../actions";
+import { initializePolling, pollServers } from "../actions";
 
 interface IServerListProps {
     servers?: {
         [id: string]: Object
     };
     initializePolling?: Function;
+    pollServers?: Function;
 };
 
 // TODO: Figure out what the actual type of a component ref is
@@ -18,9 +19,13 @@ interface IServerListState {
 }
 
 export class ServerList extends React.Component<IServerListProps, any> {
-    constructor(props: any) {
-        super(props);
-        
+
+    componentWillMount() {
+        this.props.initializePolling();
+    }
+
+    componentDidMount() {
+        this.props.pollServers();
     }
 
     render() {
@@ -50,10 +55,11 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Function) => {
-    return {
-        initializePolling: () => dispatch(initializePolling())
-    };
+const mapDispatchToProps = (dispatch: any) => {
+    return bindActionCreators({
+        initializePolling,
+        pollServers
+    }, dispatch);
 };
 
 export default connect<IServerListProps, any, any>(mapStateToProps, mapDispatchToProps)(ServerList);

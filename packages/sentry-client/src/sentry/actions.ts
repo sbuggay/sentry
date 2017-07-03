@@ -11,7 +11,6 @@ import { IState } from "./reducer";
 export const initialize = () => {
     return (dispatch: Function, getState: Function) => {
         dispatch(loadState());
-        dispatch(initializePolling());
     }
 }
 
@@ -45,7 +44,6 @@ export const editServer = (payload: any) => {
 
 export const initializePolling = () => {
     return (dispatch: Function, getState: Function) => {
-        dispatch(pollServers());
         setInterval(() => dispatch(pollServers()), POLLING_TIME);
     };
 };
