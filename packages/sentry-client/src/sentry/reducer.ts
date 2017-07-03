@@ -4,14 +4,14 @@ export interface IServer {
     name: string;
     status: number;
     data: {
-        staticInfo: {
+        staticInfo?: {
             arch: string;
             platform: string;
             release: string;
             type: string;
             endianness: string;
         };
-        dynamicInfo: {
+        dynamicInfo?: {
             hostname: string;
             uptime: number;
             freemem: number;
@@ -28,7 +28,7 @@ export interface IServer {
                 };
             }];
         };
-        serviceInfo: {
+        serviceInfo?: {
             [key: string]: {
                 name: string;
                 script: string;

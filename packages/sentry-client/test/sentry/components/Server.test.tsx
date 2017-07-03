@@ -4,8 +4,16 @@ import { Server } from "../../../src/sentry/components/Server";
 
 describe("Server", () => {
 	it("renders server", () => {
+		const server = {
+			name: "",
+			status: 0,
+			data: {
+				
+			}
+		}
+
 		const component = renderer.create(
-			<Server server={{}} index={0} />
+			<Server server={server} index={0} />
 		);
 
 		let tree = component.toJSON();
