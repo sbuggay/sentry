@@ -2,8 +2,9 @@
 
 exports[`Server renders server 1`] = `
 <div
-  onClick={[Function]}
   onKeyDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   style={
     Object {
       "borderBottom": "1px solid #adb0af",
