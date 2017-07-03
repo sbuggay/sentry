@@ -7,6 +7,7 @@ import ServerViewSelect from "./ServerViewSelect";
 import Status from "./Status";
 import LastUpdated from "./LastUpdated";
 import Legend from "./Legend";
+import Storage from "./Storage";
 
 import { initialize, addServer } from "../actions";
 
@@ -53,6 +54,9 @@ class App extends React.Component<IDispatchProps, any> {
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <LastUpdated />
                     <Legend />
+                </div>
+                <div>
+                    <Storage />
                 </div>
             </div>
         </div>;

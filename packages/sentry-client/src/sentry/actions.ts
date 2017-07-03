@@ -10,6 +10,7 @@ import { IState } from "./reducer";
 
 export const initialize = () => {
     return (dispatch: Function, getState: Function) => {
+        dispatch(loadState());
         dispatch(initializePolling());
     }
 }
@@ -44,6 +45,7 @@ export const editServer = (payload: any) => {
 
 export const initializePolling = () => {
     return (dispatch: Function, getState: Function) => {
+        dispatch(pollServers());
         setInterval(() => dispatch(pollServers()), POLLING_TIME);
     };
 };
@@ -106,13 +108,16 @@ export const pollServer = (server: any) => {
 
 // Saves the state tree to localstorage/other
 export const saveState = () => {
-
+    return (dispatch: Function, getState: Function) => {
+        save(getState().app);
+    }
 }
 
 
 // Loads the state tree from localstorage/other
 export const loadState = () => {
-    const state: IState = load();
+    const state: any = load();
+    console.log(state);
     return {
         type: actionTypes.LOAD_STATE,
         payload: state
