@@ -1,6 +1,3 @@
-//localstorage
-//serverstorage
-
 import { IState } from "../reducer";
 
 export function load(): IState {
