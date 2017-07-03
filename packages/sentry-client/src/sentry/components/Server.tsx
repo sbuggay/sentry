@@ -1,15 +1,16 @@
 import * as React from "react";
-import Status from "./Status";
-
-import { STATUS } from "../constants/status";
-
 import { removeServer } from "../actions";
 import { connect } from "react-redux";
+
+import { IServer } from "../reducer";
+
+import Status from "./Status";
+import { STATUS } from "../constants/status";
 
 import { formatBytes } from "../lib/utils";
 
 interface IStateProps {
-    server: any;
+    server: IServer;
     index: Number;
     expanded?: Boolean;
 };
@@ -89,7 +90,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         return (
             <div style={{marginTop: "0.5em", overflow: "hidden"}}>
                 {renderRow("hostname:", dynamicInfo.hostname)}
-                {renderRow("uptime:", dynamicInfo.uptime)}
+                {renderRow("uptime:", dynamicInfo.uptime.toString())}
                 {renderRow("cpu:", cpuModel)}
                 {renderRow("", `${cpuSpeed} (${virtualCores})`)}
                 {renderRow("ram:", `${formatBytes(dynamicInfo.freemem)} / ${formatBytes(dynamicInfo.totalmem)}`)}
@@ -124,7 +125,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
     renderDetails(): JSX.Element {
         if (!this.props.server.data) {
-            return undefined;
+            return null;
         }
 
         function detailStyle() {
@@ -144,7 +145,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
     renderChevron(): JSX.Element {
         if (!this.props.server.data) {
-            return undefined;
+            return null;
         }
 
         const style = {

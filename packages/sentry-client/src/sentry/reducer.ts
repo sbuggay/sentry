@@ -1,12 +1,48 @@
 import * as actionTypes from "./actionTypes";
 
-// Perhaps transition to redux-actions?
-// import { Action, handleAction } from "redux-actions";
+export interface IServer {
+    name: string;
+    status: number;
+    data: {
+        staticInfo: {
+            arch: string;
+            platform: string;
+            release: string;
+            type: string;
+            endianness: string;
+        };
+        dynamicInfo: {
+            hostname: string;
+            uptime: number;
+            freemem: number;
+            totalmem: number;
+            cpus: [{
+                model: string;
+                speed: number;
+                times: {
+                    user: number;
+                    nice: number;
+                    sys: number;
+                    idle: number;
+                    irq: number;
+                };
+            }];
+        };
+        serviceInfo: {
+            [key: string]: {
+                name: string;
+                script: string;
+                test: string;
+                status: boolean;
+            };
+        };
+    };
+};
 
 export interface IState {
     title: string;
     servers: {
-        [id: string]: Object
+        [id: string]: IServer
     };
     lastUpdated?: number;
 };

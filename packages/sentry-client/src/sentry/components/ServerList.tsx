@@ -4,10 +4,11 @@ import { bindActionCreators } from "redux";
 
 import Server from "./Server";
 import { initializePolling, pollServers } from "../actions";
+import { IServer } from "../reducer";
 
 interface IServerListProps {
     servers?: {
-        [id: string]: Object
+        [id: string]: IServer
     };
     initializePolling?: Function;
     pollServers?: Function;
