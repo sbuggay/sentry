@@ -1,8 +1,11 @@
 import * as actionTypes from "./actionTypes";
 
+import view from "./constants/view";
+
 export interface IServer {
     name: string;
-    status: number;
+    status?: number;
+    loaded?: boolean;
     staticInfo?: {
         arch: string;
         platform: string;
@@ -39,6 +42,7 @@ export interface IServer {
 
 export interface IState {
     title: string;
+    view: string;
     servers: {
         [id: string]: IServer
     };
@@ -47,6 +51,7 @@ export interface IState {
 
 export const initialState: IState = {
     title: "",
+    view: view.servers,
     servers: {
 
     },
