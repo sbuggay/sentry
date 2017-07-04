@@ -5,8 +5,6 @@ describe("utils guid", () => {
         expect(utils.guid).toBeDefined;
         expect(typeof utils.guid()).toBe("string");
     });
-
-    
 });
 
 describe("utils formatBytes", () => {

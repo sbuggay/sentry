@@ -33,7 +33,8 @@
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js"
+    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
+    "setupFiles": ["<rootDir>/test/mocks/localStorage.js"]
   },
   "author": "",
   "license": "MIT",
