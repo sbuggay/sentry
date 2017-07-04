@@ -8,11 +8,11 @@
         "jsx": "react",
         "experimentalDecorators": true,
         "noEmit": true,
-        "types":[
+        "types": [
             "jest"
         ]
     },
-    "exclude":[
+    "exclude": [
         "node_modules",
         "test"
     ],

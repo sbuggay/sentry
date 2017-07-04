@@ -9,7 +9,7 @@ interface IStatusProps {
 export class Status extends React.Component<IStatusProps, any> {
     getStyle() {
         return {
-            marginRight: "10px"
+            marginRight: "0.5em"
         }
     }
 
@@ -36,7 +36,7 @@ export class Status extends React.Component<IStatusProps, any> {
                 break;
         }
 
-        return <i className={className} style={{...this.getStyle, color}} aria-hidden="true"></i>;
+        return <i className={className} style={{...this.getStyle(), ...color}} aria-hidden="true"></i>;
     }
 }
 

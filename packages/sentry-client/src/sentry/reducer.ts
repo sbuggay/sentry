@@ -1,23 +1,56 @@
 import * as actionTypes from "./actionTypes";
 
-import { Action, handleAction } from "redux-actions";
-
-interface IState {
-    title: string;
-    servers: {
-        [id: string]: Object
+export interface IServer {
+    name: string;
+    status: number;
+    staticInfo?: {
+        arch: string;
+        platform: string;
+        release: string;
+        type: string;
+        endianness: string;
+    };
+    dynamicInfo?: {
+        hostname: string;
+        uptime: number;
+        freemem: number;
+        totalmem: number;
+        cpus: [{
+            model: string;
+            speed: number;
+            times: {
+                user: number;
+                nice: number;
+                sys: number;
+                idle: number;
+                irq: number;
+            };
+        }];
+    };
+    serviceInfo?: {
+        [key: string]: {
+            name: string;
+            script: string;
+            test: string;
+            status: boolean;
+        };
     };
 };
 
-export const initialState: IState = {
-    title: "test title",
+export interface IState {
+    title: string;
     servers: {
-        id: {
-            id: "id",
-            name: "macbook",
-            host: "http://127.0.0.1:3333"
-        } 
-    }
+        [id: string]: IServer
+    };
+    lastUpdated?: number;
+};
+
+export const initialState: IState = {
+    title: "",
+    servers: {
+
+    },
+    lastUpdated: 0
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -44,8 +77,7 @@ const reducer = (state = initialState, action: any) => {
                     ...state.servers,
                     [payload.id]: {
                         ...state.servers[payload.id],
-                        status: payload.status,
-                        data: payload.data
+                        ...payload
                     }
                 }
             };
@@ -55,6 +87,12 @@ const reducer = (state = initialState, action: any) => {
                 ...state,
                 ...payload
             };
+
+        case actionTypes.UPDATE_LAST_UPDATED:
+            return {
+                ...state,
+                lastUpdated: payload
+            }
 
         default:
             return state;

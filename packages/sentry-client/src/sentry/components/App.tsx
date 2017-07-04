@@ -1,40 +1,80 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import ServerList from "./ServerList";
 import ServerForm from "./ServerForm";
+import ServerViewSelect from "./ServerViewSelect";
 import Status from "./Status";
+import LastUpdated from "./LastUpdated";
+import Legend from "./Legend";
+import Storage from "./Storage";
 
-import { addServer } from "../actions";
+import { initialize, addServer } from "../actions";
 
 import { guid } from "../lib/utils";
 
 import { STATUS } from "../constants/status";
 
 interface IDispatchProps {
+    title?: string;
+    initialize?: Function;
     addServer?: Function;
 };
 
-class App extends React.Component<IDispatchProps, any> {
+export class App extends React.Component<IDispatchProps, any> {
+
+    componentDidMount() {
+        this.props.initialize();
+    }
+
     onServerInputSubmit(values: Object) {
-        console.log(values);
         this.props.addServer(values);
+    }
+
+    getStyle() {
+        return {
+            maxWidth: "900px",
+            width: "100%",
+            marginLeft: "auto",
+            marginRight: "auto"
+        }
     }
 
     render() {
         return <div>
-            <ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />
-            <ServerList />
+            <h1 style={{ textAlign: "center" }}>
+                {this.props.title}
+            </h1>
+            <div style={this.getStyle()}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />
+                    <ServerViewSelect />
+                </div>
+                <ServerList />
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <LastUpdated />
+                    <Legend />
+                </div>
+                <div>
+                    <Storage />
+                </div>
+            </div>
         </div>;
     }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapStateToProps = (state: any) => {
     return {
-        addServer: (values: any) => {
-            dispatch(addServer(values.nameValue, values.hostValue, guid()));
-        }
-    };
+        title: state.title
+    }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+    return bindActionCreators({
+        addServer,
+        initialize
+    }, dispatch);
 };
 
-export default connect<any, IDispatchProps, any>(undefined, mapDispatchToProps)(App);
+export default connect<IDispatchProps, any, any>(mapStateToProps, mapDispatchToProps)(App);

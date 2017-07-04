@@ -10,7 +10,7 @@ import App from "./sentry/components/App";
 
 import rootReducer from "./rootReducer";
 
-const store = createStore(
+export const store = createStore(
     rootReducer,
     applyMiddleware(thunk)
 );

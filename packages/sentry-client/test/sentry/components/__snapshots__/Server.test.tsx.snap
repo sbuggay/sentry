@@ -2,25 +2,32 @@
 
 exports[`Server renders server 1`] = `
 <div
+  onKeyDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   style={
     Object {
+      "borderBottom": "1px solid #adb0af",
       "padding": "5px 10px",
       "width": "280px",
     }
   }
+  tabIndex={0}
 >
   <div>
-    <i
-      aria-hidden="true"
-      className="fa fa-exclamation-triangle"
-      style={
-        Object {
-          "color": Object {
+    <span>
+      <i
+        aria-hidden="true"
+        className="fa fa-exclamation-triangle"
+        style={
+          Object {
             "color": "#951A1D",
-          },
+            "marginRight": "0.5em",
+          }
         }
-      }
-    />
+      />
+      
+    </span>
   </div>
 </div>
 `;
