@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 
 import ServerList from "./ServerList";
 import ServerForm from "./ServerForm";
-import ServerViewSelect from "./ServerViewSelect";
+import ServerViewSelect from "./ViewSelect";
 import Status from "./Status";
 import LastUpdated from "./LastUpdated";
 import Legend from "./Legend";
