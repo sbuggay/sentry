@@ -74,13 +74,13 @@ export const pollServer = (server: any) => {
 
             // TODO: Refactor
             if (response.ok) {
-                response.json().then((json: JSON) => {
+                response.json().then((data: JSON) => {
                     dispatch({
                         type: actionTypes.POLL_SERVER,
                         payload: {
                             id: server.id,
                             status: STATUS.AVAILABLE,
-                            data: json,
+                            ...data
                         }
                     });
                 });
@@ -90,8 +90,7 @@ export const pollServer = (server: any) => {
                     type: actionTypes.POLL_SERVER,
                     payload: {
                         id: server.id,
-                        status: STATUS.OUTAGE,
-                        data: undefined,
+                        status: STATUS.OUTAGE
                     }
                 });
             }

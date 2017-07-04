@@ -69,8 +69,8 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
     //Render
     renderData(): JSX.Element {
-        const staticInfo = this.props.server.data.staticInfo;
-        const dynamicInfo = this.props.server.data.dynamicInfo;
+        const staticInfo = this.props.server.staticInfo;
+        const dynamicInfo = this.props.server.dynamicInfo;
 
         const cpu = dynamicInfo.cpus[0].model;
 
@@ -99,7 +99,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     renderServiceData(): JSX.Element {
-        const services = this.props.server.data.serviceInfo;
+        const services = this.props.server.serviceInfo;
 
         if (!services) {
             return null;
@@ -124,9 +124,6 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     renderDetails(): JSX.Element {
-        if (!this.props.server.data) {
-            return null;
-        }
 
         function detailStyle() {
             return {
@@ -144,9 +141,6 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     renderChevron(): JSX.Element {
-        if (!this.props.server.data) {
-            return null;
-        }
 
         const style = {
             marginLeft: "10px",

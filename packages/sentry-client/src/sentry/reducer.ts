@@ -3,38 +3,36 @@ import * as actionTypes from "./actionTypes";
 export interface IServer {
     name: string;
     status: number;
-    data: {
-        staticInfo?: {
-            arch: string;
-            platform: string;
-            release: string;
-            type: string;
-            endianness: string;
-        };
-        dynamicInfo?: {
-            hostname: string;
-            uptime: number;
-            freemem: number;
-            totalmem: number;
-            cpus: [{
-                model: string;
-                speed: number;
-                times: {
-                    user: number;
-                    nice: number;
-                    sys: number;
-                    idle: number;
-                    irq: number;
-                };
-            }];
-        };
-        serviceInfo?: {
-            [key: string]: {
-                name: string;
-                script: string;
-                test: string;
-                status: boolean;
+    staticInfo?: {
+        arch: string;
+        platform: string;
+        release: string;
+        type: string;
+        endianness: string;
+    };
+    dynamicInfo?: {
+        hostname: string;
+        uptime: number;
+        freemem: number;
+        totalmem: number;
+        cpus: [{
+            model: string;
+            speed: number;
+            times: {
+                user: number;
+                nice: number;
+                sys: number;
+                idle: number;
+                irq: number;
             };
+        }];
+    };
+    serviceInfo?: {
+        [key: string]: {
+            name: string;
+            script: string;
+            test: string;
+            status: boolean;
         };
     };
 };
@@ -79,8 +77,7 @@ const reducer = (state = initialState, action: any) => {
                     ...state.servers,
                     [payload.id]: {
                         ...state.servers[payload.id],
-                        status: payload.status,
-                        data: payload.data
+                        ...payload
                     }
                 }
             };
