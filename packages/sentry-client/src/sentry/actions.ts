@@ -1,17 +1,14 @@
 import * as actionTypes from "./actionTypes";
 
+import { Dispatch } from "redux";
+
 import { POLLING_TIME } from "./constants/polling";
 import { STATUS } from "./constants/status";
 import { load, save } from "./lib/storage";
 
 import { IState } from "./reducer";
 
-export const initialize = () => {
-    return (dispatch: Function, getState: Function) => {
-        dispatch(loadState());
-    }
-}
-
+// Syncronous actions
 export const addServer = (name: String, host: String, id: String) => {
     return {
         type: actionTypes.ADD_SERVER,
@@ -31,8 +28,15 @@ export const removeServer = (id: String) => {
     };
 };
 
+// Asyncronous actions
+export const initialize = () => {
+    return (dispatch: Dispatch<IState>) => {
+        dispatch(loadState());
+    }
+}
+
 export const editServer = (payload: any) => {
-    return (dispatch: Function, getState: Function) => {
+    return (dispatch: Dispatch<IState>, getState: () => IState) => {
         dispatch({
             type: actionTypes.EDIT_SERVER,
             payload
@@ -41,13 +45,13 @@ export const editServer = (payload: any) => {
 };
 
 export const initializePolling = () => {
-    return (dispatch: Function, getState: Function) => {
+    return (dispatch: Dispatch<IState>, getState: () => IState) => {
         setInterval(() => dispatch(pollServers()), POLLING_TIME);
     };
 };
 
 export const pollServers = () => {
-    return (dispatch: Function, getState: Function) => {
+    return (dispatch: Dispatch<IState>, getState: () => IState) => {
         const state = getState();
         Object.keys(state.servers).map((key) => {
             dispatch(pollServer(state.servers[key]));
@@ -56,7 +60,7 @@ export const pollServers = () => {
 };
 
 export const pollServer = (server: any) => {
-    return (dispatch: Function, getState: Function) => {
+    return (dispatch: Dispatch<IState>, getState: () => IState) => {
         let requestInit: RequestInit = {
             method: "GET",
             headers: new Headers(),
@@ -67,51 +71,42 @@ export const pollServer = (server: any) => {
             // We care about the responseCode and the body
 
             // Go ahead and set status to unavailable
-            let status = STATUS.OUTAGE;
-
-            // If response body is in expected format, read it
-            // Set to issue, availble, or maintainence accordingly
-
-            // TODO: Refactor
-            if (response.ok) {
-                response.json().then((data: JSON) => {
-                    dispatch({
-                        type: actionTypes.POLL_SERVER,
-                        payload: {
-                            id: server.id,
-                            status: STATUS.AVAILABLE,
-                            ...data
-                        }
-                    });
-                });
-            }
-            else {
+            let status = response.ok ? STATUS.AVAILABLE : STATUS.OUTAGE;
+            response.json().then((data: JSON) => {
                 dispatch({
                     type: actionTypes.POLL_SERVER,
                     payload: {
                         id: server.id,
-                        status: STATUS.OUTAGE
+                        status: status,
+                        ...data
                     }
                 });
-            }
+            });
+
             dispatch(updateLastUpdated(Date.now()));
         }).catch((reason: Error) => {
-            console.error(reason);
+            dispatch({
+                type: actionTypes.POLL_SERVER,
+                payload: {
+                    id: server.id,
+                    status: STATUS.OUTAGE,
+                }
+            });
         });
     };
 };
 
 // Saves the state tree to localstorage/other
 export const saveState = () => {
-    return (dispatch: Function, getState: Function) => {
-        save(getState().app);
+    return (dispatch: Dispatch<IState>, getState: () => IState) => {
+        save(getState());
     }
 }
 
 
 // Loads the state tree from localstorage/other
 export const loadState = () => {
-    const state: any = load();
+    const state: IState = load();
     return {
         type: actionTypes.LOAD_STATE,
         payload: state
