@@ -30,7 +30,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
     //Handlers
     handleClick() {
-        this.toggleExpand()
+        this.toggleExpand();
     }
 
     handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
@@ -59,7 +59,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         })
     }
 
-    getStyles(): React.CSSProperties{
+    getStyle(): React.CSSProperties{
         return {
             width: "280px",
             padding: "5px 10px",
@@ -170,7 +170,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 onMouseEnter={() => this.handleOnMouseEnter()}
                 onMouseLeave={() => this.handleOnMouseLeave()}
                 onKeyDown={(e) => this.handleKeyDown(e)}
-                style={this.getStyles()}>
+                style={this.getStyle()}>
                 <div>
                     <span>
                         <Status status={this.props.server.status} />
