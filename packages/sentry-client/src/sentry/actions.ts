@@ -1,7 +1,5 @@
 import * as actionTypes from "./actionTypes";
 
-import { Action } from "./actionTypes";
-
 import { POLLING_TIME } from "./constants/polling";
 import { STATUS } from "./constants/status";
 import { load, save } from "./lib/storage";

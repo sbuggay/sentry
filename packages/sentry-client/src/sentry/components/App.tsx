@@ -22,7 +22,7 @@ interface IDispatchProps {
     addServer?: Function;
 };
 
-class App extends React.Component<IDispatchProps, any> {
+export class App extends React.Component<IDispatchProps, any> {
 
     componentDidMount() {
         this.props.initialize();
