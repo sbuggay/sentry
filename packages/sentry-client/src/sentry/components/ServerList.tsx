@@ -22,11 +22,8 @@ interface IServerListState {
 export class ServerList extends React.Component<IServerListProps, any> {
 
     componentWillMount() {
-        this.props.initializePolling();
-    }
-
-    componentDidMount() {
         this.props.pollServers();
+        this.props.initializePolling();
     }
 
     getStyle() {
@@ -60,8 +57,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return bindActionCreators({
-        initializePolling,
-        pollServers
+        pollServers,
+        initializePolling
     }, dispatch);
 };
 

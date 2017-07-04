@@ -59,7 +59,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         })
     }
 
-    getStyle(): React.CSSProperties{
+    getStyle(): React.CSSProperties {
         return {
             width: "280px",
             padding: "5px 10px",
@@ -68,6 +68,13 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     //Render
+    renderStatus(): JSX.Element {
+        const status = this.props.server.status ? this.props.server.status : STATUS.UNKNOWN;
+        return (
+            <Status status={status} />
+        );
+    }
+
     renderData(): JSX.Element {
         const staticInfo = this.props.server.staticInfo;
         const dynamicInfo = this.props.server.dynamicInfo;
@@ -76,7 +83,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
         const renderRow = (label: string, data: string) => {
             return (
-                <div style={{display: "flex", justifyContent: "space-between"}}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <span>{label}</span>
                     <span>{data}</span>
                 </div>
@@ -88,7 +95,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         const virtualCores = dynamicInfo.cpus.length;
 
         return (
-            <div style={{marginTop: "0.5em", overflow: "hidden"}}>
+            <div style={{ marginTop: "0.5em", overflow: "hidden" }}>
                 {renderRow("hostname:", dynamicInfo.hostname)}
                 {renderRow("uptime:", dynamicInfo.uptime.toString())}
                 {renderRow("cpu:", cpuModel)}
@@ -108,7 +115,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         const serviceKeys = Object.keys(services);
 
         return (
-            <div style={{marginTop: "0.5em"}}>
+            <div style={{ marginTop: "0.5em" }}>
                 <div>services:</div>
                 {serviceKeys.map((key, index) => {
                     const status = services[key].status ? STATUS.AVAILABLE : STATUS.OUTAGE;
@@ -150,10 +157,10 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         const className = this.state.expanded ? "fa fa-chevron-down" : "fa fa-chevron-right";
 
         return (
-            <i 
-            onClick={() => this.handleClick()}
-            style={style} 
-            className={className}></i>
+            <i
+                onClick={() => this.handleClick()}
+                style={style}
+                className={className}></i>
         );
     }
 
@@ -167,7 +174,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 style={this.getStyle()}>
                 <div>
                     <span>
-                        <Status status={this.props.server.status} />
+                        {this.renderStatus()}
                         {this.props.server.name}
                     </span>
                     {this.state.hover ? this.renderChevron() : null}
