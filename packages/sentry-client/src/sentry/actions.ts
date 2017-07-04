@@ -51,8 +51,8 @@ export const initializePolling = () => {
 export const pollServers = () => {
     return (dispatch: Function, getState: Function) => {
         const state = getState();
-        Object.keys(state.app.servers).map((key) => {
-            dispatch(pollServer(state.app.servers[key]));
+        Object.keys(state.servers).map((key) => {
+            dispatch(pollServer(state.servers[key]));
         });
     };
 };
@@ -115,7 +115,6 @@ export const saveState = () => {
 // Loads the state tree from localstorage/other
 export const loadState = () => {
     const state: any = load();
-    console.log(state);
     return {
         type: actionTypes.LOAD_STATE,
         payload: state

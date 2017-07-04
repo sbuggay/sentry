@@ -1,8 +1,7 @@
 import { combineReducers } from "redux";
 import reducer from "./sentry/reducer";
 
-const reducers = {
-    app: reducer
-};
+// This file exists as a future entry point for mulitple stores, currently this
+// is not needed.
 
-export default combineReducers(reducers);
+export default reducer;

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import ServerList from "./ServerList";
 import ServerForm from "./ServerForm";
@@ -65,17 +66,15 @@ class App extends React.Component<IDispatchProps, any> {
 
 const mapStateToProps = (state: any) => {
     return {
-        title: state.app.title
+        title: state.title
     }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
-    return {
-        addServer: (values: any) => {
-            dispatch(addServer(values.nameValue, values.hostValue, guid()));
-        },
-        initialize: () => dispatch(initialize())
-    };
+    return bindActionCreators({
+        addServer,
+        initialize
+    }, dispatch);
 };
 
 export default connect<IDispatchProps, any, any>(mapStateToProps, mapDispatchToProps)(App);

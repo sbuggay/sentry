@@ -5,9 +5,9 @@ import configureStore from "redux-mock-store";
 import { mount } from "enzyme";
 
 import { initialState } from "../../../src/sentry/reducer";
-import LastUpdated, { LastUpdated as ULastUpdated} from "../../../src/sentry/components/LastUpdated";
+import ServerViewSelect, { ServerViewSelect as UServerViewSelect} from "../../../src/sentry/components/ServerViewSelect";
 
-describe("LastUpdated", () => {
+describe("ServerViewSelect", () => {
 
     const mockStore = configureStore();
     let store, wrapper;
@@ -16,12 +16,12 @@ describe("LastUpdated", () => {
         store = mockStore(initialState);
         wrapper = mount(
             <Provider store={store}>
-                <LastUpdated />
+                <ServerViewSelect />
             </Provider>
         );
     });
 
     it("contains the component", () => {
-        expect(wrapper.find(LastUpdated)).toHaveLength(1);
+        expect(wrapper.find(ServerViewSelect)).toHaveLength(1);
     });
 });

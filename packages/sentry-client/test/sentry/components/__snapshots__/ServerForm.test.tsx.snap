@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ServerForm renders a ServerForm 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    name="nameValue"
+    onChange={[Function]}
+    placeholder="name"
+    type="text"
+    value=""
+  />
+  <input
+    name="hostValue"
+    onChange={[Function]}
+    placeholder="host"
+    type="text"
+    value=""
+  />
+  <button
+    type="submit"
+  >
+    submit
+  </button>
+</form>
+`;

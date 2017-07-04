@@ -29,16 +29,18 @@ export class ServerList extends React.Component<IServerListProps, any> {
         this.props.pollServers();
     }
 
-    render() {
-        const divStyle = {
+    getStyle() {
+        return {
             display: "flex",
             flexFlow: "row wrap",
             width: "100%",
             margin: "1.5em 0 1.5em"
         };
+    }
 
+    render() {
         return (
-            <div style={divStyle}>
+            <div style={this.getStyle()}>
                 {Object.keys(this.props.servers).map((id, index) => {
                     return <Server
                         index={index}
@@ -52,7 +54,7 @@ export class ServerList extends React.Component<IServerListProps, any> {
 
 const mapStateToProps = (state: any) => {
     return {
-        servers: state.app.servers
+        servers: state.servers
     };
 };
 

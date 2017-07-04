@@ -18,7 +18,7 @@ describe("Storage", () => {
             <Provider store={store}>
                 <Storage />
             </Provider>
-        )
+        );
     });
 
     it("contains the component", () => {

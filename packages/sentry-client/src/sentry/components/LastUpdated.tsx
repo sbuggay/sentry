@@ -25,7 +25,7 @@ export class LastUpdated extends React.Component<any, any> {
 
 const mapStateToProps = (state: any) => {
     return {
-        lastUpdated: state.app.lastUpdated
+        lastUpdated: state.lastUpdated
     };
 };
 

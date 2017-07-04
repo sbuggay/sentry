@@ -51,7 +51,8 @@ export const initialState: IState = {
     title: "",
     servers: {
 
-    }
+    },
+    lastUpdated: 0
 };
 
 const reducer = (state = initialState, action: any) => {
