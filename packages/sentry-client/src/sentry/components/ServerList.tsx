@@ -19,11 +19,16 @@ interface IServerListState {
     refs: any[];
 }
 
-export class ServerList extends React.Component<IServerListProps, any> {
+export class ServerList extends React.Component<IServerListProps, IServerListState> {
 
     componentWillMount() {
-        this.props.pollServers();
-        this.props.initializePolling();
+        if (this.props.pollServers) {
+            this.props.pollServers();
+        }
+        
+        if (this.props.initializePolling) {
+            this.props.initializePolling();
+        }   
     }
 
     getStyle() {
@@ -39,6 +44,10 @@ export class ServerList extends React.Component<IServerListProps, any> {
         return (
             <div style={this.getStyle()}>
                 {Object.keys(this.props.servers).map((id, index) => {
+                    if (!this.props.servers || !this.props.servers[id]) {
+                        return null;
+                    }
+
                     return <Server
                         index={index}
                         key={index}

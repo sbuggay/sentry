@@ -1,5 +1,4 @@
 import * as React from "react";
-import { connect } from "react-redux";
 
 import { Status } from "./Status";
 import { STATUS } from "../constants/status";
@@ -21,6 +20,7 @@ export class Legend extends React.Component<any, any> {
                 <span style={{marginLeft: "1em"}}><Status status={STATUS.OUTAGE} /> Outage</span>
                 <span style={{marginLeft: "1em"}}><Status status={STATUS.ISSUE} /> Issue</span>
                 <span style={{marginLeft: "1em"}}><Status status={STATUS.MAINTENANCE} /> Maintenance</span>
+                <span style={{marginLeft: "1em"}}><Status status={STATUS.UNKNOWN} /> Unknown</span>
             </div>
         );
     }

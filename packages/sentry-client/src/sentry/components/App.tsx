@@ -5,16 +5,11 @@ import { bindActionCreators } from "redux";
 import ServerList from "./ServerList";
 import ServerForm from "./ServerForm";
 import ServerViewSelect from "./ViewSelect";
-import Status from "./Status";
 import LastUpdated from "./LastUpdated";
 import Legend from "./Legend";
 import Storage from "./Storage";
 
 import { initialize, addServer } from "../actions";
-
-import { guid } from "../lib/utils";
-
-import { STATUS } from "../constants/status";
 
 interface IDispatchProps {
     title?: string;
@@ -25,11 +20,13 @@ interface IDispatchProps {
 export class App extends React.Component<IDispatchProps, any> {
 
     componentDidMount() {
-        this.props.initialize();
+        if (this.props.initialize)
+            this.props.initialize();
     }
 
     onServerInputSubmit(values: Object) {
-        this.props.addServer(values);
+        if (this.props.addServer)
+            this.props.addServer(values);
     }
 
     getStyle() {

@@ -15,7 +15,7 @@
         "react/react-in-jsx-scope": 1,
         "indent": [
             "error",
-            "tab"
+            "space"
         ],
         "quotes": [
             "error",

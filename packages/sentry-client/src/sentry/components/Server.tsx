@@ -75,11 +75,14 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         );
     }
 
-    renderData(): JSX.Element {
-        const staticInfo = this.props.server.staticInfo;
-        const dynamicInfo = this.props.server.dynamicInfo;
+    renderData(): JSX.Element | null {
+        // const staticInfo = this.props.server.staticInfo;
 
-        const cpu = dynamicInfo.cpus[0].model;
+        if (!this.props.server.dynamicInfo) {
+            return null;
+        }
+
+        const dynamicInfo = this.props.server.dynamicInfo;
 
         const renderRow = (label: string, data: string) => {
             return (
@@ -105,7 +108,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         );
     }
 
-    renderServiceData(): JSX.Element {
+    renderServiceData(): JSX.Element | null {
         const services = this.props.server.serviceInfo;
 
         if (!services) {
@@ -168,6 +171,8 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         return (
             <div
                 tabIndex={0}
+                onFocus={() => this.handleOnMouseEnter()}
+                onBlur={() => this.handleOnMouseLeave()}
                 onMouseEnter={() => this.handleOnMouseEnter()}
                 onMouseLeave={() => this.handleOnMouseLeave()}
                 onKeyDown={(e) => this.handleKeyDown(e)}

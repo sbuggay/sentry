@@ -19,11 +19,13 @@ export default class ServerForm extends React.Component<IProps, any> {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-        this.setState({ [name]: target.value });
+        this.setState({ [name]: value });
     }
 
     handleSubmit(event: any) {
-        this.props.handleSubmit(this.state);
+        if (this.props.handleSubmit)
+            this.props.handleSubmit(this.state);
+            
         event.preventDefault();
     }
 
