@@ -2,6 +2,8 @@
 
 exports[`Server renders server 1`] = `
 <div
+  onBlur={[Function]}
+  onFocus={[Function]}
   onKeyDown={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
@@ -18,10 +20,10 @@ exports[`Server renders server 1`] = `
     <span>
       <i
         aria-hidden="true"
-        className="fa fa-exclamation-triangle"
+        className="fa fa-circle"
         style={
           Object {
-            "color": "#951A1D",
+            "color": "gray",
             "marginRight": "0.5em",
           }
         }

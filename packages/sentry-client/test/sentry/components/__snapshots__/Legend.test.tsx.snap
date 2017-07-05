@@ -79,5 +79,24 @@ exports[`Legend renders a legend 1`] = `
     />
      Maintenance
   </span>
+  <span
+    style={
+      Object {
+        "marginLeft": "1em",
+      }
+    }
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-circle"
+      style={
+        Object {
+          "color": "gray",
+          "marginRight": "0.5em",
+        }
+      }
+    />
+     Unknown
+  </span>
 </div>
 `;
