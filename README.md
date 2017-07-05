@@ -3,13 +3,13 @@
 [![codecov](https://codecov.io/gh/sbuggay/sentry/branch/master/graph/badge.svg)](https://codecov.io/gh/sbuggay/sentry)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-Sentry comprises of three elements, the client, the data server, and the host server.
+Sentry comprises of three packages: the client, the data server, and the host server.
 
 | package | version |
 | ------- | ------- |
-| sentry-client-dist | [![npm version](https://badge.fury.io/js/sentry-client-dist.svg)](https://badge.fury.io/js/sentry-client-dist) |
-| sentry-server-data | [![npm version](https://badge.fury.io/js/sentry-server-data.svg)](https://badge.fury.io/js/sentry-server-data) |
-| sentry-server-host | [![npm version](https://badge.fury.io/js/sentry-server-host.svg)](https://badge.fury.io/js/sentry-server-host) |
+| [sentry-client-dist](https://github.com/sbuggay/sentry/tree/master/packages/sentry-client/dist) | [![npm version](https://badge.fury.io/js/sentry-client-dist.svg)](https://badge.fury.io/js/sentry-client-dist) |
+| [sentry-server-data](https://github.com/sbuggay/sentry/tree/master/packages/sentry-server-data) | [![npm version](https://badge.fury.io/js/sentry-server-data.svg)](https://badge.fury.io/js/sentry-server-data) |
+| [sentry-server-host](https://github.com/sbuggay/sentry/tree/master/packages/sentry-server-host) | [![npm version](https://badge.fury.io/js/sentry-server-host.svg)](https://badge.fury.io/js/sentry-server-host) |
 
 ## Getting up and running
 
@@ -48,6 +48,9 @@ sentry-server-data is running on port 8080
 
 ### Contributing
 Clone the repository.
+```bash
+git clone https://github.com/sbuggay/sentry.git
+```
 
 Install lerna.
 ```bash
@@ -56,8 +59,12 @@ npm i -g lerna
 
 Install dependencies.
 ```bash
-lerna bootstrap
+npm run bootstrap
 ```
 
-## Roadmap
-- [ ] Basic authentication
+Running tests.
+```bash
+npm run test
+```
+
+The only package that currently needs to be "built" is the client. Instructions for doing so can be find in the [client package README.md](https://github.com/sbuggay/sentry/tree/master/packages/sentry-client).
