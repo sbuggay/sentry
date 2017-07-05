@@ -19,7 +19,6 @@ interface IServerListState {
     refs: any[];
 }
 
-
 export class ServerList extends React.Component<IServerListProps, IServerListState> {
 
     componentWillMount() {
