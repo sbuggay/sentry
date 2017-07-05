@@ -10,7 +10,8 @@ import LastUpdated, { LastUpdated as ULastUpdated} from "../../../src/sentry/com
 describe("LastUpdated", () => {
 
     const mockStore = configureStore();
-    let store, wrapper;
+    let store;
+    let wrapper;
 
     beforeEach(() => {
         store = mockStore(initialState);

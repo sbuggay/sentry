@@ -5,6 +5,6 @@ interface IView {
 const view: IView = {
     servers: "Servers",
     services: "Services"
-}
+};
 
 export default view;

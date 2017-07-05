@@ -4,4 +4,4 @@ export enum STATUS {
     UNKNOWN,
     ISSUE,
     MAINTENANCE
-};
+}

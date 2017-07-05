@@ -5,8 +5,7 @@ import { bindActionCreators } from "redux";
 import { loadState, saveState } from "../actions";
 
 export class Storage extends React.Component<any, any> {
-
-    render() {
+    public render() {
         return (
             <div>
                 <button onClick={() => this.props.saveState()}>save</button>

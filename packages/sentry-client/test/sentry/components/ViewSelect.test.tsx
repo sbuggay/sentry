@@ -10,7 +10,8 @@ import ViewSelect, { ViewSelect as UViewSelect} from "../../../src/sentry/compon
 describe("ServerViewSelect", () => {
 
     const mockStore = configureStore();
-    let store, wrapper;
+    let store;
+    let wrapper;
 
     beforeEach(() => {
         store = mockStore(initialState);

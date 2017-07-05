@@ -1,6 +1,5 @@
 import * as storage from "../../../src/sentry/lib/storage";
 
-
 describe("storage", () => {
 
     it("should exist", () => {
@@ -18,7 +17,6 @@ describe("storage", () => {
 
     it ("should save", () => {
         localStorage.setItem = jest.fn();
-        
         storage.save({
             title: "",
             servers: {}
@@ -26,5 +24,4 @@ describe("storage", () => {
 
         expect(localStorage.setItem).toBeCalled();
     });
-
 });

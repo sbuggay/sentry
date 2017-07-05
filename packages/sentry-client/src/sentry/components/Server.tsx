@@ -1,8 +1,8 @@
 import * as React from "react";
-import { removeServer } from "../actions";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
-import { IServer } from "../reducer";
+import { IState, IServer } from "../reducer";
 
 import Status from "./Status";
 import { STATUS } from "../constants/status";
@@ -11,13 +11,13 @@ import { formatBytes } from "../lib/utils";
 
 interface IStateProps {
     server: IServer;
-    index: Number;
-    expanded?: Boolean;
-};
+    index: number;
+    expanded?: boolean;
+}
 
 interface IDispatchProps {
-    removeServer?: Function;
-};
+    removeServer?: () => any;
+}
 
 export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     constructor(props: any) {
@@ -25,15 +25,15 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         this.state = {
             expanded: false,
             hover: false
-        }
+        };
     }
 
-    //Handlers
-    handleClick() {
+    // Handlers
+    public handleClick() {
         this.toggleExpand();
     }
 
-    handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    public handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
         switch (e.key) {
             case "Enter":
                 this.toggleExpand();
@@ -41,25 +41,25 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         }
     }
 
-    handleOnMouseEnter() {
+    public handleOnMouseEnter() {
         this.setState({
             hover: true
         });
     }
 
-    handleOnMouseLeave() {
+    public handleOnMouseLeave() {
         this.setState({
             hover: false
         });
     }
 
-    toggleExpand() {
+    public toggleExpand() {
         this.setState({
             expanded: !this.state.expanded
-        })
+        });
     }
 
-    getStyle(): React.CSSProperties {
+    public getStyle(): React.CSSProperties {
         return {
             width: "280px",
             padding: "5px 10px",
@@ -67,15 +67,15 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         };
     }
 
-    //Render
-    renderStatus(): JSX.Element {
+    // Render
+    public renderStatus(): JSX.Element {
         const status = this.props.server.status ? this.props.server.status : STATUS.UNKNOWN;
         return (
             <Status status={status} />
         );
     }
 
-    renderData(): JSX.Element | null {
+    public renderData(): JSX.Element | null {
         // const staticInfo = this.props.server.staticInfo;
 
         if (!this.props.server.dynamicInfo) {
@@ -91,7 +91,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                     <span>{data}</span>
                 </div>
             );
-        }
+        };
 
         const cpuModel = dynamicInfo.cpus[0].model.split("@")[0];
         const cpuSpeed = dynamicInfo.cpus[0].model.split("@")[1];
@@ -108,7 +108,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         );
     }
 
-    renderServiceData(): JSX.Element | null {
+    public renderServiceData(): JSX.Element | null {
         const services = this.props.server.serviceInfo;
 
         if (!services) {
@@ -127,19 +127,19 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                             <Status status={status} />
                             {services[key].name}
                         </div>
-                    )
+                    );
                 })}
             </div>
         );
     }
 
-    renderDetails(): JSX.Element {
+    public renderDetails(): JSX.Element {
 
         function detailStyle() {
             return {
                 fontSize: "14px",
                 marginBottom: "10px"
-            }
+            };
         }
 
         return (
@@ -150,7 +150,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         );
     }
 
-    renderChevron(): JSX.Element {
+    public renderChevron(): JSX.Element {
 
         const style = {
             marginLeft: "10px",
@@ -167,7 +167,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         );
     }
 
-    render(): JSX.Element {
+    public render(): JSX.Element {
         return (
             <div
                 tabIndex={0}
@@ -190,9 +190,8 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 }
 
-const mapDispatchToProps = (dispatch: Function) => {
+const mapDispatchToProps = (dispatch: Dispatch<IState>) => {
     return {
-        removeServer: () => dispatch(removeServer)
     };
 };
 

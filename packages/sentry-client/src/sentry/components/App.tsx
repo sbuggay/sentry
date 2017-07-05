@@ -13,32 +13,34 @@ import { initialize, addServer } from "../actions";
 
 interface IDispatchProps {
     title?: string;
-    initialize?: Function;
-    addServer?: Function;
-};
+    initialize?: () => any;
+    addServer?: (values: object) => any;
+}
 
 export class App extends React.Component<IDispatchProps, any> {
 
-    componentDidMount() {
-        if (this.props.initialize)
+    public componentDidMount() {
+        if (this.props.initialize) {
             this.props.initialize();
+        }
     }
 
-    onServerInputSubmit(values: Object) {
-        if (this.props.addServer)
+    public onServerInputSubmit(values: object) {
+        if (this.props.addServer) {
             this.props.addServer(values);
+        }
     }
 
-    getStyle() {
+    public getStyle() {
         return {
             maxWidth: "900px",
             width: "100%",
             marginLeft: "auto",
             marginRight: "auto"
-        }
+        };
     }
 
-    render() {
+    public render() {
         return <div>
             <h1 style={{ textAlign: "center" }}>
                 {this.props.title}
@@ -64,8 +66,8 @@ export class App extends React.Component<IDispatchProps, any> {
 const mapStateToProps = (state: any) => {
     return {
         title: state.title
-    }
-}
+    };
+};
 
 const mapDispatchToProps = (dispatch: any) => {
     return bindActionCreators({

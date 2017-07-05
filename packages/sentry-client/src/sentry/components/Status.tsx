@@ -7,15 +7,16 @@ interface IStatusProps {
 }
 
 export class Status extends React.Component<IStatusProps, any> {
-    getStyle() {
+    public getStyle() {
         return {
             marginRight: "0.5em"
-        }
+        };
     }
 
-    render() {
-        let className, color;
-        
+    public render() {
+        let className;
+        let color;
+
         switch (this.props.status) {
             case STATUS.OUTAGE:
                 className = "fa fa-exclamation-triangle";
@@ -38,7 +39,6 @@ export class Status extends React.Component<IStatusProps, any> {
                 color = { color: "#1172C6" };
                 break;
             default:
-            
         }
 
         return <i className={className} style={{...this.getStyle(), ...color}} aria-hidden="true"></i>;

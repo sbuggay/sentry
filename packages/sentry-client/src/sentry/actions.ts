@@ -9,19 +9,19 @@ import { load, save } from "./lib/storage";
 import { IState } from "./reducer";
 
 // Syncronous actions
-export const addServer = (name: String, host: String, id: String) => {
+export const addServer = (name: string, host: string, id: string) => {
     return {
         type: actionTypes.ADD_SERVER,
         payload: {
-            id: id,
-            name: name,
-            host: host,
+            id,
+            name,
+            host,
             status: STATUS.OUTAGE
         }
-    }
+    };
 };
 
-export const removeServer = (id: String) => {
+export const removeServer = (id: string) => {
     return {
         type: actionTypes.REMOVE_SERVER,
         payload: id
@@ -32,8 +32,8 @@ export const removeServer = (id: String) => {
 export const initialize = () => {
     return (dispatch: Dispatch<IState>) => {
         dispatch(loadState());
-    }
-}
+    };
+};
 
 export const editServer = (payload: any) => {
     return (dispatch: Dispatch<IState>, getState: () => IState) => {
@@ -61,7 +61,7 @@ export const pollServers = () => {
 
 export const pollServer = (server: any) => {
     return (dispatch: Dispatch<IState>, getState: () => IState) => {
-        let requestInit: RequestInit = {
+        const requestInit: RequestInit = {
             method: "GET",
             headers: new Headers(),
             cache: "default"
@@ -71,13 +71,13 @@ export const pollServer = (server: any) => {
             // We care about the responseCode and the body
 
             // Go ahead and set status to unavailable
-            let status = response.ok ? STATUS.AVAILABLE : STATUS.OUTAGE;
+            const status = response.ok ? STATUS.AVAILABLE : STATUS.OUTAGE;
             response.json().then((data: JSON) => {
                 dispatch({
                     type: actionTypes.POLL_SERVER,
                     payload: {
                         id: server.id,
-                        status: status,
+                        status,
                         ...data
                     }
                 });
@@ -100,9 +100,8 @@ export const pollServer = (server: any) => {
 export const saveState = () => {
     return (dispatch: Dispatch<IState>, getState: () => IState) => {
         save(getState());
-    }
-}
-
+    };
+};
 
 // Loads the state tree from localstorage/other
 export const loadState = () => {
@@ -110,12 +109,12 @@ export const loadState = () => {
     return {
         type: actionTypes.LOAD_STATE,
         payload: state
-    }
-}
+    };
+};
 
 export const updateLastUpdated = (date: number) => {
     return {
         type: actionTypes.UPDATE_LAST_UPDATED,
         payload: date
-    }
-}
+    };
+};

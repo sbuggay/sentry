@@ -5,14 +5,14 @@ import { STATUS } from "../constants/status";
 
 export class Legend extends React.Component<any, any> {
 
-    getStyle() {
+    public getStyle() {
         return {
             fontSize: "14px",
             color: "#adb0af"
-        }
+        };
     }
 
-    render(): JSX.Element {
+    public render(): JSX.Element {
         // TODO: Clean up this stupid style hack
         return (
             <div style={this.getStyle()}>

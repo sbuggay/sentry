@@ -19,16 +19,12 @@ describe("sentry reducer", () => {
 			servers: {
 				...initialState.servers,
 				[id]: {
-					id: id,
-					name: name,
-					host: host,
+					id,
+					name,
+					host,
 					status: STATUS.OUTAGE
 				}
 			}
 		});
-	});
-
-	xit("should reduce remove server", () => {
-
 	});
 });

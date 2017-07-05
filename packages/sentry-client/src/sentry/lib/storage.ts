@@ -5,8 +5,7 @@ export function load(): IState {
 
     if (store) {
         return JSON.parse(store);
-    }
-    else {
+    } else {
         return initialState;
     }
 }

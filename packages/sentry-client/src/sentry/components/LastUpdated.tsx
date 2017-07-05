@@ -2,19 +2,19 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 interface ILastUpdatedProps {
-    lastUpdated?: number
+    lastUpdated?: number;
 }
 
 export class LastUpdated extends React.Component<ILastUpdatedProps, any> {
 
-    getStyle() {
+    public getStyle() {
         return {
             fontSize: "14px",
             color: "#adb0af"
-        }
+        };
     }
 
-    render(): JSX.Element | null {
+    public render(): JSX.Element | null {
         if (this.props.lastUpdated === undefined) {
             return null;
         }

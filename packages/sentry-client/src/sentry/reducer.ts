@@ -38,7 +38,7 @@ export interface IServer {
             status: boolean;
         };
     };
-};
+}
 
 export interface IState {
     title: string;
@@ -47,7 +47,7 @@ export interface IState {
         [id: string]: IServer
     };
     lastUpdated?: number;
-};
+}
 
 export const initialState: IState = {
     title: "",
@@ -59,7 +59,7 @@ export const initialState: IState = {
 };
 
 const reducer = (state = initialState, action: any) => {
-    let payload = action.payload;
+    const payload = action.payload;
 
     switch (action.type) {
         case actionTypes.ADD_SERVER:
@@ -97,7 +97,7 @@ const reducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 lastUpdated: payload
-            }
+            };
 
         default:
             return state;
