@@ -11,11 +11,16 @@
         "react"
     ],
     "rules": {
-        "react/jsx-uses-vars": 1,
-        "react/react-in-jsx-scope": 1,
+        "ordered-imports": [
+            false
+        ],
+        "object-literal-sort-keys": false,
+        "trailing-comma": [
+            false
+        ],
         "indent": [
             "error",
-            "tab"
+            "space"
         ],
         "quotes": [
             "error",

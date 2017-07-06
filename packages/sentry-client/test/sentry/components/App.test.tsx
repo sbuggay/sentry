@@ -10,7 +10,8 @@ import App, { App as UApp} from "../../../src/sentry/components/App";
 xdescribe("App", () => {
 
     const mockStore = configureStore();
-    let store, wrapper;
+    let store;
+    let wrapper;
 
     beforeEach(() => {
         store = mockStore(initialState);

@@ -12,9 +12,9 @@ describe("actions", () => {
 		expect(actions.addServer(name, host, id)).toEqual({
 			type: actionTypes.ADD_SERVER,
 			payload: {
-				id: id,
-				name: name,
-				host: host,
+				id,
+				name,
+				host,
 				status: STATUS.OUTAGE
 			}
 		});
@@ -27,4 +27,4 @@ describe("actions", () => {
 			payload: id
 		});
 	});
-})
+});

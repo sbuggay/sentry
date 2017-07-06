@@ -10,7 +10,8 @@ import Storage, { Storage as UStorage} from "../../../src/sentry/components/Stor
 describe("Storage", () => {
 
     const mockStore = configureStore();
-    let store, wrapper;
+    let store;
+    let wrapper;
 
     beforeEach(() => {
         store = mockStore(initialState);

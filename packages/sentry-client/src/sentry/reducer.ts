@@ -1,8 +1,11 @@
 import * as actionTypes from "./actionTypes";
 
+import view from "./constants/view";
+
 export interface IServer {
     name: string;
-    status: number;
+    status?: number;
+    loaded?: boolean;
     staticInfo?: {
         arch: string;
         platform: string;
@@ -35,18 +38,20 @@ export interface IServer {
             status: boolean;
         };
     };
-};
+}
 
 export interface IState {
     title: string;
+    view: string;
     servers: {
         [id: string]: IServer
     };
     lastUpdated?: number;
-};
+}
 
 export const initialState: IState = {
     title: "",
+    view: view.servers,
     servers: {
 
     },
@@ -54,7 +59,7 @@ export const initialState: IState = {
 };
 
 const reducer = (state = initialState, action: any) => {
-    let payload = action.payload;
+    const payload = action.payload;
 
     switch (action.type) {
         case actionTypes.ADD_SERVER:
@@ -92,7 +97,7 @@ const reducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 lastUpdated: payload
-            }
+            };
 
         default:
             return state;

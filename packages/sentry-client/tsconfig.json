@@ -2,7 +2,6 @@
     "compilerOptions": {
         "sourceMap": true,
         "removeComments": true,
-        "noImplicitAny": true,
         "module": "commonjs",
         "target": "es5",
         "jsx": "react",
@@ -10,7 +9,10 @@
         "noEmit": true,
         "types": [
             "jest"
-        ]
+        ],
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "strict": true
     },
     "exclude": [
         "node_modules",

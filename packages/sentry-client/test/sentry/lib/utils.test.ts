@@ -2,14 +2,14 @@ import * as utils from "../../../src/sentry/lib/utils";
 
 describe("utils guid", () => {
     it("generates a guid", () => {
-        expect(utils.guid).toBeDefined;
+        expect(utils.guid).toBeDefined();
         expect(typeof utils.guid()).toBe("string");
     });
 });
 
 describe("utils formatBytes", () => {
     it("exists", () => {
-        expect(utils.formatBytes).toBeDefined;
+        expect(utils.formatBytes).toBeDefined();
     });
 
     it("generates the correct bytes", () => {

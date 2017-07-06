@@ -5,23 +5,24 @@ import configureStore from "redux-mock-store";
 import { mount } from "enzyme";
 
 import { initialState } from "../../../src/sentry/reducer";
-import ServerViewSelect, { ServerViewSelect as UServerViewSelect} from "../../../src/sentry/components/ServerViewSelect";
+import ViewSelect, { ViewSelect as UViewSelect} from "../../../src/sentry/components/ViewSelect";
 
 describe("ServerViewSelect", () => {
 
     const mockStore = configureStore();
-    let store, wrapper;
+    let store;
+    let wrapper;
 
     beforeEach(() => {
         store = mockStore(initialState);
         wrapper = mount(
             <Provider store={store}>
-                <ServerViewSelect />
+                <ViewSelect />
             </Provider>
         );
     });
 
     it("contains the component", () => {
-        expect(wrapper.find(ServerViewSelect)).toHaveLength(1);
+        expect(wrapper.find(ViewSelect)).toHaveLength(1);
     });
 });

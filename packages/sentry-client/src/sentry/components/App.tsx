@@ -4,44 +4,43 @@ import { bindActionCreators } from "redux";
 
 import ServerList from "./ServerList";
 import ServerForm from "./ServerForm";
-import ServerViewSelect from "./ServerViewSelect";
-import Status from "./Status";
+import ServerViewSelect from "./ViewSelect";
 import LastUpdated from "./LastUpdated";
 import Legend from "./Legend";
 import Storage from "./Storage";
 
 import { initialize, addServer } from "../actions";
 
-import { guid } from "../lib/utils";
-
-import { STATUS } from "../constants/status";
-
 interface IDispatchProps {
     title?: string;
-    initialize?: Function;
-    addServer?: Function;
-};
+    initialize?: () => any;
+    addServer?: (values: object) => any;
+}
 
 export class App extends React.Component<IDispatchProps, any> {
 
-    componentDidMount() {
-        this.props.initialize();
+    public componentDidMount() {
+        if (this.props.initialize) {
+            this.props.initialize();
+        }
     }
 
-    onServerInputSubmit(values: Object) {
-        this.props.addServer(values);
+    public onServerInputSubmit(values: object) {
+        if (this.props.addServer) {
+            this.props.addServer(values);
+        }
     }
 
-    getStyle() {
+    public getStyle() {
         return {
             maxWidth: "900px",
             width: "100%",
             marginLeft: "auto",
             marginRight: "auto"
-        }
+        };
     }
 
-    render() {
+    public render() {
         return <div>
             <h1 style={{ textAlign: "center" }}>
                 {this.props.title}
@@ -67,8 +66,8 @@ export class App extends React.Component<IDispatchProps, any> {
 const mapStateToProps = (state: any) => {
     return {
         title: state.title
-    }
-}
+    };
+};
 
 const mapDispatchToProps = (dispatch: any) => {
     return bindActionCreators({

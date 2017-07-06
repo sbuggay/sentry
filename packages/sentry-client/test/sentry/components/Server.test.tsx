@@ -8,15 +8,14 @@ describe("Server", () => {
 			name: "",
 			status: 0,
 			data: {
-				
 			}
-		}
+		};
 
 		const component = renderer.create(
 			<Server server={server} index={0} />
 		);
 
-		let tree = component.toJSON();
+		const tree = component.toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 

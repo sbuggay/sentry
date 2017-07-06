@@ -10,26 +10,27 @@ interface IServerListProps {
     servers?: {
         [id: string]: IServer
     };
-    initializePolling?: Function;
-    pollServers?: Function;
-};
+    initializePolling?: () => any;
+    pollServers?: () => any;
+}
 
 // TODO: Figure out what the actual type of a component ref is
 interface IServerListState {
     refs: any[];
 }
 
-export class ServerList extends React.Component<IServerListProps, any> {
+export class ServerList extends React.Component<IServerListProps, IServerListState> {
 
-    componentWillMount() {
-        this.props.initializePolling();
+    public componentWillMount() {
+        if (this.props.pollServers) {
+            this.props.pollServers();
+        }
+        if (this.props.initializePolling) {
+            this.props.initializePolling();
+        }
     }
 
-    componentDidMount() {
-        this.props.pollServers();
-    }
-
-    getStyle() {
+    public getStyle() {
         return {
             display: "flex",
             flexFlow: "row wrap",
@@ -38,10 +39,14 @@ export class ServerList extends React.Component<IServerListProps, any> {
         };
     }
 
-    render() {
+    public render() {
         return (
             <div style={this.getStyle()}>
                 {Object.keys(this.props.servers).map((id, index) => {
+                    if (!this.props.servers || !this.props.servers[id]) {
+                        return null;
+                    }
+
                     return <Server
                         index={index}
                         key={index}
@@ -60,8 +65,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return bindActionCreators({
-        initializePolling,
-        pollServers
+        pollServers,
+        initializePolling
     }, dispatch);
 };
 
