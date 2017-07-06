@@ -20,11 +20,11 @@ export class Status extends React.Component<IStatusProps, any> {
         switch (this.props.status) {
             case STATUS.OUTAGE:
                 className = "fa fa-exclamation-triangle";
-                color = { color: "#951A1D" };
+                color = { color: "#DF3E2D" };
                 break;
             case STATUS.AVAILABLE:
                 className = "fa fa-circle";
-                color = { color: "#229926" };
+                color = { color: "#62C552" };
                 break;
             case STATUS.UNKNOWN:
                 className = "fa fa-circle";
