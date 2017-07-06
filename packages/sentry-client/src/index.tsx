@@ -15,9 +15,10 @@ export const store = createStore(
     applyMiddleware(thunk)
 );
 
-ReactDOM.render(
+// Initial render entry point
+export default ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>,
-    document.getElementById("app")
+    document.getElementById("app") || document.createElement("div")
 );
