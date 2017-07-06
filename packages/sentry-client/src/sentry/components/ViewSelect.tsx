@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import view from "../constants/view";
+import { view } from "../constants";
 
 export class ViewSelect extends React.Component<any, any> {
     public render() {

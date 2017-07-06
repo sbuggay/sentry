@@ -3,7 +3,7 @@ import * as actionTypes from "../../src/sentry/actionTypes";
 import reducer, { initialState } from "../../src/sentry/reducer";
 
 import { guid } from "../../src/sentry/lib/utils";
-import { STATUS } from "../../src/sentry/constants/status";
+import { STATUS } from "../../src/sentry/constants";
 
 describe("sentry reducer", () => {
 	it("should return the initial state", () => {

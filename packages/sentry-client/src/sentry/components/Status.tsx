@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { STATUS } from "../constants/status";
+import { STATUS } from "../constants";
 
 interface IStatusProps {
     status: STATUS;

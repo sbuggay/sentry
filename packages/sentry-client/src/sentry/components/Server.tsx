@@ -5,7 +5,7 @@ import { Dispatch } from "redux";
 import { IState, IServer } from "../reducer";
 
 import Status from "./Status";
-import { STATUS } from "../constants/status";
+import { STATUS } from "../constants";
 
 import { formatBytes } from "../lib/utils";
 

@@ -2,7 +2,7 @@ import * as actions from "../../src/sentry/actions";
 import * as actionTypes from "../../src/sentry/actionTypes";
 
 import { guid } from "../../src/sentry/lib/utils";
-import { STATUS } from "../../src/sentry/constants/status";
+import { STATUS } from "../../src/sentry/constants";
 
 describe("actions", () => {
 	it("should create an action to add a server", () => {

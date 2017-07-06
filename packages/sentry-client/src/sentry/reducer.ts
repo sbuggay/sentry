@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 
-import view from "./constants/view";
+import { view } from "./constants";
 
 export interface IServer {
     name: string;

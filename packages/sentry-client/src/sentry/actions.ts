@@ -2,8 +2,7 @@ import * as actionTypes from "./actionTypes";
 
 import { Dispatch } from "redux";
 
-import { POLLING_TIME } from "./constants/polling";
-import { STATUS } from "./constants/status";
+import { POLLING_TIME, STATUS } from "./constants";
 import { load, save } from "./lib/storage";
 
 import { IState } from "./reducer";

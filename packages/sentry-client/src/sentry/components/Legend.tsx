@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Status } from "./Status";
-import { STATUS } from "../constants/status";
+import { STATUS } from "../constants";
 
 export class Legend extends React.Component<any, any> {
 
