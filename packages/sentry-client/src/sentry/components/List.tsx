@@ -6,7 +6,7 @@ import Server from "./Server";
 import { initializePolling, pollServers } from "../actions";
 import { IServer } from "../reducer";
 
-interface IServerListProps {
+interface IListProps {
     servers?: {
         [id: string]: IServer
     };
@@ -15,11 +15,11 @@ interface IServerListProps {
 }
 
 // TODO: Figure out what the actual type of a component ref is
-interface IServerListState {
+interface IListState {
     refs: any[];
 }
 
-export class ServerList extends React.Component<IServerListProps, IServerListState> {
+export class List extends React.Component<IListProps, IListState> {
 
     public componentWillMount() {
         if (this.props.pollServers) {
@@ -70,4 +70,4 @@ const mapDispatchToProps = (dispatch: any) => {
     }, dispatch);
 };
 
-export default connect<IServerListProps, any, any>(mapStateToProps, mapDispatchToProps)(ServerList);
+export default connect<IListProps, any, any>(mapStateToProps, mapDispatchToProps)(List);

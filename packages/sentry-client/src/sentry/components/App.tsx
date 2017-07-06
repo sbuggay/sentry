@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import ServerList from "./ServerList";
+import List from "./List";
 import ServerForm from "./ServerForm";
 import ServerViewSelect from "./ViewSelect";
 import LastUpdated from "./LastUpdated";
@@ -50,7 +50,7 @@ export class App extends React.Component<IDispatchProps, any> {
                     <ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />
                     <ServerViewSelect />
                 </div>
-                <ServerList />
+                <List />
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <LastUpdated />
                     <Legend />
