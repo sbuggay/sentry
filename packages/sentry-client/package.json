@@ -6,6 +6,8 @@
   "scripts": {
     "build": "webpack",
     "serve": "webpack-dev-server --content-base dist/",
+    "lint": "tslint '{src,test}/**/*.{ts,tsx}'",
+    "pretest": "npm run lint",
     "test": "jest --coverage",
     "analyze": "webpack --json | webpack-bundle-size-analyzer",
     "doc": "jsdoc"
