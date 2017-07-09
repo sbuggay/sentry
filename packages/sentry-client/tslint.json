@@ -11,6 +11,9 @@
         "react"
     ],
     "rules": {
+        "no-console": [
+            false
+        ],
         "ordered-imports": [
             false
         ],
