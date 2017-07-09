@@ -20,7 +20,7 @@ interface IDispatchProps {
 
 export class App extends React.Component<IDispatchProps, any> {
 
-    public componentDidMount() {
+    public componentWillMount() {
         if (this.props.initialize) {
             this.props.initialize();
         }
