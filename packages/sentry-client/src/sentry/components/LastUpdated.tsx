@@ -1,11 +1,11 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-interface ILastUpdatedProps {
-    lastUpdated?: number;
-}
+// interface ILastUpdatedProps {
+//     lastUpdated?: number;
+// }
 
-export class LastUpdated extends React.Component<ILastUpdatedProps, any> {
+export class LastUpdated extends React.Component<any, any> {
 
     public getStyle() {
         return {
@@ -33,4 +33,4 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default connect<ILastUpdatedProps, any, any>(null, mapStateToProps)(LastUpdated);
+export default connect<any, any, any>(mapStateToProps)(LastUpdated);

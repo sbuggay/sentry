@@ -32,7 +32,7 @@ export class Status extends React.Component<IStatusProps, any> {
                 break;
             case STATUS.ISSUE:
                 className = "fa fa-exclamation-circle";
-                color = { color: "#FEE032" };
+                color = { color: "#fadf59" };
                 break;
             case STATUS.MAINTENANCE:
                 className = "fa fa-square";

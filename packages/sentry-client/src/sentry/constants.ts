@@ -8,8 +8,8 @@ export enum STATUS {
     MAINTENANCE
 }
 
-interface IView {
-    [key: string]: string;
+export interface IView {
+    [key: string]: "Servers" | "Services";
 }
 
 export const view: IView = {

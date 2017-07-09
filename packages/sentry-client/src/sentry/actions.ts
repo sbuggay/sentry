@@ -5,12 +5,14 @@ import { Dispatch } from "redux";
 import { POLLING_TIME, STATUS } from "./constants";
 import { load, save } from "./lib/storage";
 
+import { IView } from "./constants";
+
 import { IState } from "./reducer";
 
 // Syncronous actions
 export const addServer = (name: string, host: string, id: string) => {
     return {
-        type: actionTypes.ADD_SERVER,
+        type: actionTypes.SERVER_ADD,
         payload: {
             id,
             name,
@@ -22,7 +24,7 @@ export const addServer = (name: string, host: string, id: string) => {
 
 export const removeServer = (id: string) => {
     return {
-        type: actionTypes.REMOVE_SERVER,
+        type: actionTypes.SERVER_REMOVE,
         payload: id
     };
 };
@@ -37,7 +39,7 @@ export const initialize = () => {
 export const editServer = (payload: any) => {
     return (dispatch: Dispatch<IState>, getState: () => IState) => {
         dispatch({
-            type: actionTypes.EDIT_SERVER,
+            type: actionTypes.SERVER_EDIT,
             payload
         });
     };
@@ -63,7 +65,7 @@ export const pollServer = (server: any) => {
         const requestInit: RequestInit = {
             method: "GET",
             headers: new Headers(),
-            cache: "default"
+            cache: "no-cache"
         };
 
         fetch(server.host, requestInit).then((response: Response) => {
@@ -73,7 +75,7 @@ export const pollServer = (server: any) => {
             const status = response.ok ? STATUS.AVAILABLE : STATUS.OUTAGE;
             response.json().then((data: JSON) => {
                 dispatch({
-                    type: actionTypes.POLL_SERVER,
+                    type: actionTypes.SERVER_POLL_SUCCESS,
                     payload: {
                         id: server.id,
                         status,
@@ -85,13 +87,20 @@ export const pollServer = (server: any) => {
             dispatch(updateLastUpdated(Date.now()));
         }).catch((reason: Error) => {
             dispatch({
-                type: actionTypes.POLL_SERVER,
+                type: actionTypes.SERVER_POLL_FAILURE,
                 payload: {
                     id: server.id,
                     status: STATUS.OUTAGE,
                 }
             });
         });
+    };
+};
+
+export const changeView = (view: IView) => {
+    return {
+        type: actionTypes.VIEW_CHANGE,
+        payload: view
     };
 };
 
@@ -106,7 +115,7 @@ export const saveState = () => {
 export const loadState = () => {
     const state: IState = load();
     return {
-        type: actionTypes.LOAD_STATE,
+        type: actionTypes.STATE_LOAD,
         payload: state
     };
 };

@@ -1,8 +1,6 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
 
-import { IState, IServer } from "../reducer";
+import { IServer } from "../reducer";
 
 import Status from "./Status";
 import { STATUS } from "../constants";
@@ -134,7 +132,6 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     public renderDetails(): JSX.Element {
-
         function detailStyle() {
             return {
                 fontSize: "14px",
@@ -151,7 +148,6 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     public renderChevron(): JSX.Element {
-
         const style = {
             marginLeft: "10px",
             float: "right"
@@ -190,9 +186,4 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<IState>) => {
-    return {
-    };
-};
-
-export default connect<IStateProps, IDispatchProps, any>(undefined, mapDispatchToProps)(Server);
+export default Server;

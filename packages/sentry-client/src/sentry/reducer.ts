@@ -1,7 +1,5 @@
 import * as actionTypes from "./actionTypes";
 
-import { view } from "./constants";
-
 export interface IServer {
     name: string;
     status?: number;
@@ -51,7 +49,7 @@ export interface IState {
 
 export const initialState: IState = {
     title: "",
-    view: view.servers,
+    view: "servers",
     servers: {
 
     },
@@ -62,7 +60,7 @@ const reducer = (state = initialState, action: any) => {
     const payload = action.payload;
 
     switch (action.type) {
-        case actionTypes.ADD_SERVER:
+        case actionTypes.SERVER_ADD:
             return {
                 ...state,
                 servers: {
@@ -70,12 +68,12 @@ const reducer = (state = initialState, action: any) => {
                     [payload.id]: { ...payload }
                 }
             };
-        case actionTypes.REMOVE_SERVER:
+        case actionTypes.SERVER_REMOVE:
             return {
                 ...state
             };
 
-        case actionTypes.POLL_SERVER:
+        case actionTypes.SERVER_POLL_SUCCESS:
             return {
                 ...state,
                 servers: {
@@ -87,7 +85,13 @@ const reducer = (state = initialState, action: any) => {
                 }
             };
 
-        case actionTypes.LOAD_STATE:
+        case actionTypes.VIEW_CHANGE:
+            return {
+                ...state,
+                view: payload
+            };
+
+        case actionTypes.STATE_LOAD:
             return {
                 ...state,
                 ...payload

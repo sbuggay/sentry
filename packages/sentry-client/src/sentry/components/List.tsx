@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import Server from "./Server";
+import Service from "./Service";
 import { initializePolling, pollServers } from "../actions";
 import { IServer } from "../reducer";
 
 interface IListProps {
+    view?: string;
     servers?: {
         [id: string]: IServer
     };
@@ -30,6 +32,37 @@ export class List extends React.Component<IListProps, IListState> {
         }
     }
 
+    public getServices() {
+        const servers = this.props.servers;
+        if (servers === undefined) {
+            return;
+        }
+
+        // const flattenServices: any[] = [];
+
+        // Object.keys(servers).filter((key: string) => {
+        //     // Remove all servers that done have services
+        //     return servers[key].serviceInfo !== undefined;
+        // }).map((key: string) => {
+        //     // Get the service info
+        //     return servers[key].serviceInfo;
+        // }).forEach((value) => {
+        //     if (value !== undefined) {
+        //         const serviceArray = Object.keys(value).map((key: string) => {
+        //             return value[key];
+        //         });
+        //         return flattenServices.push(...serviceArray);
+        //     }
+        // });
+
+        return Object.keys(servers).map((serverKey: string) => servers[serverKey]).reduce(
+            (prev, current: IServer) => current.serviceInfo ?
+                prev.concat(Object.keys(current.serviceInfo)
+                    .map((serviceKey: string) => current.serviceInfo && current.serviceInfo[serviceKey]))
+                : prev, [] as any[]);
+        // return flattenServices;
+    }
+
     public getStyle() {
         return {
             display: "flex",
@@ -39,7 +72,7 @@ export class List extends React.Component<IListProps, IListState> {
         };
     }
 
-    public render() {
+    public renderServers(): JSX.Element {
         return (
             <div style={this.getStyle()}>
                 {Object.keys(this.props.servers).map((id, index) => {
@@ -55,10 +88,45 @@ export class List extends React.Component<IListProps, IListState> {
             </div>
         );
     }
+
+    public renderServices(): JSX.Element | null {
+        const services = this.getServices();
+        if (services === undefined) {
+            return null;
+        }
+
+        return (
+            <div style={this.getStyle()}>
+                {services.map((service: any, index: number) => {
+                    return (
+                        <div>
+                            <Service
+                                key={index}
+                                index={index}
+                                service={service} />
+                        </div>
+                    );
+                })}
+            </div>
+        );
+
+    }
+
+    public render() {
+        switch (this.props.view) {
+            case "servers":
+                return this.renderServers();
+            case "services":
+                return this.renderServices();
+            default:
+                return null;
+        }
+    }
 }
 
 const mapStateToProps = (state: any) => {
     return {
+        view: state.view,
         servers: state.servers
     };
 };

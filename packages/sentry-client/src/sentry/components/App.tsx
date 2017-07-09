@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import List from "./List";
-import ServerForm from "./ServerForm";
+// import ServerForm from "./ServerForm";
 import ServerViewSelect from "./ViewSelect";
 import LastUpdated from "./LastUpdated";
 import Legend from "./Legend";
@@ -13,6 +13,7 @@ import { initialize, addServer } from "../actions";
 
 interface IDispatchProps {
     title?: string;
+    view?: string;
     initialize?: () => any;
     addServer?: (values: object) => any;
 }
@@ -47,7 +48,8 @@ export class App extends React.Component<IDispatchProps, any> {
             </h1>
             <div style={this.getStyle()}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />
+                    {/*<ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />*/}
+                    {this.props.view}
                     <ServerViewSelect />
                 </div>
                 <List />
@@ -65,7 +67,8 @@ export class App extends React.Component<IDispatchProps, any> {
 
 const mapStateToProps = (state: any) => {
     return {
-        title: state.title
+        title: state.title,
+        view: state.view
     };
 };
 

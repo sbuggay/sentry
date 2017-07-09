@@ -1,17 +1,15 @@
-export interface IAction<T> {
-    type: string;
-    payload: T;
-    error?: boolean;
-    meta?: any;
-}
-
 export const INITIALIZE = "INITIALIZE";
 
-export const ADD_SERVER = "ADD_SERVER";
-export const REMOVE_SERVER = "REMOVE_SERVER";
-export const EDIT_SERVER = "EDIT_SERVER";
-export const POLL_SERVER = "POLL_SERVER";
+export const SERVER_ADD = "SERVER_ADD";
+export const SERVER_REMOVE = "SERVER_REMOVE";
+export const SERVER_EDIT = "SERVER_EDIT";
+export const SERVER_POLL = "SERVER_POLL";
+export const SERVER_POLL_SUCCESS = "SERVER_POLL_SUCCESS";
+export const SERVER_POLL_FAILURE = "SERVER_POLL_FAILURE";
 
-export const LOAD_STATE = "LOAD_SERVER";
-export const SAVE_STATE = "SAVE_STATE";
+export const VIEW_CHANGE = "VIEW_CHANGE";
+
+export const STATE_LOAD = "STATE_LOAD";
+export const STATE_SAVE = "STATE_SAVE";
+
 export const UPDATE_LAST_UPDATED = "UPDATE_LAST_UPDATED";
