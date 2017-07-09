@@ -1,40 +1,49 @@
 import * as actionTypes from "./actionTypes";
 
+// TODO: move these interfaces
+export interface ICPU {
+    model: string;
+    speed: number;
+    times: {
+        user: number;
+        nice: number;
+        sys: number;
+        idle: number;
+        irq: number;
+    };
+}
+
+export interface IStaticInfo {
+    arch: string;
+    platform: string;
+    release: string;
+    type: string;
+    endianness: string;
+}
+
+export interface IDynamicInfo {
+    hostname: string;
+    uptime: number;
+    freemem: number;
+    totalmem: number;
+    cpus: ICPU[];
+}
+
+export interface IService {
+    name: string;
+    script: string;
+    test: string;
+    status: boolean;
+}
+
 export interface IServer {
     name: string;
     status?: number;
     loaded?: boolean;
-    staticInfo?: {
-        arch: string;
-        platform: string;
-        release: string;
-        type: string;
-        endianness: string;
-    };
-    dynamicInfo?: {
-        hostname: string;
-        uptime: number;
-        freemem: number;
-        totalmem: number;
-        cpus: [{
-            model: string;
-            speed: number;
-            times: {
-                user: number;
-                nice: number;
-                sys: number;
-                idle: number;
-                irq: number;
-            };
-        }];
-    };
+    staticInfo?: IStaticInfo;
+    dynamicInfo?: IDynamicInfo;
     serviceInfo?: {
-        [key: string]: {
-            name: string;
-            script: string;
-            test: string;
-            status: boolean;
-        };
+        [key: string]: IService
     };
 }
 
