@@ -1,4 +1,4 @@
-# Sentry Server [![npm version](https://badge.fury.io/js/sentryserver.svg)](https://badge.fury.io/js/sentryserver)
+# Sentry Server [![npm version](https://badge.fury.io/js/sentry-server-data.svg)](https://badge.fury.io/js/sentry-server-data)
 sentryserver is a small express server that will report back information about the system.
 
 ### Installation and Use
