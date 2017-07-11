@@ -3,51 +3,13 @@ import * as React from "react";
 import Status from "./Status";
 import { STATUS } from "../constants";
 
+import { IService } from "../reducer";
+
 interface IStateProps {
-    service: any;
-    index: number;
-    expanded?: boolean;
+    service: IService;
 }
 
 export class Service extends React.Component<IStateProps, any> {
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            expanded: false,
-            hover: false
-        };
-    }
-
-    // Handlers
-    public handleClick() {
-        this.toggleExpand();
-    }
-
-    public handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
-        switch (e.key) {
-            case "Enter":
-                this.toggleExpand();
-                break;
-        }
-    }
-
-    public handleOnMouseEnter() {
-        this.setState({
-            hover: true
-        });
-    }
-
-    public handleOnMouseLeave() {
-        this.setState({
-            hover: false
-        });
-    }
-
-    public toggleExpand() {
-        this.setState({
-            expanded: !this.state.expanded
-        });
-    }
 
     public getStyle(): React.CSSProperties {
         return {
@@ -68,12 +30,6 @@ export class Service extends React.Component<IStateProps, any> {
     public render(): JSX.Element {
         return (
             <div
-                tabIndex={0}
-                onFocus={() => this.handleOnMouseEnter()}
-                onBlur={() => this.handleOnMouseLeave()}
-                onMouseEnter={() => this.handleOnMouseEnter()}
-                onMouseLeave={() => this.handleOnMouseLeave()}
-                onKeyDown={(e) => this.handleKeyDown(e)}
                 style={this.getStyle()}>
                 <div>
                     <span>
