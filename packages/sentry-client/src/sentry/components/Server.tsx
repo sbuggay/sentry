@@ -3,9 +3,12 @@ import * as React from "react";
 import { IServer } from "../reducer";
 
 import Status from "./Status";
+import Bar from "./Bar";
 import { STATUS } from "../constants";
 
 import { formatBytes } from "../lib/utils";
+
+import { pretty } from "../utils/prettyTime";
 
 interface IStateProps {
     server: IServer;
@@ -82,26 +85,59 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
         const dynamicInfo = this.props.server.dynamicInfo;
 
+        // Helper function to render a flex row with left/right spans
         const renderRow = (label: string, data: string) => {
             return (
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>{label}</span>
+                <div style={{ display: "flex", justifyContent: "space-between", height: "20px" }}>
+                    <strong>{label}</strong>
                     <span>{data}</span>
                 </div>
             );
         };
 
         const cpuModel = dynamicInfo.cpus[0].model.split("@")[0];
-        const cpuSpeed = dynamicInfo.cpus[0].model.split("@")[1];
-        const virtualCores = dynamicInfo.cpus.length;
+        // const cpuSpeed = dynamicInfo.cpus[0].model.split("@")[1];
+
+        const renderCpuCores = () => {
+
+            const bars = dynamicInfo.cpus.map((core: any, index: number) => {
+
+                // Calulate total by summing up all the times
+                let total = 0;
+                for (const type in core.times) {
+                    total += core.times[type];
+                }
+
+                // Calculate our used and percent
+                const used = core.times.user + core.times.sys;
+                const percent = (used * 100) / total;
+
+                return (
+                    <Bar
+                        key={index}
+                        style={{ width: "100%" }}
+                        percentage={percent}
+                        text={`${percent.toFixed(2)}%`}/>
+                );
+            });
+
+            return (
+                <div style={{ display: "flex", flexWrap: "wrap" }}>
+                    {bars}
+                </div>
+            );
+        };
 
         return (
-            <div style={{ marginTop: "0.5em", overflow: "hidden" }}>
+            <div style={{ marginTop: "0.5em" }}>
                 {renderRow("hostname:", dynamicInfo.hostname)}
-                {renderRow("uptime:", dynamicInfo.uptime.toString())}
+                {renderRow("uptime:", pretty(dynamicInfo.uptime, 2))}
                 {renderRow("cpu:", cpuModel)}
-                {renderRow("", `${cpuSpeed} (${virtualCores})`)}
-                {renderRow("ram:", `${formatBytes(dynamicInfo.freemem)} / ${formatBytes(dynamicInfo.totalmem)}`)}
+                {renderCpuCores()}
+                {renderRow("ram:", "")}
+                <Bar
+                    percentage={(dynamicInfo.freemem / dynamicInfo.totalmem) * 100}
+                    text={`${formatBytes(dynamicInfo.freemem)} / ${formatBytes(dynamicInfo.totalmem)}`}/>
             </div>
         );
     }
@@ -121,7 +157,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 {serviceKeys.map((key, index) => {
                     const status = services[key].status ? STATUS.AVAILABLE : STATUS.OUTAGE;
                     return (
-                        <div key={index}>
+                        <div key={index} style={{height: "20px"}}>
                             <Status status={status} />
                             {services[key].name}
                         </div>
