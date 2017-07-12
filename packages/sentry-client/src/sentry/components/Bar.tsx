@@ -14,7 +14,6 @@ export class Bar extends React.Component<IBarProps, any> {
             width: "100%",
             height: "16px",
             boxSizing: "border-box",
-            margin: "2px",
             border: "1px solid gray",
             ...this.props.style
         };
@@ -31,8 +30,9 @@ export class Bar extends React.Component<IBarProps, any> {
 
     public getTextStyle(): React.CSSProperties {
         return {
-            position: "absolute",
-            fontSize: "12px"
+            float: "right",
+            fontSize: "12px",
+            clear: "both"
         };
     }
 

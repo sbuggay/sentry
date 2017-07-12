@@ -38,6 +38,7 @@ export interface IService {
 
 export interface IServer {
     name: string;
+    host: string;
     status?: number;
     loaded?: boolean;
     staticInfo?: IStaticInfo;

@@ -102,7 +102,6 @@ export class List extends React.Component<IListProps, IListState> {
                         <div>
                             <Service
                                 key={index}
-                                index={index}
                                 service={service} />
                         </div>
                     );
