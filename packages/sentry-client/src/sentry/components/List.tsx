@@ -4,11 +4,12 @@ import { bindActionCreators } from "redux";
 
 import Server from "./Server";
 import Service from "./Service";
+
 import { initializePolling, pollServers } from "../actions";
 import { IServer } from "../reducer";
 
 interface IListProps {
-    view?: string;
+    view?: number;
     servers?: {
         [id: string]: IServer
     };
@@ -38,35 +39,18 @@ export class List extends React.Component<IListProps, IListState> {
             return;
         }
 
-        // const flattenServices: any[] = [];
-
-        // Object.keys(servers).filter((key: string) => {
-        //     // Remove all servers that done have services
-        //     return servers[key].serviceInfo !== undefined;
-        // }).map((key: string) => {
-        //     // Get the service info
-        //     return servers[key].serviceInfo;
-        // }).forEach((value) => {
-        //     if (value !== undefined) {
-        //         const serviceArray = Object.keys(value).map((key: string) => {
-        //             return value[key];
-        //         });
-        //         return flattenServices.push(...serviceArray);
-        //     }
-        // });
-
         return Object.keys(servers).map((serverKey: string) => servers[serverKey]).reduce(
             (prev, current: IServer) => current.serviceInfo ?
                 prev.concat(Object.keys(current.serviceInfo)
                     .map((serviceKey: string) => current.serviceInfo && current.serviceInfo[serviceKey]))
                 : prev, [] as any[]);
-        // return flattenServices;
     }
 
-    public getStyle() {
+    public getStyle(): React.CSSProperties {
         return {
             display: "flex",
             flexFlow: "row wrap",
+            // justifyContent: "center",
             width: "100%",
             margin: "1.5em 0 1.5em"
         };
@@ -113,9 +97,9 @@ export class List extends React.Component<IListProps, IListState> {
 
     public render() {
         switch (this.props.view) {
-            case "servers":
+            case 0:
                 return this.renderServers();
-            case "services":
+            case 1:
                 return this.renderServices();
             default:
                 return null;
