@@ -62,6 +62,7 @@ export class GroupSelect extends React.Component<IGroupSelectProps, any> {
 
             let style = this.getOptionStyle();
 
+            // Special styling for first and last elements of the group
             if (index === 0) {
                 style = {
                     ...style,
@@ -78,6 +79,7 @@ export class GroupSelect extends React.Component<IGroupSelectProps, any> {
                 };
             }
 
+            // Special styling for the selected and non-selected elements of the group
             if (index === this.props.selectedIndex) {
                 style = {
                     ...style,
