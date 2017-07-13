@@ -5,8 +5,6 @@ import { Dispatch } from "redux";
 import { POLLING_TIME, STATUS } from "./constants";
 import { load, save } from "./lib/storage";
 
-import { IView } from "./constants";
-
 import { IState } from "./reducer";
 
 // Syncronous actions
@@ -65,7 +63,7 @@ export const pollServer = (server: any) => {
         const requestInit: RequestInit = {
             method: "GET",
             headers: new Headers(),
-            cache: "no-cache"
+            cache: "no-store"
         };
 
         fetch(server.host, requestInit).then((response: Response) => {
@@ -97,7 +95,7 @@ export const pollServer = (server: any) => {
     };
 };
 
-export const changeView = (view: IView) => {
+export const changeView = (view: number) => {
     return {
         type: actionTypes.VIEW_CHANGE,
         payload: view

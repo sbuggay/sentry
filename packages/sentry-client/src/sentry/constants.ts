@@ -1,4 +1,5 @@
-export const POLLING_TIME = 5000;
+// Polling time, in ms
+export const POLLING_TIME = 10000;
 
 export enum STATUS {
     OUTAGE,
@@ -8,11 +9,8 @@ export enum STATUS {
     MAINTENANCE
 }
 
-export interface IView {
-    [key: string]: "Servers" | "Services";
-}
+// export interface IView {
+//     [key: string]: "Servers" | "Services";
+// }
 
-export const view: IView = {
-    servers: "Servers",
-    services: "Services"
-};
+export const view: string[] = ["Servers", "Services"];

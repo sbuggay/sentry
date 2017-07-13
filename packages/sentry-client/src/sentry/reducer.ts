@@ -50,7 +50,7 @@ export interface IServer {
 
 export interface IState {
     title: string;
-    view: string;
+    view: number;
     servers: {
         [id: string]: IServer
     };
@@ -59,7 +59,7 @@ export interface IState {
 
 export const initialState: IState = {
     title: "",
-    view: "servers",
+    view: 0,
     servers: {
 
     },
