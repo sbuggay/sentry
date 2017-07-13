@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 
-import GroupSelect from "../../../src/sentry/components/GroupSelect";
+import GroupSelect from "../../src/components/GroupSelect";
 
 describe("GroupSelect", () => {
 

@@ -4,10 +4,10 @@ import * as renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import { mount } from "enzyme";
 
-import { initialState } from "../../../src/sentry/reducer";
-import App, { App as UApp} from "../../../src/sentry/components/App";
+import { initialState } from "../../src/reducer";
+import Storage, { Storage as UStorage} from "../../src/components/Storage";
 
-xdescribe("App", () => {
+describe("Storage", () => {
 
     const mockStore = configureStore();
     let store;
@@ -17,12 +17,16 @@ xdescribe("App", () => {
         store = mockStore(initialState);
         wrapper = mount(
             <Provider store={store}>
-                <App />
+                <Storage />
             </Provider>
         );
     });
 
     it("contains the component", () => {
-        expect(wrapper.find(App)).toHaveLength(1);
+        expect(wrapper.find(Storage)).toHaveLength(1);
+    });
+
+    xit("has the dumb compnent", () => {
+        // expect(wrapper.find(""))
     });
 });

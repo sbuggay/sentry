@@ -1,8 +1,8 @@
-import * as actions from "../../src/sentry/actions";
-import * as actionTypes from "../../src/sentry/actionTypes";
+import * as actions from "../src/actions";
+import * as actionTypes from "../src/actionTypes";
 
-import { guid } from "../../src/sentry/lib/utils";
-import { STATUS } from "../../src/sentry/constants";
+import { guid } from "../src/lib/utils";
+import { STATUS } from "../src/constants";
 
 describe("actions", () => {
 	it("should create an action to add a server", () => {
@@ -25,6 +25,13 @@ describe("actions", () => {
 		expect(actions.removeServer(id)).toEqual({
 			type: actionTypes.SERVER_REMOVE,
 			payload: id
+		});
+	});
+
+	it("should update lastUpdated", () => {
+		expect(actions.updateLastUpdated(0)).toEqual({
+			type: actionTypes.UPDATE_LAST_UPDATED,
+			payload: 0
 		});
 	});
 });

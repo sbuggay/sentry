@@ -1,4 +1,4 @@
-import * as storage from "../../../src/sentry/lib/storage";
+import * as storage from "../../src/lib/storage";
 
 describe("storage", () => {
 
@@ -19,7 +19,8 @@ describe("storage", () => {
         localStorage.setItem = jest.fn();
         storage.save({
             title: "",
-            servers: {}
+            servers: {},
+            view: 0
         });
 
         expect(localStorage.setItem).toBeCalled();

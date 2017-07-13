@@ -1,11 +1,12 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import { Server } from "../../../src/sentry/components/Server";
+import { Server } from "../../src/components/Server";
 
 describe("Server", () => {
 	it("renders server", () => {
 		const server = {
 			name: "",
+			host: "",
 			status: 0,
 			data: {
 			}

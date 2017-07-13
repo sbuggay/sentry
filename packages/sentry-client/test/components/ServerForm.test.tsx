@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import { Legend } from "../../../src/sentry/components/Legend";
+import ServerForm from "../../src/components/ServerForm";
 
-describe("Legend", () => {
-	it("renders a legend", () => {
+describe("ServerForm", () => {
+	it("renders a ServerForm", () => {
 		const component = renderer.create(
-			<Legend />
+			<ServerForm />
 		);
 
 		const tree = component.toJSON();

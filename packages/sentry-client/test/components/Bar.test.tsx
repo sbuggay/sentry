@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 
-import Service from "../../../src/sentry/components/Service";
+import Bar from "../../src/components/Bar";
 
-describe("Service", () => {
+describe("Bar", () => {
 
-    it("renders a basic Service", () => {
+    it("renders a basic Bar", () => {
         const component = renderer.create(
-            <Service service={{name: "test", script: "test", test: "test", status: false}} />
+            <Bar percentage={50} />
         );
 
         const tree = component.toJSON();

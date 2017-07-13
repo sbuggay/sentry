@@ -1,4 +1,4 @@
-import * as utils from "../../../src/sentry/lib/utils";
+import * as utils from "../../src/lib/utils";
 
 describe("utils guid", () => {
     it("generates a guid", () => {

@@ -35,11 +35,9 @@ export const initialize = () => {
 };
 
 export const editServer = (payload: any) => {
-    return (dispatch: Dispatch<IState>, getState: () => IState) => {
-        dispatch({
-            type: actionTypes.SERVER_EDIT,
-            payload
-        });
+    return {
+        type: actionTypes.SERVER_EDIT,
+        payload
     };
 };
 

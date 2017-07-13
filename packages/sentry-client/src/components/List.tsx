@@ -50,7 +50,6 @@ export class List extends React.Component<IListProps, IListState> {
         return {
             display: "flex",
             flexFlow: "row wrap",
-            // justifyContent: "center",
             width: "100%",
             margin: "1.5em 0 1.5em"
         };

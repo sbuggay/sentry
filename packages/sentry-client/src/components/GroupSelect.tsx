@@ -41,16 +41,6 @@ export class GroupSelect extends React.Component<IGroupSelectProps, any> {
     }
     public handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>, index: number) {
         switch (e.key) {
-            case "ArrowRight":
-                if (this.props.onChange) {
-                    this.props.onChange(index + 1);
-                }
-                break;
-            case "ArrowLeft":
-                if (this.props.onChange) {
-                    this.props.onChange(index - 1);
-                }
-                break;
             case "Enter":
                 this.updateSelected(index);
                 break;
@@ -60,6 +50,7 @@ export class GroupSelect extends React.Component<IGroupSelectProps, any> {
     public render(): JSX.Element | null {
         const options = this.props.options.map((option, index) => {
 
+            // Get style for some conditional settings
             let style = this.getOptionStyle();
 
             // Special styling for first and last elements of the group
@@ -95,7 +86,6 @@ export class GroupSelect extends React.Component<IGroupSelectProps, any> {
             return (
                 <div
                     key={index}
-                    tabIndex={0}
                     onKeyDown={(e) => this.handleKeyDown(e, index)}
                     onClick={() => this.handleSelect(index)}
                     style={style}>

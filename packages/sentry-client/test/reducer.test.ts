@@ -1,9 +1,9 @@
-import * as actions from "../../src/sentry/actions";
-import * as actionTypes from "../../src/sentry/actionTypes";
-import reducer, { initialState } from "../../src/sentry/reducer";
+import * as actions from "../src/actions";
+import * as actionTypes from "../src/actionTypes";
+import reducer, { initialState } from "../src/reducer";
 
-import { guid } from "../../src/sentry/lib/utils";
-import { STATUS } from "../../src/sentry/constants";
+import { guid } from "../src/lib/utils";
+import { STATUS } from "../src/constants";
 
 describe("sentry reducer", () => {
 	it("should return the initial state", () => {

@@ -24,7 +24,6 @@ exports[`GroupSelect renders a basic GroupSelect 1`] = `
         "padding": "2px 8px",
       }
     }
-    tabIndex={0}
   >
     test
   </div>
@@ -43,7 +42,6 @@ exports[`GroupSelect renders a basic GroupSelect 1`] = `
         "padding": "2px 8px",
       }
     }
-    tabIndex={0}
   >
     test
   </div>

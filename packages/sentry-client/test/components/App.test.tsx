@@ -4,10 +4,10 @@ import * as renderer from "react-test-renderer";
 import configureStore from "redux-mock-store";
 import { mount } from "enzyme";
 
-import { initialState } from "../../../src/sentry/reducer";
-import LastUpdated, { LastUpdated as ULastUpdated} from "../../../src/sentry/components/LastUpdated";
+import { initialState } from "../../src/reducer";
+import App, { App as UApp} from "../../src/components/App";
 
-describe("LastUpdated", () => {
+xdescribe("App", () => {
 
     const mockStore = configureStore();
     let store;
@@ -17,12 +17,12 @@ describe("LastUpdated", () => {
         store = mockStore(initialState);
         wrapper = mount(
             <Provider store={store}>
-                <LastUpdated />
+                <App />
             </Provider>
         );
     });
 
     it("contains the component", () => {
-        expect(wrapper.find(LastUpdated)).toHaveLength(1);
+        expect(wrapper.find(App)).toHaveLength(1);
     });
 });

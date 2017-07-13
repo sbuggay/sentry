@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import List from "./List";
-// import ServerForm from "./ServerForm";
-// import ServerViewSelect from "./ViewSelect";
 import LastUpdated from "./LastUpdated";
 import Legend from "./Legend";
 import Storage from "./Storage";
