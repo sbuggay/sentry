@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bar renders a basic Bar 1`] = `
+<div
+  style={
+    Object {
+      "border": "1px solid gray",
+      "borderRadius": "4px",
+      "boxSizing": "border-box",
+      "height": "16px",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "clear": "both",
+        "float": "right",
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "marginRight": "4px",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "background": "#62C552",
+        "borderRadius": "4px",
+        "height": "100%",
+        "width": "50%",
+      }
+    }
+  />
+</div>
+`;

@@ -19,7 +19,7 @@ exports[`Status renders an available status 1`] = `
   className="fa fa-circle"
   style={
     Object {
-      "color": "#229926",
+      "color": "#62C552",
       "marginRight": "0.5em",
     }
   }
@@ -32,7 +32,7 @@ exports[`Status renders an issue status 1`] = `
   className="fa fa-exclamation-circle"
   style={
     Object {
-      "color": "#FEE032",
+      "color": "#fadf59",
       "marginRight": "0.5em",
     }
   }
@@ -45,7 +45,7 @@ exports[`Status renders an outage status 1`] = `
   className="fa fa-exclamation-triangle"
   style={
     Object {
-      "color": "#951A1D",
+      "color": "#DF3E2D",
       "marginRight": "0.5em",
     }
   }

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GroupSelect renders a basic GroupSelect 1`] = `
+<div
+  style={
+    Object {
+      "fontSize": "14px",
+    }
+  }
+>
+  <div
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#3595FD",
+        "border": "1px solid gray",
+        "borderBottomLeftRadius": "4px",
+        "borderRight": 0,
+        "borderTopLeftRadius": "4px",
+        "boxSizing": "border-box",
+        "color": "white",
+        "display": "inline",
+        "padding": "2px 8px",
+      }
+    }
+    tabIndex={0}
+  >
+    test
+  </div>
+  <div
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    style={
+      Object {
+        "border": "1px solid gray",
+        "borderBottomRightRadius": "4px",
+        "borderLeft": 0,
+        "borderTopRightRadius": "4px",
+        "boxSizing": "border-box",
+        "cursor": "pointer",
+        "display": "inline",
+        "padding": "2px 8px",
+      }
+    }
+    tabIndex={0}
+  >
+    test
+  </div>
+</div>
+`;

@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 
-import GroupSelect from "../../../src/sentry/components/GroupSelect";
+import Service from "../../../src/sentry/components/Service";
 
-describe("GroupSelect", () => {
+describe("Service", () => {
 
-    it("renders a basic GroupSelect", () => {
+    it("renders a basic Service", () => {
         const component = renderer.create(
-            <GroupSelect options={["test", "test"]} selectedIndex={0} />
+            <Service service={{name: "test", script: "test", test: "test", status: false}} />
         );
 
         const tree = component.toJSON();

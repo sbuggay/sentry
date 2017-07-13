@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 
-import GroupSelect from "../../../src/sentry/components/GroupSelect";
+import Bar from "../../../src/sentry/components/Bar";
 
-describe("GroupSelect", () => {
+describe("Bar", () => {
 
-    it("renders a basic GroupSelect", () => {
+    it("renders a basic Bar", () => {
         const component = renderer.create(
-            <GroupSelect options={["test", "test"]} selectedIndex={0} />
+            <Bar percentage={50} />
         );
 
         const tree = component.toJSON();

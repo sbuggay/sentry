@@ -10,7 +10,7 @@ describe("actions", () => {
 		const host = "test_host";
 		const id = guid();
 		expect(actions.addServer(name, host, id)).toEqual({
-			type: actionTypes.ADD_SERVER,
+			type: actionTypes.SERVER_ADD,
 			payload: {
 				id,
 				name,
@@ -23,7 +23,7 @@ describe("actions", () => {
 	it("should create an action to remove a server", () => {
 		const id = guid();
 		expect(actions.removeServer(id)).toEqual({
-			type: actionTypes.REMOVE_SERVER,
+			type: actionTypes.SERVER_REMOVE,
 			payload: id
 		});
 	});
