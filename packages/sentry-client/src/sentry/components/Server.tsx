@@ -189,7 +189,8 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     public renderChevron(): JSX.Element {
         const style = {
             marginLeft: "10px",
-            float: "right"
+            float: "right",
+            cursor: "pointer"
         };
 
         const className = this.state.expanded ? "fa fa-chevron-down" : "fa fa-chevron-right";
