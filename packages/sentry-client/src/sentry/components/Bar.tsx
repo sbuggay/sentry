@@ -15,6 +15,7 @@ export class Bar extends React.Component<IBarProps, any> {
             height: "16px",
             boxSizing: "border-box",
             border: "1px solid gray",
+            borderRadius: "4px",
             ...this.props.style
         };
     }
@@ -24,6 +25,7 @@ export class Bar extends React.Component<IBarProps, any> {
             width: `${this.props.percentage}%`,
             height: "100%",
             background: "#62C552",
+            borderRadius: "4px",
             ...this.props.barStyle
         };
     }
@@ -32,7 +34,9 @@ export class Bar extends React.Component<IBarProps, any> {
         return {
             float: "right",
             fontSize: "12px",
-            clear: "both"
+            marginRight: "4px",
+            clear: "both",
+            lineHeight: this.getStyle().height
         };
     }
 
