@@ -4,18 +4,22 @@ import { bindActionCreators } from "redux";
 
 import List from "./List";
 // import ServerForm from "./ServerForm";
-import ServerViewSelect from "./ViewSelect";
+// import ServerViewSelect from "./ViewSelect";
 import LastUpdated from "./LastUpdated";
 import Legend from "./Legend";
 import Storage from "./Storage";
+import GroupSelect from "./GroupSelect";
 
-import { initialize, addServer } from "../actions";
+import { view } from "../constants";
+
+import { initialize, addServer, changeView } from "../actions";
 
 interface IDispatchProps {
     title?: string;
-    view?: string;
+    view?: number;
     initialize?: () => any;
     addServer?: (values: object) => any;
+    changeView?: (view: number) => void;
 }
 
 export class App extends React.Component<IDispatchProps, any> {
@@ -35,33 +39,45 @@ export class App extends React.Component<IDispatchProps, any> {
     public getStyle() {
         return {
             maxWidth: "900px",
-            width: "100%",
             marginLeft: "auto",
             marginRight: "auto"
         };
     }
 
+    public handleSelectChange(index: number) {
+        if (this.props.changeView) {
+            this.props.changeView(index);
+        }
+    }
+
     public render() {
-        return <div>
-            <h1 style={{ textAlign: "center" }}>
-                {this.props.title}
-            </h1>
-            <div style={this.getStyle()}>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    {/*<ServerForm handleSubmit={this.onServerInputSubmit.bind(this)} />*/}
-                    {this.props.view}
-                    <ServerViewSelect />
-                </div>
-                <List />
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <LastUpdated />
-                    <Legend />
-                </div>
-                <div>
-                    <Storage />
+
+        const options = view;
+
+        return (
+            <div>
+                <h1 style={{ textAlign: "center", fontWeight: 500 }}>
+                    {this.props.title}
+                </h1>
+                <div style={this.getStyle()}>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <div></div>
+                        <GroupSelect
+                            onChange={(index) => this.handleSelectChange(index)}
+                            options={options}
+                            selectedIndex={this.props.view || 0} />
+                    </div>
+                    <List />
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <LastUpdated />
+                        <Legend />
+                    </div>
+                    <div>
+                        <Storage />
+                    </div>
                 </div>
             </div>
-        </div>;
+        );
     }
 }
 
@@ -75,7 +91,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
     return bindActionCreators({
         addServer,
-        initialize
+        initialize,
+        changeView
     }, dispatch);
 };
 
