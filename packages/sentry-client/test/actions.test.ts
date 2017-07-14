@@ -2,7 +2,7 @@ import * as actions from "../src/actions";
 import * as actionTypes from "../src/actionTypes";
 
 import { guid } from "../src/lib/utils";
-import { STATUS } from "../src/constants";
+import { EStatus } from "../src/constants";
 
 describe("actions", () => {
 	it("should create an action to add a server", () => {
@@ -15,7 +15,7 @@ describe("actions", () => {
 				id,
 				name,
 				host,
-				status: STATUS.OUTAGE
+				status: EStatus.outage
 			}
 		});
 	});

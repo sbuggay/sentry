@@ -3,7 +3,7 @@ import * as actionTypes from "../src/actionTypes";
 import reducer, { initialState } from "../src/reducer";
 
 import { guid } from "../src/lib/utils";
-import { STATUS } from "../src/constants";
+import { EStatus } from "../src/constants";
 
 describe("sentry reducer", () => {
 	it("should return the initial state", () => {
@@ -22,7 +22,7 @@ describe("sentry reducer", () => {
 					id,
 					name,
 					host,
-					status: STATUS.OUTAGE
+					status: EStatus.outage
 				}
 			}
 		});

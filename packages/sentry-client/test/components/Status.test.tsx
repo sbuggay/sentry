@@ -1,12 +1,12 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 import { Status } from "../../src/components/Status";
-import { STATUS } from "../../src/constants";
+import { EStatus } from "../../src/constants";
 
 describe("Status", () => {
     it("renders an available status", () => {
         const component = renderer.create(
-            <Status status={STATUS.AVAILABLE} />
+            <Status status={EStatus.available} />
         );
 
         const tree = component.toJSON();
@@ -15,7 +15,7 @@ describe("Status", () => {
 
     it("renders an outage status", () => {
         const component = renderer.create(
-            <Status status={STATUS.OUTAGE} />
+            <Status status={EStatus.outage} />
         );
 
         const tree = component.toJSON();
@@ -24,7 +24,7 @@ describe("Status", () => {
 
     it("renders an issue status", () => {
         const component = renderer.create(
-            <Status status={STATUS.ISSUE} />
+            <Status status={EStatus.issue} />
         );
 
         const tree = component.toJSON();
@@ -33,7 +33,7 @@ describe("Status", () => {
 
     it("renders a maintenance status", () => {
         const component = renderer.create(
-            <Status status={STATUS.MAINTENANCE} />
+            <Status status={EStatus.maintenence} />
         );
 
         const tree = component.toJSON();
