@@ -37,7 +37,7 @@ export class App extends React.Component<IStateProps & IDispatchProps, any> {
         }
     }
 
-    public getStyle() {
+    public getStyle(): React.CSSProperties {
         return {
             maxWidth: "900px",
             marginLeft: "auto",
