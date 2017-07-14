@@ -11,6 +11,9 @@
         "react"
     ],
     "rules": {
+        "no-console": [
+            false
+        ],
         "ordered-imports": [
             false
         ],
@@ -18,6 +21,8 @@
         "trailing-comma": [
             false
         ],
+        "no-bitwise": false,
+        "forin": false,
         "indent": [
             "error",
             "space"

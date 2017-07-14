@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Legend renders a legend 1`] = `
+<div
+  style={
+    Object {
+      "color": "#adb0af",
+      "fontSize": "14px",
+    }
+  }
+>
+  <span>
+    <i
+      aria-hidden="true"
+      className="fa fa-circle"
+      style={
+        Object {
+          "color": "#62C552",
+          "marginRight": "0.5em",
+        }
+      }
+    />
+     Available
+  </span>
+  <span
+    style={
+      Object {
+        "marginLeft": "1em",
+      }
+    }
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-exclamation-triangle"
+      style={
+        Object {
+          "color": "#DF3E2D",
+          "marginRight": "0.5em",
+        }
+      }
+    />
+     Outage
+  </span>
+  <span
+    style={
+      Object {
+        "marginLeft": "1em",
+      }
+    }
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-exclamation-circle"
+      style={
+        Object {
+          "color": "#fadf59",
+          "marginRight": "0.5em",
+        }
+      }
+    />
+     Issue
+  </span>
+  <span
+    style={
+      Object {
+        "marginLeft": "1em",
+      }
+    }
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-square"
+      style={
+        Object {
+          "color": "#1172C6",
+          "marginRight": "0.5em",
+        }
+      }
+    />
+     Maintenance
+  </span>
+  <span
+    style={
+      Object {
+        "marginLeft": "1em",
+      }
+    }
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-circle"
+      style={
+        Object {
+          "color": "gray",
+          "marginRight": "0.5em",
+        }
+      }
+    />
+     Unknown
+  </span>
+</div>
+`;
