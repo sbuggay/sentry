@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Status from "./Status";
-import { STATUS } from "../constants";
+import { EStatus } from "../constants";
 
 import { IService } from "../reducer";
 
@@ -21,7 +21,7 @@ export class Service extends React.Component<IStateProps, any> {
 
     // Render
     public renderStatus(): JSX.Element {
-        const status = this.props.service.status ? STATUS.AVAILABLE : STATUS.OUTAGE;
+        const status = this.props.service.status ? EStatus.available : EStatus.outage;
         return (
             <Status status={status} />
         );

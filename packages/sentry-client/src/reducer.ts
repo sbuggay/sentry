@@ -1,5 +1,7 @@
 import * as actionTypes from "./actionTypes";
 
+import { EView } from "./constants";
+
 // TODO: move these interfaces
 export interface ICPU {
     model: string;
@@ -50,7 +52,7 @@ export interface IServer {
 
 export interface IState {
     title: string;
-    view: number;
+    view: EView;
     servers: {
         [id: string]: IServer
     };
@@ -59,7 +61,7 @@ export interface IState {
 
 export const initialState: IState = {
     title: "",
-    view: 0,
+    view: EView.servers,
     servers: {
 
     },

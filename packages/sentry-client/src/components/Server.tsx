@@ -4,7 +4,7 @@ import { IServer } from "../reducer";
 
 import Status from "./Status";
 import Bar from "./Bar";
-import { STATUS } from "../constants";
+import { EStatus } from "../constants";
 
 import { formatBytes } from "../lib/utils";
 
@@ -80,7 +80,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
     // Render
     public renderStatus(): JSX.Element {
-        const status = this.props.server.status ? this.props.server.status : STATUS.UNKNOWN;
+        const status = this.props.server.status ? this.props.server.status : EStatus.unknown;
         return (
             <Status status={status} />
         );
@@ -98,7 +98,15 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         const cpuModel = dynamicInfo.cpus[0].model.split("@")[0];
         // const cpuSpeed = dynamicInfo.cpus[0].model.split("@")[1];
 
-        const renderCpuCores = () => {
+        function renderCpuCores() {
+
+            function getCpuContainerStyle(): React.CSSProperties {
+                return {
+                    width: "100%",
+                    height: "20px",
+                    padding: "1px"
+                };
+            }
 
             const bars = dynamicInfo.cpus.map((core: any, index: number) => {
 
@@ -113,7 +121,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 const percent = (used * 100) / total;
 
                 return (
-                    <div style={{width: "100%", height: "20px", padding: "1px" }}>
+                    <div style={getCpuContainerStyle()}>
                         <Bar
                             key={index}
                             style={{ width: "100%" }}
@@ -128,7 +136,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                     {bars}
                 </div>
             );
-        };
+        }
 
         return (
             <div style={{ marginTop: "0.5em" }}>
@@ -146,6 +154,13 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     public renderServiceData(): JSX.Element | null {
+
+        function getServiceDataStyle(): React.CSSProperties {
+            return {
+                marginTop: "0.5em"
+            };
+        }
+
         const services = this.props.server.serviceInfo;
 
         if (!services) {
@@ -155,12 +170,14 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         const serviceKeys = Object.keys(services);
 
         return (
-            <div style={{ marginTop: "0.5em" }}>
+            <div style={getServiceDataStyle()}>
                 {this.renderRow("services:", serviceKeys.length.toString())}
                 {serviceKeys.map((key, index) => {
-                    const status = services[key].status ? STATUS.AVAILABLE : STATUS.OUTAGE;
+                    const status = services[key].status ? EStatus.available : EStatus.outage;
                     return (
-                        <div key={index} style={{ height: "20px" }}>
+                        <div
+                            key={index}
+                            style={{ height: "20px" }}>
                             <Status status={status} />
                             {services[key].name}
                         </div>
@@ -171,7 +188,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     public renderDetails(): JSX.Element {
-        function detailStyle() {
+        function getDetailStyle() {
             return {
                 fontSize: "14px",
                 marginBottom: "10px"
@@ -179,7 +196,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         }
 
         return (
-            <div style={detailStyle()}>
+            <div style={getDetailStyle()}>
                 {this.renderData()}
                 {this.renderServiceData()}
             </div>

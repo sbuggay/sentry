@@ -8,8 +8,10 @@ import Service from "./Service";
 import { initializePolling, pollServers } from "../actions";
 import { IServer } from "../reducer";
 
+import { EView } from "../constants";
+
 interface IListProps {
-    view?: number;
+    view?: EView;
     servers?: {
         [id: string]: IServer
     };
@@ -96,9 +98,9 @@ export class List extends React.Component<IListProps, IListState> {
 
     public render() {
         switch (this.props.view) {
-            case 0:
+            case EView.servers:
                 return this.renderServers();
-            case 1:
+            case EView.services:
                 return this.renderServices();
             default:
                 return null;

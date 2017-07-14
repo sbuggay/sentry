@@ -2,7 +2,7 @@ import * as actionTypes from "./actionTypes";
 
 import { Dispatch } from "redux";
 
-import { POLLING_TIME, STATUS } from "./constants";
+import { POLLING_TIME, EStatus } from "./constants";
 import { load, save } from "./lib/storage";
 
 import { IState } from "./reducer";
@@ -15,7 +15,7 @@ export const addServer = (name: string, host: string, id: string) => {
             id,
             name,
             host,
-            status: STATUS.OUTAGE
+            status: EStatus.outage
         }
     };
 };
@@ -68,7 +68,7 @@ export const pollServer = (server: any) => {
             // We care about the responseCode and the body
 
             // Go ahead and set status to unavailable
-            const status = response.ok ? STATUS.AVAILABLE : STATUS.OUTAGE;
+            const status = response.ok ? EStatus.available : EStatus.outage;
             response.json().then((data: JSON) => {
                 dispatch({
                     type: actionTypes.SERVER_POLL_SUCCESS,
@@ -86,7 +86,7 @@ export const pollServer = (server: any) => {
                 type: actionTypes.SERVER_POLL_FAILURE,
                 payload: {
                     id: server.id,
-                    status: STATUS.OUTAGE,
+                    status: EStatus.outage,
                 }
             });
         });

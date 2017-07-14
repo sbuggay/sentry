@@ -8,19 +8,22 @@ import Legend from "./Legend";
 import Storage from "./Storage";
 import GroupSelect from "./GroupSelect";
 
-import { view } from "../constants";
+import { EView } from "../constants";
 
 import { initialize, addServer, changeView } from "../actions";
 
-interface IDispatchProps {
+interface IStateProps {
     title?: string;
-    view?: number;
-    initialize?: () => any;
-    addServer?: (values: object) => any;
-    changeView?: (view: number) => void;
+    view?: EView;
 }
 
-export class App extends React.Component<IDispatchProps, any> {
+interface IDispatchProps {
+    initialize?: () => any;
+    addServer?: (values: object) => any;
+    changeView?: (view: EView) => void;
+}
+
+export class App extends React.Component<IStateProps & IDispatchProps, any> {
 
     public componentWillMount() {
         if (this.props.initialize) {
@@ -42,7 +45,7 @@ export class App extends React.Component<IDispatchProps, any> {
         };
     }
 
-    public handleSelectChange(index: number) {
+    public handleSelectChange(index: EView) {
         if (this.props.changeView) {
             this.props.changeView(index);
         }
@@ -50,7 +53,10 @@ export class App extends React.Component<IDispatchProps, any> {
 
     public render() {
 
-        const options = view;
+        const options = [];
+        for (const option in EView) {
+            options.push(EView[option]);
+        }
 
         return (
             <div>
@@ -60,10 +66,10 @@ export class App extends React.Component<IDispatchProps, any> {
                 <div style={this.getStyle()}>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <div></div>
-                        <GroupSelect
+                         <GroupSelect
                             onChange={(index) => this.handleSelectChange(index)}
                             options={options}
-                            selectedIndex={this.props.view || 0} />
+                            selectedOption={this.props.view || EView.servers} />
                     </div>
                     <List />
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -94,4 +100,4 @@ const mapDispatchToProps = (dispatch: any) => {
     }, dispatch);
 };
 
-export default connect<IDispatchProps, any, any>(mapStateToProps, mapDispatchToProps)(App);
+export default connect<IStateProps & IDispatchProps, any, any>(mapStateToProps, mapDispatchToProps)(App);

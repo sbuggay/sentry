@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Status } from "./Status";
-import { STATUS } from "../constants";
+import { EStatus } from "../constants";
 
 export class Legend extends React.Component<any, any> {
 
@@ -16,11 +16,11 @@ export class Legend extends React.Component<any, any> {
         // TODO: Clean up this stupid style hack
         return (
             <div style={this.getStyle()}>
-                <span><Status status={STATUS.AVAILABLE} /> Available</span>
-                <span style={{marginLeft: "1em"}}><Status status={STATUS.OUTAGE} /> Outage</span>
-                <span style={{marginLeft: "1em"}}><Status status={STATUS.ISSUE} /> Issue</span>
-                <span style={{marginLeft: "1em"}}><Status status={STATUS.MAINTENANCE} /> Maintenance</span>
-                <span style={{marginLeft: "1em"}}><Status status={STATUS.UNKNOWN} /> Unknown</span>
+                <span><Status status={EStatus.available} /> Available</span>
+                <span style={{marginLeft: "1em"}}><Status status={EStatus.outage} /> Outage</span>
+                <span style={{marginLeft: "1em"}}><Status status={EStatus.issue} /> Issue</span>
+                <span style={{marginLeft: "1em"}}><Status status={EStatus.maintenence} /> Maintenance</span>
+                <span style={{marginLeft: "1em"}}><Status status={EStatus.unknown} /> Unknown</span>
             </div>
         );
     }

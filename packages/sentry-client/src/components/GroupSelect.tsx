@@ -1,9 +1,11 @@
 import * as React from "react";
 
+// import { EView } from "../constants";
+
 interface IGroupSelectProps {
     options: string[];
-    selectedIndex: number;
-    onChange?: (index: number) => void;
+    selectedOption: any;
+    onChange?: (option: any) => void;
 }
 
 export class GroupSelect extends React.Component<IGroupSelectProps, any> {
@@ -30,24 +32,25 @@ export class GroupSelect extends React.Component<IGroupSelectProps, any> {
         };
     }
 
-    public updateSelected(index: number) {
+    public updateSelected(option: any) {
         if (this.props.onChange) {
-            this.props.onChange(index);
+            this.props.onChange(option);
         }
     }
 
-    public handleSelect(index: number) {
-        this.updateSelected(index);
+    public handleSelect(option: any) {
+        this.updateSelected(option);
     }
-    public handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>, index: number) {
+    public handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>, option: any) {
         switch (e.key) {
             case "Enter":
-                this.updateSelected(index);
+                this.updateSelected(option);
                 break;
         }
     }
 
     public render(): JSX.Element | null {
+
         const options = this.props.options.map((option, index) => {
 
             // Get style for some conditional settings
@@ -71,7 +74,7 @@ export class GroupSelect extends React.Component<IGroupSelectProps, any> {
             }
 
             // Special styling for the selected and non-selected elements of the group
-            if (index === this.props.selectedIndex) {
+            if (option === this.props.selectedOption) {
                 style = {
                     ...style,
                     ...this.getSelectedOptionStyle()
@@ -86,12 +89,13 @@ export class GroupSelect extends React.Component<IGroupSelectProps, any> {
             return (
                 <div
                     key={index}
-                    onKeyDown={(e) => this.handleKeyDown(e, index)}
-                    onClick={() => this.handleSelect(index)}
+                    onKeyDown={(e) => this.handleKeyDown(e, option)}
+                    onClick={() => this.handleSelect(option)}
                     style={style}>
                     {option}
                 </div>
             );
+
         });
 
         return (
