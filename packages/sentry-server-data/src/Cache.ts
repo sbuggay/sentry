@@ -1,9 +1,18 @@
-const defaultConfig = {
+export const defaultConfig = {
     interval: 10000,
     timeout: 5000,
 }
 
-class Cache {
+interface IStore {
+    [key: string]: any
+}
+
+export default class Cache {
+    store: IStore;
+    intervalFunctions: any;
+    config: any;
+    interval: any;
+
     constructor(config = {}) {
         this.setConfig(config);
         this.store = {};
@@ -12,12 +21,12 @@ class Cache {
     }
 
     /** Get a key. */
-    set(key, value) {
+    set(key: string, value: any): void {
         this.store[key] = value;
     }
 
     /** Set a key. */
-    get(key) {
+    get(key: string): any {
         return this.store[key];
     }
 
@@ -28,7 +37,7 @@ class Cache {
     }
 
     /** Set the config by assigning it to the default config. */
-    setConfig(config) {
+    setConfig(config: any) {
         this.config = Object.assign({}, defaultConfig, config);
     }
 
@@ -38,12 +47,12 @@ class Cache {
     }
 
     /** Add a function to the function queue. */
-    addIntervalFunction(key, callback) {
+    addIntervalFunction(key: string, callback: Function) {
         this.intervalFunctions[key] = callback;
     }
 
      /** Add a function array to the function queue. */
-    addIntervalFunctionArray(key, array) {
+    addIntervalFunctionArray(key: string, array: Function[]) {
         this.intervalFunctions[key] = array;
     }
 
@@ -59,21 +68,16 @@ class Cache {
             const func = intervalFunctions[key];
             if (Array.isArray(func)) {
                 func.forEach((element) => {
-                    element().then(values => {
+                    element().then((values: any) => {
                         this.set(key, Object.assign({}, this.get(key), { [values.name]: values }));
                     });
                 });
             }
             else {
-                func().then((values) => {
+                func().then((values: any) => {
                     this.set(key, values);
                 });
             }
         });
     }
 }
-
-module.exports = {
-    defaultConfig,
-    Cache
-};

@@ -1,13 +1,14 @@
-const os = require("os");
-const exec = require("child_process").exec;
-const express = require("express");
+import * as os from "os";
+import * as express from "express";
+import { exec } from "child_process";
+
+const app = express();
 const packageConfig = require("../package.json");
 const config = require("./config.json")
-const app = express();
 
-const Cache = require("./Cache").Cache;
+import Cache from "./Cache";
 
-const staticInfo = {
+export const staticInfo = {
     arch: os.arch(),
     platform: os.platform(),
     release: os.release(),
@@ -15,7 +16,7 @@ const staticInfo = {
     endianness: os.endianness()
 };
 
-const dynamicInfo = () => {
+export const dynamicInfo = () => {
     return new Promise((resolve, reject) => {
         resolve({
             hostname: os.hostname(),
@@ -27,9 +28,9 @@ const dynamicInfo = () => {
     });
 }
 
-const serviceInfo = () => {
+export function serviceInfo() {
     const services = config.services;
-    let serviceFunctions = [];
+    let serviceFunctions: any[] = [];
     Object.keys(services).forEach((key) => {
         function serviceFunction() {
             let service = services[key];
@@ -47,7 +48,10 @@ const serviceInfo = () => {
     return serviceFunctions;
 };
 
-class Server {
+export default class Server {
+    port: number;
+    cache: Cache;
+
     constructor(port = 3333) {
         this.port = port;
         this.cache = new Cache();
@@ -72,18 +76,11 @@ class Server {
             response.send(JSON.stringify(this.serverInfo()));
         });
 
-        app.listen(this.port, (error) => {
+        app.listen(this.port, (error: any) => {
             if (error) {
                 return console.error("Server error", error);
             }
             console.log(`${packageConfig.name}@${packageConfig.version} is running on port ${this.port}`);
         });
     }
-};
-
-module.exports = {
-    staticInfo,
-    dynamicInfo,
-    serviceInfo,
-    Server
 };
