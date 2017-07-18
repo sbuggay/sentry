@@ -56,9 +56,9 @@ export default class Server {
         this.port = port;
         this.cache = new Cache();
         this.cache.set("staticInfo", staticInfo);
-        this.cache.addIntervalFunction("dynamicInfo", dynamicInfo);
-        this.cache.addIntervalFunctionArray("serviceInfo", serviceInfo());
-        this.cache.runIntervalFunctions();
+        this.cache.addCacheFunction("dynamicInfo", dynamicInfo);
+        this.cache.addCacheFunctions("serviceInfo", serviceInfo());
+        this.cache.runCacheFunctions();
     }
 
     serverInfo() {

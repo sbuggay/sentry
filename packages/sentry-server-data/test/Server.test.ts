@@ -1,4 +1,5 @@
-const Server = require("../src/Server").Server;
+import Server from "../src/Server";
+
 let server;
 
 describe("Cache", () => {

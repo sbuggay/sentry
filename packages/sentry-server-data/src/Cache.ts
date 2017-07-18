@@ -9,15 +9,15 @@ interface IStore {
 
 export default class Cache {
     store: IStore;
-    intervalFunctions: any;
+    cacheFunctions: any;
     config: any;
     interval: any;
 
     constructor(config = {}) {
         this.setConfig(config);
         this.store = {};
-        this.intervalFunctions = {};
-        this.interval = setInterval(this.runIntervalFunctions.bind(this), this.config.interval);
+        this.cacheFunctions = {};
+        this.interval = setInterval(this.runCacheFunctions.bind(this), this.config.interval);
     }
 
     /** Get a key. */
@@ -33,7 +33,7 @@ export default class Cache {
     /** Clear the cache. */
     clear() {
         this.store = {};
-        this.intervalFunctions = {};
+        this.cacheFunctions = {};
     }
 
     /** Set the config by assigning it to the default config. */
@@ -47,23 +47,23 @@ export default class Cache {
     }
 
     /** Add a function to the function queue. */
-    addIntervalFunction(key: string, callback: Function) {
-        this.intervalFunctions[key] = callback;
+    addCacheFunction(key: string, callback: Function) {
+        this.cacheFunctions[key] = callback;
     }
 
      /** Add a function array to the function queue. */
-    addIntervalFunctionArray(key: string, array: Function[]) {
-        this.intervalFunctions[key] = array;
+    addCacheFunctions(key: string, array: Function[]) {
+        this.cacheFunctions[key] = array;
     }
 
      /** Get the interval functions. */
-    getIntervalFunctions() {
-        return this.intervalFunctions;
+    getCacheFunctions() {
+        return this.cacheFunctions;
     }
 
     /** Run all actions and update cache. */
-    runIntervalFunctions() {
-        const intervalFunctions = this.getIntervalFunctions();
+    runCacheFunctions() {
+        const intervalFunctions = this.getCacheFunctions();
         Object.keys(intervalFunctions).forEach((key) => {
             const func = intervalFunctions[key];
             if (Array.isArray(func)) {

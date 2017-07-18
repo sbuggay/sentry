@@ -1,5 +1,5 @@
-const Cache = require("../src/Cache").Cache;
-const defaultConfig = require("../src/Cache").defaultConfig;
+import Cache, { defaultConfig } from "../src/Cache";
+
 let cache;
 
 describe("Cache", () => {
@@ -34,19 +34,19 @@ describe("Cache", () => {
 
     it("should clear the cache", () => {
         cache.set("key", "value");
-        cache.addIntervalFunction("key", function () { });
+        cache.addCacheFunction("key", function () { });
         cache.clear();
         
         expect(cache.get("key")).toEqual(undefined);
-        expect(cache.getIntervalFunctions()["key"]).toEqual(undefined);
+        expect(cache.getCacheFunctions()["key"]).toEqual(undefined);
     });
 
     it("should add an intervalFunction", () => {
         const key = "key";
         const value = function () { };
-        cache.addIntervalFunction(key, value);
+        cache.addCacheFunction(key, value);
 
-        const functions = cache.getIntervalFunctions();
+        const functions = cache.getCacheFunctions();
 
         expect(functions[key]).toEqual(value);
     });
@@ -54,9 +54,9 @@ describe("Cache", () => {
     it("should add intervalFunctions", () => {
         const key = "key";
         const value = [function () { }, function () { }];
-        cache.addIntervalFunctionArray(key, value);
+        cache.addCacheFunction(key, value);
 
-        const functions = cache.getIntervalFunctions();
+        const functions = cache.getCacheFunctions();
 
         expect(functions[key]).toEqual(value);
     });

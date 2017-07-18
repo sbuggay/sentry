@@ -6,7 +6,8 @@
         "target": "es2015",
         "noEmit": true,
         "types": [
-            "node"
+            "node",
+            "jest"
         ],
         "typeRoots": [
             "./node_modules/@types"
