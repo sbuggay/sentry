@@ -1,8 +1,20 @@
 import * as os from "os";
 import * as express from "express";
+import * as WebSocket from "ws";
+import * as http from "http";
 import { exec } from "child_process";
 
 const app = express();
+
+app.use(function (request, response) {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Content-Type: application/json");
+  response.send(JSON.stringify(this.serverInfo()));
+});
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
 const packageConfig = require("../package.json");
 const config = require("./config.json")
 
@@ -70,13 +82,19 @@ export default class Server {
     }
 
     start() {
-        app.get("/", (request, response) => {
-            response.header("Access-Control-Allow-Origin", "*");
-            response.header("Content-Type: application/json");
-            response.send(JSON.stringify(this.serverInfo()));
+        wss.on('connection', connection(ws: WebSocket, req: http.IncomingMessage) => {
+          const location = url.parse(req.url, true);
+          // You might use location.query.access_token to authenticate or share sessions
+          // or req.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
+
+          ws.on('message', incoming(message: MessageEvent) => {
+            console.log('received: %s', message);
+          });
+
+          ws.send('something');
         });
 
-        app.listen(this.port, (error: any) => {
+        server.listen(this.port, (error: any) => {
             if (error) {
                 return console.error("Server error", error);
             }
