@@ -1,10 +1,9 @@
 {
-  "name": "sentry-client",
-  "private": true,
-  "version": "0.0.0",
+  "name": "sentry-client-web",
+  "version": "0.2.0",
   "description": "A dashboard for collecting and displaying data from sentry-server-data.",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
     "serve": "webpack-dev-server --content-base dist/",
     "lint": "tslint '{src,test}/**/*.{ts,tsx}'",
     "pretest": "npm run lint",
