@@ -5,7 +5,7 @@
   "scripts": {
     "bootstrap": "npm i && lerna bootstrap",
     "clean": "lerna clean --yes",
-    "publish": "lerna publish --skip-git",
+    "publish": "lerna run build && lerna publish --skip-git",
     "test": "lerna run test"
   },
   "devDependencies": {

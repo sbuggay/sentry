@@ -4,6 +4,7 @@
   "description": "A server that hosts and persists the Sentry client.",
   "scripts": {
     "start": "./node_modules/.bin/ts-node src/index.ts",
+    "build": "",
     "test": "jest --coverage"
   },
   "author": "",
