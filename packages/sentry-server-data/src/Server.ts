@@ -6,7 +6,7 @@ import { exec } from "child_process";
 
 const app = express();
 
-app.use(function (request, response) {
+app.use((request, response) => {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Content-Type: application/json");
   response.send(JSON.stringify(this.serverInfo()));
