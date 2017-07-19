@@ -1,14 +1,16 @@
-var express = require("express");
-var path = require("path");
-var app = express();
+import * as express from "express";
+import * as path from "path";
+let app = express();
 
-var apiRoute = require("./api");
+import apiRoute from "./api";
 
 app.use(express.static(path.join(__dirname, "../node_modules/sentry-client-dist/")));
 
 app.use("/api", apiRoute);
 
+const port = 3333;
+
 // Listen for requests
-var server = app.listen(port = 3333, () => {
+const server = app.listen(port, () => {
 	console.log(`listening on port ${port}`);
 });
