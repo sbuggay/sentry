@@ -3,7 +3,7 @@
   "version": "0.1.5",
   "description": "A server that hosts and persists the Sentry client.",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "./node_modules/.bin/ts-node src/index.ts",
     "test": "jest --coverage"
   },
   "author": "",
