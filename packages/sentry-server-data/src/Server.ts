@@ -4,7 +4,7 @@ import { exec } from "child_process";
 
 const app = express();
 const packageConfig = require("../package.json");
-const config = require("./config.json")
+const config = require("../config.json")
 
 import Cache from "./Cache";
 

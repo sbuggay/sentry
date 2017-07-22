@@ -8,9 +8,9 @@ app.use(express.static(path.join(__dirname, "../node_modules/sentry-client-dist/
 
 app.use("/api", apiRoute);
 
-const port = 3333;
+const port = 3030;
 
 // Listen for requests
-const server = app.listen(port, () => {
+export const server = app.listen(port, () => {
 	console.log(`listening on port ${port}`);
 });

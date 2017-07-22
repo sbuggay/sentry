@@ -1,12 +1,3 @@
 #!/usr/bin/env node
-
-const program = require("commander");
-const Server = require("../src/Server.js").Server;
-
-program
-	.option('-c, --config <config>', 'path to config')
-	.option('-p, --port <port>', 'port number')
-	.parse(process.argv);
-
-const server = new Server(program.port);
-server.start();
+require("ts-node/register");
+require("../src/index");

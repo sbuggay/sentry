@@ -10,8 +10,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@types/jest": "^20.0.4",
+    "@types/node-fetch": "^1.6.7",
     "express": "^4.15.2",
     "jsonfile": "^2.4.0",
+    "node-fetch": "^1.7.1",
     "sentry-client-web": "^0.2.1"
   },
   "devDependencies": {

@@ -9,6 +9,9 @@
             "node",
             "jest"
         ],
+        "typeRoots": [
+            "./node_modules/@types"
+        ],
         "noUnusedLocals": true,
         "noUnusedParameters": false,
         "moduleResolution": "node",
