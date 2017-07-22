@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
 		"http://127.0.0.1:3333",
 		"http://127.0.0.1:3333"
 	]
-	pollServers(hosts).then((json) => {
-		res.send(json);
+	pollServers(hosts).then((result) => {
+		res.send(result);
 	});
 });
 
