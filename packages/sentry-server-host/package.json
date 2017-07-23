@@ -5,7 +5,7 @@
   "bin": "./scripts/server",
   "scripts": {
     "start": "./scripts/server",
-    "serve": "nodemon ./scripts/server",
+    "serve": "nodemon ./scripts/server --watch src",
     "build": "",
     "test": "jest --coverage"
   },
