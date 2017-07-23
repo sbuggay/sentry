@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import List from "./List";
 import LastUpdated from "./LastUpdated";
 import Legend from "./Legend";
-import Storage from "./Storage";
+import DebugPanel from "./DebugPanel";
 import GroupSelect from "./GroupSelect";
 
 import { EView } from "../constants";
@@ -24,6 +24,23 @@ interface IDispatchProps {
 }
 
 export class App extends React.Component<IStateProps & IDispatchProps, any> {
+
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            debug: false
+        };
+
+        document.addEventListener("keypress", (e) => {
+            switch (e.key) {
+                case "i":
+                    this.setState({
+                        debug: !this.state.debug
+                    });
+                    break;
+            }
+        });
+    }
 
     public componentWillMount() {
         if (this.props.initialize) {
@@ -51,6 +68,16 @@ export class App extends React.Component<IStateProps & IDispatchProps, any> {
         }
     }
 
+    public renderDebugPanel(): JSX.Element | null {
+        if (this.state.debug === false) {
+            return null;
+        }
+
+        return (
+            <DebugPanel />
+        );
+    }
+
     public render() {
 
         const options = [];
@@ -66,7 +93,7 @@ export class App extends React.Component<IStateProps & IDispatchProps, any> {
                 <div style={this.getStyle()}>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                         <div></div>
-                         <GroupSelect
+                        <GroupSelect
                             onChange={(index) => this.handleSelectChange(index)}
                             options={options}
                             selectedOption={this.props.view || EView.servers} />
@@ -76,10 +103,8 @@ export class App extends React.Component<IStateProps & IDispatchProps, any> {
                         <LastUpdated />
                         <Legend />
                     </div>
-                    <div>
-                        <Storage />
-                    </div>
                 </div>
+                {this.renderDebugPanel()}
             </div>
         );
     }

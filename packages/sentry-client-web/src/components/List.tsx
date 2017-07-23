@@ -111,7 +111,7 @@ export class List extends React.Component<IListProps, IListState> {
                 height: "300px"
             };
             return (
-                <MessageBox message={"No services"} style={style} />
+                <MessageBox message={"No servers"} style={style} />
             );
         }
     }

@@ -49,7 +49,7 @@ export const initializePolling = () => {
 
 export const pollServers = () => {
     return (dispatch: Dispatch<IState>, getState: () => IState) => {
-        const endpoint = "http://127.0.0.1:303/api";
+        const endpoint = "http://127.0.0.1:3030/api";
         const requestInit: RequestInit = {
             method: "GET",
             headers: new Headers(),
@@ -62,6 +62,7 @@ export const pollServers = () => {
 
         fetch(endpoint, requestInit).then((response: Response) => {
             response.json().then((data: JSON) => {
+                console.log(data);
                 dispatch({
                     type: actionTypes.SERVER_POLL_SUCCESS,
                     payload: data

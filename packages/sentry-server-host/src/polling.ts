@@ -13,7 +13,12 @@ export function pollServer(host: string) {
             .then((res: any) => {
                 return res.json();
             }).then((json: JSON) => {
-                resolve({ [host]: json });
+                const knowns = {
+                    name: host,
+                    host: host,
+                    status: 1
+                }
+                resolve({ ...knowns, ...json });
             }).catch((error) => {
                 reject(error);
             });
