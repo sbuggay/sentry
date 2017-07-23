@@ -3,7 +3,7 @@ let router = express.Router();
 
 import { pollServers } from "./polling";
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
 	let hosts = [
 		"http://127.0.0.1:3333",
 		"http://127.0.0.1:3333",
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 	});
 });
 
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
 	res.send(200);
 });
 
