@@ -4,13 +4,14 @@ let app = express();
 
 import apiRoute from "./api";
 
-app.use(express.static(path.join(__dirname, "../node_modules/sentry-client-dist/")));
+export function start(port = 3030) {
+	app.use(express.static(path.join(__dirname, "../node_modules/sentry-client-dist/")));
 
-app.use("/api", apiRoute);
+	app.use("/api", apiRoute);
 
-const port = 3030;
+	// Listen for requests
+	app.listen(port, () => {
+		console.log(`listening on port ${port}`);
+	});
+}
 
-// Listen for requests
-export const server = app.listen(port, () => {
-	console.log(`listening on port ${port}`);
-});

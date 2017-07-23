@@ -6,13 +6,12 @@
     "type": "git",
     "url": ""
   },
+  "bin": "./scripts/server",
   "scripts": {
-    "start": "./node_modules/.bin/ts-node src/index.ts",
+    "start": "./scripts/server",
+    "serve": "nodemon ./scripts/server",
     "build": "",
     "test": "jest --coverage"
-  },
-  "bin": {
-    "sentry-server": "./scripts/sentry-server"
   },
   "jest": {
     "collectCoverageFrom": [
