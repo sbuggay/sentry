@@ -60,7 +60,7 @@ export interface IState {
 }
 
 export const initialState: IState = {
-    title: "",
+    title: "System Status",
     view: EView.servers,
     servers: {
 

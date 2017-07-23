@@ -91,20 +91,29 @@ export class List extends React.Component<IListProps, IListState> {
             return null;
         }
 
-        return (
-            <div style={this.getStyle()}>
-                {services.map((service: any, index: number) => {
-                    return (
-                        <div>
-                            <Service
-                                key={index}
-                                service={service} />
-                        </div>
-                    );
-                })}
-            </div>
-        );
-
+        if (services.length > 0) {
+            return (
+                <div style={this.getStyle()}>
+                    {services.map((service: any, index: number) => {
+                        return (
+                            <div>
+                                <Service
+                                    key={index}
+                                    service={service} />
+                            </div>
+                        );
+                    })}
+                </div>
+            );
+        } else {
+            const style = {
+                width: "100%",
+                height: "300px"
+            };
+            return (
+                <MessageBox message={"No services"} style={style} />
+            );
+        }
     }
 
     public render() {
