@@ -85,16 +85,23 @@ const reducer = (state = initialState, action: any) => {
                 ...state
             };
 
+        case actionTypes.SERVER_POLL:
+            return {
+                ...state
+            };
+
         case actionTypes.SERVER_POLL_SUCCESS:
             return {
                 ...state,
                 servers: {
                     ...state.servers,
-                    [payload.id]: {
-                        ...state.servers[payload.id],
-                        ...payload
-                    }
+                    ...payload
                 }
+            };
+
+        case actionTypes.SERVER_POLL_FAILURE:
+            return {
+                ...state
             };
 
         case actionTypes.VIEW_CHANGE:

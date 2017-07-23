@@ -49,49 +49,69 @@ export const initializePolling = () => {
 
 export const pollServers = () => {
     return (dispatch: Dispatch<IState>, getState: () => IState) => {
-        const state = getState();
-        Object.keys(state.servers).map((key) => {
-            dispatch(pollServer(state.servers[key]));
-        });
-    };
-};
-
-export const pollServer = (server: any) => {
-    return (dispatch: Dispatch<IState>, getState: () => IState) => {
+        const endpoint = "http://127.0.0.1:303/api";
         const requestInit: RequestInit = {
             method: "GET",
             headers: new Headers(),
             cache: "no-store"
         };
 
-        fetch(server.host, requestInit).then((response: Response) => {
-            // We care about the responseCode and the body
+        dispatch({
+            type: actionTypes.SERVER_POLL
+        });
 
-            // Go ahead and set status to unavailable
-            const status = response.ok ? EStatus.available : EStatus.outage;
+        fetch(endpoint, requestInit).then((response: Response) => {
             response.json().then((data: JSON) => {
                 dispatch({
                     type: actionTypes.SERVER_POLL_SUCCESS,
-                    payload: {
-                        id: server.id,
-                        status,
-                        ...data
-                    }
+                    payload: data
                 });
             });
-
-            dispatch(updateLastUpdated(Date.now()));
-        }).catch((reason: Error) => {
+        }).catch((error: Error) => {
             dispatch({
                 type: actionTypes.SERVER_POLL_FAILURE,
-                payload: {
-                    id: server.id,
-                    status: EStatus.outage,
-                }
+                payload: error
             });
         });
     };
 };
+
+// export const pollServer = (server: any) => {
+//     return (dispatch: Dispatch<IState>, getState: () => IState) => {
+//         const requestInit: RequestInit = {
+//             method: "GET",
+//             headers: new Headers(),
+//             cache: "no-store"
+//         };
+
+//         fetch(server.host, requestInit).then((response: Response) => {
+//             // We care about the responseCode and the body
+
+//             // Go ahead and set status to unavailable
+//             const status = response.ok ? EStatus.available : EStatus.outage;
+//             response.json().then((data: JSON) => {
+//                 dispatch({
+//                     type: actionTypes.SERVER_POLL_SUCCESS,
+//                     payload: {
+//                         id: server.id,
+//                         status,
+//                         ...data
+//                     }
+//                 });
+//             });
+
+//             dispatch(updateLastUpdated(Date.now()));
+//         }).catch((reason: Error) => {
+//             dispatch({
+//                 type: actionTypes.SERVER_POLL_FAILURE,
+//                 payload: {
+//                     id: server.id,
+//                     status: EStatus.outage,
+//                 }
+//             });
+//         });
+//     };
+// };
 
 export const changeView = (view: number) => {
     return {
