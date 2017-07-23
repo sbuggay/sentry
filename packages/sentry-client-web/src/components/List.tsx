@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 
 import Server from "./Server";
 import Service from "./Service";
+import MessageBox from "./MessageBox";
 
 import { initializePolling, pollServers } from "../actions";
 import { IServer } from "../reducer";
@@ -58,20 +59,30 @@ export class List extends React.Component<IListProps, IListState> {
     }
 
     public renderServers(): JSX.Element {
-        return (
-            <div style={this.getStyle()}>
-                {Object.keys(this.props.servers).map((id, index) => {
-                    if (!this.props.servers || !this.props.servers[id]) {
-                        return null;
-                    }
+        if (this.props.servers && Object.keys(this.props.servers).length > 0) {
+            return (
+                <div style={this.getStyle()}>
+                    {Object.keys(this.props.servers).map((id, index) => {
+                        if (!this.props.servers || !this.props.servers[id]) {
+                            return null;
+                        }
 
-                    return <Server
-                        index={index}
-                        key={index}
-                        server={this.props.servers[id]} />;
-                })}
-            </div>
-        );
+                        return <Server
+                            index={index}
+                            key={index}
+                            server={this.props.servers[id]} />;
+                    })}
+                </div>
+            );
+        } else {
+            const style = {
+                width: "100%",
+                height: "300px"
+            };
+            return (
+                <MessageBox message={"No servers"} style={style} />
+            );
+        }
     }
 
     public renderServices(): JSX.Element | null {
