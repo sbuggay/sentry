@@ -7,6 +7,4 @@ program
     .option('-p, --port <port>', 'port number')
     .parse(process.argv)
 
-console.log(program);
-
 start(program.port);
