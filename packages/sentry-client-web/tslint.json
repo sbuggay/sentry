@@ -23,6 +23,7 @@
         ],
         "no-bitwise": false,
         "forin": false,
+        "space-before-function-paren": false,
         "indent": [
             "error",
             "space"
