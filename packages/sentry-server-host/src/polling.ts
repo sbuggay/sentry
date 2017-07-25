@@ -1,5 +1,7 @@
 import fetch from "node-fetch";
 
+import { EStatus } from "./constants";
+
 export function pollServers(hosts: string[]) {
     const promises = hosts.map((host) => {
         return pollServer(host);
@@ -13,12 +15,12 @@ export function pollServer(host: string) {
             .then((res: any) => {
                 return res.json();
             }).then((json: JSON) => {
-                const knowns = {
+                const config = {
                     name: host,
                     host: host,
-                    status: 1
+                    status: EStatus.available
                 }
-                resolve({ ...knowns, ...json });
+                resolve({ ...config, ...json });
             }).catch((error) => {
                 reject(error);
             });
