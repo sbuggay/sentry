@@ -1,4 +1,5 @@
 const prompt = require("prompt");
+prompt.message = "";
 
 const SERVICE_ADD = "add-service";
 const SERVICE_REMOVE = "remove-service";
@@ -6,9 +7,6 @@ const SERVICE_EDIT = "edit-service";
 const SERVICE_LIST = "list-services";
 
 import { updateServices } from "./configHandler";
-
-
-prompt.message = "";
 
 export function handleAction(args: string[]) {
     const action = args[0];

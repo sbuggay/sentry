@@ -4,20 +4,20 @@ let router = express.Router();
 import { pollServers } from "./polling";
 
 router.get("/", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Content-Type: application/json");
-	let hosts = [
-		"http://127.0.0.1:3333",
-		"http://127.0.0.1:3333",
-		"http://127.0.0.1:3333"
-	];
-	pollServers(hosts).then((result) => {
-		res.send(result);
-	});
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Content-Type: application/json");
+    let hosts = [
+        "http://127.0.0.1:3333",
+        "http://127.0.0.1:3333",
+        "http://127.0.0.1:3333"
+    ];
+    pollServers(hosts).then((result) => {
+        res.send(result);
+    });
 });
 
 router.post("/", (req, res) => {
-	res.send(200);
+    res.send(200);
 });
 
 export default router;

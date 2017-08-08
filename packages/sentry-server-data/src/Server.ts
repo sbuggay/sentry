@@ -28,7 +28,7 @@ export const dynamicInfo = () => {
     });
 }
 
-export function serviceInfo() {
+export const serviceInfo = () => {
     const services = config.services;
     let serviceFunctions: any[] = [];
     Object.keys(services).forEach((key) => {
