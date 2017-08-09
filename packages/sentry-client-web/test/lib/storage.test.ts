@@ -1,5 +1,7 @@
 import * as storage from "../../src/lib/storage";
 
+import { EView } from "../../src/constants";
+
 describe("storage", () => {
 
     it("should exist", () => {
@@ -7,7 +9,7 @@ describe("storage", () => {
         expect(storage.save).toBeDefined();
     });
 
-    it ("should load", () => {
+    it("should load", () => {
         localStorage.getItem = jest.fn();
 
         storage.load();
@@ -15,12 +17,12 @@ describe("storage", () => {
         expect(localStorage.getItem).toBeCalled();
     });
 
-    it ("should save", () => {
+    it("should save", () => {
         localStorage.setItem = jest.fn();
         storage.save({
             title: "",
             servers: {},
-            view: 0
+            view: EView.servers
         });
 
         expect(localStorage.setItem).toBeCalled();
