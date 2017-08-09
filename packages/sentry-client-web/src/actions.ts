@@ -49,7 +49,10 @@ export const initializePolling = () => {
 
 export const pollServers = () => {
     return (dispatch: Dispatch<IState>, getState: () => IState) => {
-        const endpoint = "http://localhost:3030/api";
+
+        // Allow for localStorage override of API endpoint
+        const hostEndpoint = localStorage.getItem("hostEndpoint");
+        const endpoint = hostEndpoint ? hostEndpoint : "/api";
 
         dispatch({
             type: actionTypes.SERVER_POLL

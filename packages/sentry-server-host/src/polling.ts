@@ -11,7 +11,7 @@ export function pollServers(hosts: string[]) {
 
 export function pollServer(host: string) {
     return new Promise((resolve, reject) => {
-        fetch(host, {})
+        fetch(host)
             .then((res: any) => {
                 return res.json();
             }).then((json: JSON) => {
