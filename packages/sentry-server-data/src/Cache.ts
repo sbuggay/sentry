@@ -9,7 +9,9 @@ interface IStore {
 
 export default class Cache {
     store: IStore;
-    cacheFunctions: any;
+    cacheFunctions: {
+        [key: string]: Function | Function[]
+    };
     config: any;
     interval: any;
 
