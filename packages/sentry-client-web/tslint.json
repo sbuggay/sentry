@@ -1,0 +1,40 @@
+{
+    "extends": "tslint:recommended",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "no-console": [
+            false
+        ],
+        "ordered-imports": [
+            false
+        ],
+        "object-literal-sort-keys": false,
+        "trailing-comma": [
+            false
+        ],
+        "no-bitwise": false,
+        "forin": false,
+        "space-before-function-paren": false,
+        "indent": [
+            "error",
+            "space"
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}

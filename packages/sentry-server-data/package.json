@@ -1,21 +1,50 @@
 {
   "name": "sentry-server-data",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "A server that provides system and service information.",
   "repository": {
     "type": "git",
     "url": ""
   },
+  "bin": "./scripts/server",
   "scripts": {
+    "start": "node ./scripts/server",
+    "serve": "nodemon ./scripts/server --watch src",
+    "build": "",
     "test": "jest --coverage"
   },
-  "bin": {
-    "sentry-server": "./scripts/sentry-server"
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!**/node_modules/**"
+    ],
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    }
   },
   "author": "Devan Buggay",
   "license": "ISC",
   "dependencies": {
+    "@types/commander": "^2.9.1",
     "commander": "^2.9.0",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "json-update": "^3.0.0",
+    "prompt": "^1.0.0",
+    "ts-node": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.36",
+    "@types/jest": "^20.0.4",
+    "@types/node": "^8.0.14",
+    "jest": "^20.0.4",
+    "ts-jest": "^20.0.7",
+    "typescript": "^2.4.1"
   }
 }

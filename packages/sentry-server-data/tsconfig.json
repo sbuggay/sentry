@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "removeComments": true,
+        "module": "commonjs",
+        "target": "es2015",
+        "noEmit": true,
+        "types": [
+            "node",
+            "jest"
+        ],
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "moduleResolution": "node",
+        "strict": true
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "test"
+    ]
+}

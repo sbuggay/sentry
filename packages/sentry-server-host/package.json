@@ -1,16 +1,33 @@
 {
   "name": "sentry-server-host",
-  "version": "0.1.5",
+  "version": "0.2.1",
   "description": "A server that hosts and persists the Sentry client.",
+  "bin": "./scripts/server",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node ./scripts/server",
+    "serve": "nodemon ./scripts/server --watch src",
+    "build": "",
     "test": "jest --coverage"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@types/commander": "^2.9.1",
+    "@types/jest": "^20.0.4",
+    "@types/nconf": "0.0.34",
+    "@types/node-fetch": "^1.6.7",
+    "commander": "^2.11.0",
     "express": "^4.15.2",
     "jsonfile": "^2.4.0",
-    "sentry-client-dist": "^0.1.6"
+    "nconf": "^0.8.4",
+    "node-fetch": "^1.7.1",
+    "sentry-client-web": "^0.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.36",
+    "@types/node": "^8.0.14",
+    "ts-jest": "^20.0.7",
+    "ts-node": "^3.2.0",
+    "typescript": "^2.4.1"
   }
 }
