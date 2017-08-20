@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`index renders 1`] = `"{\\"props\\":{\\"store\\":{},\\"children\\":{\\"key\\":null,\\"ref\\":null,\\"props\\":{},\\"_owner\\":null,\\"_store\\":{}}},\\"context\\":{},\\"refs\\":{},\\"updater\\":{},\\"store\\":{},\\"_reactInternalInstance\\":\\"censored\\",\\"state\\":null}"`;
