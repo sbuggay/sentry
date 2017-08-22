@@ -7,6 +7,7 @@ import LastUpdated from "./LastUpdated";
 import Legend from "./Legend";
 import DebugPanel from "./DebugPanel";
 import GroupSelect from "./GroupSelect";
+import ToggleControl from "./ToggleControl";
 
 import { EView } from "../constants";
 
@@ -91,8 +92,8 @@ export class App extends React.Component<IStateProps & IDispatchProps, any> {
                     {this.props.title}
                 </h1>
                 <div style={this.getStyle()}>
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <div></div>
+                    <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                        <ToggleControl />
                         <GroupSelect
                             onChange={(index) => this.handleSelectChange(index)}
                             options={options}
