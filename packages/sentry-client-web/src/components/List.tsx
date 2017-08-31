@@ -66,23 +66,17 @@ export class List extends React.Component<IListProps, IListState> {
             case EView.servers:
                 DisplayEntity = Server;
                 displayEntities = Object.values(servers);
-                if (Object.keys(servers).length > 0) {
-                  errorMessage = `No ${EView.servers}`;
-                }
                 break;
             case EView.services:
                 DisplayEntity = Service;
                 displayEntities = this.getServices();
-                if (displayEntities.length < 0) {
-                  errorMessage = `No ${EView.services}`;
-                }
                 break;
             default:
                 throw new Error("Switch statement should be exhaustive");
         }
 
-        if (errorMessage) {
-            return <MessageBox message={errorMessage} />;
+        if (displayEntities.length === 0) {
+            return <MessageBox message={`No ${this.props.view}`} />;
         } else {
             return (
                 <div style={this.getStyle()}>
