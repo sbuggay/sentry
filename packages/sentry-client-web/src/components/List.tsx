@@ -59,7 +59,6 @@ export class List extends React.Component<IListProps, IListState> {
             return;
         }
 
-        let errorMessage;
         let displayEntities;
         let DisplayEntity;
         switch (this.props.view) {
