@@ -12,6 +12,8 @@ export class MessageBox extends React.Component<IMessageBoxProps, any> {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            width: "100%",
+            height: "300px",
             ...this.props.style
         };
     }
