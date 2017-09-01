@@ -80,7 +80,7 @@ export class List extends React.Component<IListProps, IListState> {
         } else {
             return (
                 <div style={this.getStyle()}>
-                    {displayEntities.map((entity: any, index: number) => {
+                    {displayEntities.map((entity: Object, index: number) => {
                         return (
                             <div>
                                 <DisplayEntity
