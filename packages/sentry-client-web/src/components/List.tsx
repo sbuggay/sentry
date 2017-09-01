@@ -37,7 +37,8 @@ export class List extends React.Component<IListProps, IListState> {
     }
 
     public getServices() {
-        return Object.keys(this.props.servers).map((serverKey: string) => servers[serverKey]).reduce(
+        const servers = this.props.servers;
+        return Object.keys(servers).map((serverKey: string) => servers[serverKey]).reduce(
             (prev, current: IServer) => current.serviceInfo ?
                 prev.concat(Object.keys(current.serviceInfo)
                     .map((serviceKey: string) => current.serviceInfo && current.serviceInfo[serviceKey]))
@@ -59,12 +60,12 @@ export class List extends React.Component<IListProps, IListState> {
             return;
         }
 
-        let displayEntities;
-        let DisplayEntity;
+        let displayEntities: Object[];
+        let DisplayEntity: any;
         switch (this.props.view) {
             case EView.servers:
                 DisplayEntity = Server;
-                displayEntities = Object.values(servers);
+                displayEntities = Object.keys(servers).map((serverKey: string) => servers[serverKey]);
                 break;
             case EView.services:
                 DisplayEntity = Service;
