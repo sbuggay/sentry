@@ -60,7 +60,7 @@ export class List extends React.Component<IListProps, IListState> {
             return;
         }
 
-        let displayEntities: Object[];
+        let displayEntities: object[];
         let DisplayEntity: any;
         switch (this.props.view) {
             case EView.servers:
@@ -80,7 +80,7 @@ export class List extends React.Component<IListProps, IListState> {
         } else {
             return (
                 <div style={this.getStyle()}>
-                    {displayEntities.map((entity: Object, index: number) => {
+                    {displayEntities.map((entity: object, index: number) => {
                         return (
                             <div>
                                 <DisplayEntity

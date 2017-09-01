@@ -7,7 +7,7 @@ describe("Service", () => {
 
     it("renders a basic Service", () => {
         const component = renderer.create(
-            <Service service={{name: "test", script: "test", test: "test", status: false}} />
+            <Service data={{name: "test", script: "test", test: "test", status: false}} />
         );
 
         const tree = component.toJSON();
