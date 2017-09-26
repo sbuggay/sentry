@@ -12,7 +12,7 @@ import { IServer } from "../reducer";
 import { EView } from "../constants";
 
 interface IListProps {
-    view?: EView;
+    view?: string;
     servers?: {
         [id: string]: IServer
     };
@@ -37,9 +37,9 @@ export class List extends React.Component<IListProps, IListState> {
     }
 
     public getServices() {
-        const servers = this.props.servers;
+        const servers = this.props.servers || {};
         return Object.keys(servers).map((serverKey: string) => servers[serverKey]).reduce(
-            (prev, current: IServer) => current.serviceInfo ?
+            (prev: any[], current: IServer) => current.serviceInfo ?
                 prev.concat(Object.keys(current.serviceInfo)
                     .map((serviceKey: string) => current.serviceInfo && current.serviceInfo[serviceKey]))
                 : prev, [] as any[]);
@@ -55,11 +55,7 @@ export class List extends React.Component<IListProps, IListState> {
     }
 
     public render() {
-        const servers = this.props.servers;
-        if (servers === undefined) {
-            return;
-        }
-
+        const servers = this.props.servers || {};
         let displayEntities: object[];
         let DisplayEntity: any;
         switch (this.props.view) {
