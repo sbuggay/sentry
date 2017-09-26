@@ -12,7 +12,7 @@ import { IServer } from "../reducer";
 import { EView } from "../constants";
 
 interface IListProps {
-    view?: EView;
+    view?: string;
     servers?: {
         [id: string]: IServer
     };
@@ -37,13 +37,9 @@ export class List extends React.Component<IListProps, IListState> {
     }
 
     public getServices() {
-        const servers = this.props.servers;
-        if (servers === undefined) {
-            return;
-        }
-
+        const servers = this.props.servers || {};
         return Object.keys(servers).map((serverKey: string) => servers[serverKey]).reduce(
-            (prev, current: IServer) => current.serviceInfo ?
+            (prev: any[], current: IServer) => current.serviceInfo ?
                 prev.concat(Object.keys(current.serviceInfo)
                     .map((serviceKey: string) => current.serviceInfo && current.serviceInfo[serviceKey]))
                 : prev, [] as any[]);
@@ -58,72 +54,40 @@ export class List extends React.Component<IListProps, IListState> {
         };
     }
 
-    public renderServers(): JSX.Element {
-        if (this.props.servers && Object.keys(this.props.servers).length > 0) {
-            return (
-                <div style={this.getStyle()}>
-                    {Object.keys(this.props.servers).map((id, index) => {
-                        if (!this.props.servers || !this.props.servers[id]) {
-                            return null;
-                        }
+    public render() {
+        const servers = this.props.servers || {};
+        let displayEntities: object[];
+        let DisplayEntity: any;
+        switch (this.props.view) {
+            case EView.servers:
+                DisplayEntity = Server;
+                displayEntities = Object.keys(servers).map((serverKey: string) => servers[serverKey]);
+                break;
+            case EView.services:
+                DisplayEntity = Service;
+                displayEntities = this.getServices();
+                break;
+            default:
+                throw new Error("Switch statement should be exhaustive");
+        }
 
-                        return <Server
-                            index={index}
-                            key={index}
-                            server={this.props.servers[id]} />;
-                    })}
-                </div>
-            );
+        if (displayEntities.length === 0) {
+            return <MessageBox message={`No ${this.props.view}`} />;
         } else {
-            const style = {
-                width: "100%",
-                height: "300px"
-            };
-            return (
-                <MessageBox message={"No servers"} style={style} />
-            );
-        }
-    }
-
-    public renderServices(): JSX.Element | null {
-        const services = this.getServices();
-        if (services === undefined) {
-            return null;
-        }
-
-        if (services.length > 0) {
             return (
                 <div style={this.getStyle()}>
-                    {services.map((service: any, index: number) => {
+                    {displayEntities.map((entity: object, index: number) => {
                         return (
                             <div>
-                                <Service
+                                <DisplayEntity
                                     key={index}
-                                    service={service} />
+                                    index={index}
+                                    data={entity} />
                             </div>
                         );
                     })}
                 </div>
             );
-        } else {
-            const style = {
-                width: "100%",
-                height: "300px"
-            };
-            return (
-                <MessageBox message={"No servers"} style={style} />
-            );
-        }
-    }
-
-    public render() {
-        switch (this.props.view) {
-            case EView.servers:
-                return this.renderServers();
-            case EView.services:
-                return this.renderServices();
-            default:
-                return null;
         }
     }
 }

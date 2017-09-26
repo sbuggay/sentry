@@ -6,7 +6,7 @@ import { EStatus } from "../constants";
 import { IService } from "../reducer";
 
 interface IStateProps {
-    service: IService;
+    data: IService;
 }
 
 export class Service extends React.Component<IStateProps, any> {
@@ -21,7 +21,7 @@ export class Service extends React.Component<IStateProps, any> {
 
     // Render
     public renderStatus(): JSX.Element {
-        const status = this.props.service.status ? EStatus.available : EStatus.outage;
+        const status = this.props.data.status ? EStatus.available : EStatus.outage;
         return (
             <Status status={status} />
         );
@@ -34,7 +34,7 @@ export class Service extends React.Component<IStateProps, any> {
                 <div>
                     <span>
                         {this.renderStatus()}
-                        {this.props.service.name}
+                        {this.props.data.name}
                     </span>
                 </div>
             </div>

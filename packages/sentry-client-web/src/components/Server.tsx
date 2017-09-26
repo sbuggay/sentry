@@ -11,7 +11,7 @@ import { formatBytes } from "../lib/utils";
 import { pretty } from "../utils/prettyTime";
 
 interface IStateProps {
-    server: IServer;
+    data: IServer;
     index: number;
     expanded?: boolean;
 }
@@ -80,20 +80,20 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
     // Render
     public renderStatus(): JSX.Element {
-        const status = this.props.server.status ? this.props.server.status : EStatus.unknown;
+        const status = this.props.data.status ? this.props.data.status : EStatus.unknown;
         return (
             <Status status={status} />
         );
     }
 
     public renderData(): JSX.Element | null {
-        // const staticInfo = this.props.server.staticInfo;
+        // const staticInfo = this.props.data.staticInfo;
 
-        if (!this.props.server.dynamicInfo) {
+        if (!this.props.data.dynamicInfo) {
             return null;
         }
 
-        const dynamicInfo = this.props.server.dynamicInfo;
+        const dynamicInfo = this.props.data.dynamicInfo;
 
         const cpuModel = dynamicInfo.cpus[0].model.split("@")[0];
         // const cpuSpeed = dynamicInfo.cpus[0].model.split("@")[1];
@@ -141,7 +141,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         return (
             <div style={{ marginTop: "0.5em" }}>
                 {this.renderRow("hostname:", dynamicInfo.hostname)}
-                {this.renderRow("host:", this.props.server.host)}
+                {this.renderRow("host:", this.props.data.host)}
                 {this.renderRow("uptime:", pretty(dynamicInfo.uptime, 2))}
                 {this.renderRow("cpu:", cpuModel)}
                 {renderCpuCores()}
@@ -161,7 +161,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
             };
         }
 
-        const services = this.props.server.serviceInfo;
+        const services = this.props.data.serviceInfo;
 
         if (!services) {
             return null;
@@ -233,7 +233,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 <div>
                     <span>
                         {this.renderStatus()}
-                        {this.props.server.name}
+                        {this.props.data.name}
                     </span>
                     {this.state.hover ? this.renderChevron() : null}
                 </div>
