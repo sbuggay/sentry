@@ -7,7 +7,7 @@
     "serve": "webpack-dev-server --content-base dist/",
     "lint": "tslint '{src,test}/**/*.{ts,tsx}'",
     "pretest": "npm run lint",
-    "test": "jest --coverage",
+    "test": "node ./node_modules/jest/bin/jest.js . --coverage",
     "analyze": "webpack --json | webpack-bundle-size-analyzer",
     "doc": "jsdoc"
   },
