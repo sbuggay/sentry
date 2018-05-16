@@ -4,6 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ![demo1](https://raw.githubusercontent.com/sbuggay/sentry/master/demo/demo1.png)
+![demo2](https://raw.githubusercontent.com/sbuggay/sentry/master/demo/demo2.png)
 
 Sentry comprises of three packages: the client, the data server, and the host server.
 
