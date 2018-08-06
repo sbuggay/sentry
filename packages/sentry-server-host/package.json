@@ -7,7 +7,7 @@
     "start": "node ./scripts/server",
     "serve": "nodemon ./scripts/server --watch src",
     "build": "",
-    "test": "jest --coverage"
+    "test": "node ./node_modules/jest/bin/jest.js . --coverage"
   },
   "author": "",
   "license": "MIT",
