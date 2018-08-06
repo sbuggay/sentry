@@ -74,6 +74,7 @@ export const pollServers = () => {
                         payload: this.responseText
                     });
                 }
+                dispatch(updateLastUpdated(Date.now()));
             }
         };
 
