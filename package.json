@@ -9,7 +9,6 @@
     "test": "lerna run test"
   },
   "devDependencies": {
-    "lerna": "^2.0.0-rc.5",
-    "ts-jest": "^20.0.7"
+    "lerna": "^2.11.0"
   }
 }

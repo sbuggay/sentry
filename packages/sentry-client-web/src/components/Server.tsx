@@ -204,7 +204,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     public renderChevron(): JSX.Element {
-        const style = {
+        const style: React.CSSProperties = {
             marginLeft: "10px",
             float: "right",
             cursor: "pointer"

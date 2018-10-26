@@ -1,7 +1,5 @@
 import * as actionTypes from "./actionTypes";
 
-import { Dispatch } from "redux";
-
 import { POLLING_TIME, EStatus } from "./constants";
 import { load, save } from "./lib/storage";
 
@@ -29,7 +27,7 @@ export const removeServer = (id: string) => {
 
 // Asyncronous actions
 export const initialize = () => {
-    return (dispatch: Dispatch<IState>) => {
+    return (dispatch: any) => {
         dispatch(loadState());
     };
 };
@@ -42,13 +40,13 @@ export const editServer = (payload: any) => {
 };
 
 export const initializePolling = () => {
-    return (dispatch: Dispatch<IState>, getState: () => IState) => {
+    return (dispatch: any, getState: () => IState) => {
         setInterval(() => dispatch(pollServers()), POLLING_TIME);
     };
 };
 
 export const pollServers = () => {
-    return (dispatch: Dispatch<IState>, getState: () => IState) => {
+    return (dispatch: any, getState: () => IState) => {
 
         // Allow for localStorage override of API endpoint
         const hostEndpoint = localStorage.getItem("hostEndpoint");
@@ -58,28 +56,14 @@ export const pollServers = () => {
             type: actionTypes.SERVER_POLL
         });
 
-        const xhr = new XMLHttpRequest();
-
-        xhr.onreadystatechange = function () {
-            if (this.readyState === this.DONE) {
-                if (this.status === 200) {
-                    const data = JSON.parse(this.responseText);
-                    dispatch({
-                        type: actionTypes.SERVER_POLL_SUCCESS,
-                        payload: data
-                    });
-                } else {
-                    dispatch({
-                        type: actionTypes.SERVER_POLL_FAILURE,
-                        payload: this.responseText
-                    });
-                }
-                dispatch(updateLastUpdated(Date.now()));
-            }
-        };
-
-        xhr.open("GET", endpoint, true);
-        xhr.send();
+        fetch(endpoint).then(response => response.json()).then(data => {
+            dispatch({
+                type: actionTypes.SERVER_POLL_SUCCESS,
+                payload: data
+            });
+        }).catch(error => {
+            console.error(error);
+        });
     };
 };
 
@@ -92,7 +76,7 @@ export const changeView = (view: number) => {
 
 // Saves the state tree to localstorage/other
 export const saveState = () => {
-    return (dispatch: Dispatch<IState>, getState: () => IState) => {
+    return (dispatch: any, getState: () => IState) => {
         save(getState());
     };
 };

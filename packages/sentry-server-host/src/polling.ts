@@ -24,5 +24,7 @@ export function pollServer(host: string) {
             }).catch((error) => {
                 reject(error);
             });
+    }).catch(error => {
+        console.error(error);
     });
 }
