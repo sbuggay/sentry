@@ -1,6 +1,6 @@
 {
   "name": "sentry-server-data",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A server that provides system and service information.",
   "repository": {
     "type": "git",
