@@ -4,6 +4,7 @@ import { EStatus } from "./constants";
 
 export function pollServers(hosts: string[]) {
     const promises = hosts.map((host) => {
+        console.log(`polling ${host}`);
         return pollServer(host);
     });
     return Promise.all(promises);

@@ -1,5 +1,7 @@
 {
-    "services": {
-        
-    }
+    "services":[{
+            "name": "sshd",
+            "script": "netstat -anl|grep LISTEN|grep \"*.22\"",
+            "test": "tcp4"
+    }]
 }

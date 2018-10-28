@@ -96,15 +96,16 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         const dynamicInfo = this.props.server.dynamicInfo;
 
         const cpuModel = dynamicInfo.cpus[0].model.split("@")[0];
-        // const cpuSpeed = dynamicInfo.cpus[0].model.split("@")[1];
+        const cpuCores = dynamicInfo.cpus.length;
+        const cpuSpeed = dynamicInfo.cpus[0].model.split("@")[1];
 
         function renderCpuCores() {
 
             function getCpuContainerStyle(): React.CSSProperties {
                 return {
                     width: "100%",
-                    height: "20px",
-                    padding: "1px"
+                    padding: "1px",
+                    display: "flex"
                 };
             }
 
@@ -124,9 +125,8 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                     <div style={getCpuContainerStyle()}>
                         <Bar
                             key={index}
-                            style={{ width: "100%" }}
-                            percentage={percent}
-                            text={`${percent.toFixed(2)}%`} />
+                            style={{ height: "8px", flex: "0 50%", boxSizing: "border-box" }}
+                            percentage={percent} />
                     </div>
                 );
             });
@@ -144,6 +144,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 {this.renderRow("host:", this.props.server.host)}
                 {this.renderRow("uptime:", pretty(dynamicInfo.uptime, 2))}
                 {this.renderRow("cpu:", cpuModel)}
+                {this.renderRow("", `${cpuCores} core${cpuCores === 1 ? "" : "s"} @ ${cpuSpeed}`)}
                 {renderCpuCores()}
                 {this.renderRow("ram:", "")}
                 <Bar

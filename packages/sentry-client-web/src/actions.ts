@@ -56,12 +56,12 @@ export const pollServers = () => {
             type: actionTypes.SERVER_POLL
         });
 
-        fetch(endpoint).then(response => response.json()).then(data => {
+        fetch(endpoint).then((response) => response.json()).then((data) => {
             dispatch({
                 type: actionTypes.SERVER_POLL_SUCCESS,
                 payload: data
             });
-        }).catch(error => {
+        }).catch((error) => {
             console.error(error);
         });
     };

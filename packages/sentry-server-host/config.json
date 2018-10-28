@@ -2,6 +2,12 @@
     "servers": [
         {
             "host": "http://localhost:3333"
+        },
+        {
+            "host": "http://192.168.1.2:3333"
+        },
+        {
+            "host": "http://devan.space:3333"
         }
     ]
 }
