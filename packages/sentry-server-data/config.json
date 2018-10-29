@@ -1,5 +1,19 @@
 {
-    "services": {
-        
+  "services": [
+    {
+      "name": "csgo1",
+      "script": "csgo-script",
+      "test": "running"
+    },
+    {
+      "name": "csgo2",
+      "script": "csgo-script",
+      "test": "running"
+    },
+    {
+      "name": "csgo3",
+      "script": "csgo-script",
+      "test": "running"
     }
+  ]
 }
