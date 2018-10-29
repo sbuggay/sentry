@@ -1,42 +1,17 @@
-const prompt = require("prompt");
-prompt.message = "";
 
-const SERVICE_ADD = "add-service";
-const SERVICE_REMOVE = "remove-service";
-const SERVICE_EDIT = "edit-service";
-const SERVICE_LIST = "list-services";
+import * as inquirer from "inquirer";
 
-import { updateServices } from "./configHandler";
+export function editConfig() {
+    inquirer.prompt({
 
-export function handleAction(args: string[]) {
-    const action = args[0];
+        type: "list",
+        name: "Edit Config",
+        choices: [
 
-    switch (action) {
-        case SERVICE_ADD:
-            addService();
-            break;
-        case SERVICE_REMOVE:
+            new inquirer.Separator(),
+        ]
 
-            break;
-        case SERVICE_EDIT:
-
-            break;
-        case SERVICE_LIST:
-
-            break;
-        default:
-            break;
-    }
-}
-
-
-
-export function addService() {
-    prompt.start();
-
-    const options = ["service", "script", "test"];
-
-    prompt.get(options, (err: any, result: any) => {
-        updateServices({ service: result.service, script: result.script, test: result.test });
+    }).then((answers) => {
+        console.log(answers);
     });
 }

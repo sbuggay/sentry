@@ -17,35 +17,32 @@ export const staticInfo = {
 };
 
 export const dynamicInfo = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         resolve({
             hostname: os.hostname(),
             uptime: os.uptime(),
             freemem: os.freemem(),
             totalmem: os.totalmem(),
-            cpus: os.cpus()
+            cpus: os.cpus(),
+            loadavg: os.loadavg()
         });
     });
 }
 
 export const serviceInfo = () => {
     const services = config.services;
-    let serviceFunctions: any[] = [];
-    Object.keys(services).forEach((key) => {
-        function serviceFunction() {
-            let service = services[key];
-            return new Promise((resolve, reject) => {
-                exec(service.script, (error, stdout, stderr) => {
-                    resolve(Object.assign({}, service,
-                        { status: (stdout.indexOf(service.test) > -1) }
-                    ));
+
+    return Object.keys(services).map((key) => {
+        let service = services[key];
+        return () => new Promise((resolve) => {
+            exec(service.script, (error, stdout, stderr) => {
+                resolve({
+                    ...service,
+                    status: (stdout.indexOf(service.test) > -1)
                 });
             });
-        }
-
-        serviceFunctions.push(serviceFunction);
+        });
     });
-    return serviceFunctions;
 };
 
 export default class Server {
@@ -63,6 +60,7 @@ export default class Server {
 
     serverInfo() {
         return {
+            "version": packageConfig.version,
             "staticInfo": this.cache.get("staticInfo"),
             "dynamicInfo": this.cache.get("dynamicInfo"),
             "serviceInfo": this.cache.get("serviceInfo")

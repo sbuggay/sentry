@@ -7,7 +7,6 @@ import LastUpdated from "./LastUpdated";
 import Legend from "./Legend";
 import DebugPanel from "./DebugPanel";
 import GroupSelect from "./GroupSelect";
-import ToggleControl from "./ToggleControl";
 
 import { EView } from "../constants";
 
@@ -70,13 +69,7 @@ export class App extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     public renderDebugPanel(): JSX.Element | null {
-        if (this.state.debug === false) {
-            return null;
-        }
-
-        return (
-            <DebugPanel />
-        );
+        return this.state.debug ? <DebugPanel /> : null;
     }
 
     public render() {
@@ -93,7 +86,6 @@ export class App extends React.Component<IStateProps & IDispatchProps, any> {
                 </h1>
                 <div style={this.getStyle()}>
                     <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <ToggleControl />
                         <GroupSelect
                             onChange={(index) => this.handleSelectChange(index)}
                             options={options}

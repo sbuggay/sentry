@@ -2,20 +2,18 @@ import Server from "./Server";
 
 import * as program from "commander";
 
-import { handleAction } from "./actionHandler";
+import { editConfig } from "./actionHandler";
 
 program
     .option('-c, --config <config>', 'path to config')
     .option('-p, --port <port>', 'port number')
+    .option('-e, --edit', 'edit server config')
     .parse(process.argv)
 
-if (program.args.length > 0) {
-    const args = program.args;
-    handleAction(args);
+if (program.edit) {
+    editConfig();
 }
 else {
     const server = new Server(program.port);
     server.start();
 }
-
-
