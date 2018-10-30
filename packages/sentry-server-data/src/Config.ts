@@ -12,46 +12,64 @@ interface IService {
 //     services: IService[];
 // }
 
-const newServerQuestions = [
-    {
-        type: "input",
-        name: "name"
-    },
-    {
-        type: "input",
-        name: "script"
-    },
-    {
-        type: "input",
-        name: "test"
-    }
-]
+function serverQuestions(service: IService): inquirer.Questions<any> {
+    return [
+        {
+            type: "input",
+            name: "name",
+            message: "Name (name of service)",
+        },
+        {
+            type: "input",
+            name: "script",
+            message: "Script (command to run)",
+        },
+        {
+            type: "input",
+            name: "test",
+            message: "Test (string to test against stdout)",
+        }
+    ]
+}
 
-export function editConfig(config: Config) {
+export async function editConfig(config: Config) {
 
     const services: IService[] = config.get("services");
-    const serviceNames = services.map(service => service.name);
+    const serviceNames = services.map((service, index) => {
+        return {
+            name: service.name,
+            value: index.toString()
+        }
+    });
 
-    inquirer.prompt({
+    const answers: any = await inquirer.prompt({
         type: "list",
-        name: "Edit Config",
+        name: "edit_config",
+        message: "Edit Config",
         choices: [
             ...serviceNames,
             new inquirer.Separator(),
-            "New service"
+            {
+                name: "New Service",
+                value: "new_service"
+            }
         ]
-    }).then((answers: any) => {
-        const answer = answers["Edit Config"];
-        if (answer == "New service") {
-            inquirer.prompt(newServerQuestions).then((input) => {
-                services.push(input as IService);
-                config.set("services", services);
-            });
-        }
-        else {
-            
-        }
     });
+    const answer = answers["edit_config"];
+    // if (answer == "new_service") {
+    //     inquirer.prompt(serverQuestions()).then((input) => {
+    //         services.push(input as IService);
+    //         config.set("services", services);
+    //     });
+    // }
+    // else {
+    //     const index = parseInt(answer);
+    //     const service = services[index];
+    //     inquirer.prompt(serverQuestions()).then((input) => {
+    //         services.push(input as IService);
+    //         config.set("services", services);
+    //     });
+    // }
 }
 
 export default class Config {
