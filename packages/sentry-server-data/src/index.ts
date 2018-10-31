@@ -2,20 +2,21 @@ import Server from "./Server";
 
 import * as program from "commander";
 
-import { handleAction } from "./actionHandler";
+import Config, { editConfig } from "./Config";
 
 program
     .option('-c, --config <config>', 'path to config')
     .option('-p, --port <port>', 'port number')
+    .option('-e, --edit', 'edit server config')
     .parse(process.argv)
 
-if (program.args.length > 0) {
-    const args = program.args;
-    handleAction(args);
+const configPath = program.config ? program.config : "./config.json";
+const config = new Config(configPath);
+
+if (program.edit) {
+    editConfig(config);
 }
 else {
-    const server = new Server(program.port);
+    const server = new Server(config, program.port);
     server.start();
 }
-
-

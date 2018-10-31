@@ -4,11 +4,28 @@ import { exec } from "child_process";
 
 const app = express();
 const packageConfig = require("../package.json");
-const config = require("../config.json")
 
 import Cache from "./Cache";
+import Config from "./Config";
 
-export const staticInfo = {
+interface IStaticInfo {
+    arch: string;
+    platform: string;
+    release: string;
+    type: string;
+    endianness: string;
+}
+
+interface IDynamicInfo {
+    hostname: string;
+    uptime: number;
+    freemem: number;
+    totalmem: number;
+    cpus: any;
+    loadavg: any;
+}
+
+export const staticInfo: IStaticInfo = {
     arch: os.arch(),
     platform: os.platform(),
     release: os.release(),
@@ -16,53 +33,51 @@ export const staticInfo = {
     endianness: os.endianness()
 };
 
-export const dynamicInfo = () => {
-    return new Promise((resolve, reject) => {
+export function dynamicInfo(): Promise<IDynamicInfo> {
+    return new Promise((resolve) => {
         resolve({
             hostname: os.hostname(),
             uptime: os.uptime(),
             freemem: os.freemem(),
             totalmem: os.totalmem(),
-            cpus: os.cpus()
+            cpus: os.cpus(),
+            loadavg: os.loadavg()
         });
     });
 }
 
-export const serviceInfo = () => {
-    const services = config.services;
-    let serviceFunctions: any[] = [];
-    Object.keys(services).forEach((key) => {
-        function serviceFunction() {
-            let service = services[key];
-            return new Promise((resolve, reject) => {
-                exec(service.script, (error, stdout, stderr) => {
-                    resolve(Object.assign({}, service,
-                        { status: (stdout.indexOf(service.test) > -1) }
-                    ));
+export const serviceInfo = (services: any) => {
+    return Object.keys(services).map((key) => {
+        let service = services[key];
+        return () => new Promise((resolve) => {
+            exec(service.script, (error, stdout, stderr) => {
+                resolve({
+                    ...service,
+                    status: (stdout.indexOf(service.test) > -1)
                 });
             });
-        }
-
-        serviceFunctions.push(serviceFunction);
+        });
     });
-    return serviceFunctions;
 };
 
 export default class Server {
     port: number;
     cache: Cache;
+    config: Config;
 
-    constructor(port = 3333) {
+    constructor(config: Config, port = 3333) {
+        this.config = config;
         this.port = port;
         this.cache = new Cache();
         this.cache.set("staticInfo", staticInfo);
         this.cache.addCacheFunction("dynamicInfo", dynamicInfo);
-        this.cache.addCacheFunctions("serviceInfo", serviceInfo());
+        this.cache.addCacheFunctions("serviceInfo", serviceInfo(config.get("services")));
         this.cache.runCacheFunctions();
     }
 
     serverInfo() {
         return {
+            "version": packageConfig.version,
             "staticInfo": this.cache.get("staticInfo"),
             "dynamicInfo": this.cache.get("dynamicInfo"),
             "serviceInfo": this.cache.get("serviceInfo")

@@ -23,7 +23,7 @@ $ sentryserver -h
 For example:
 ```bash
 $ sentryserver -p 8080
-sentryserver@0.1.0 is running on port 8080
+sentryserver is running on port 8080
 ```
 
 ### Machine information
