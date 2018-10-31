@@ -38,6 +38,13 @@ export interface IService {
     status: boolean;
 }
 
+export interface IOS {
+    os: string;
+    dist?: string;
+    codename?: string;
+    release?: string;
+}
+
 export interface IServer {
     name: string;
     host: string;
@@ -45,6 +52,7 @@ export interface IServer {
     loaded?: boolean;
     staticInfo?: IStaticInfo;
     dynamicInfo?: IDynamicInfo;
+    os?: IOS;
     serviceInfo?: {
         [key: string]: IService
     };
@@ -53,6 +61,7 @@ export interface IServer {
 export interface IState {
     title: string;
     view: EView;
+    loading: boolean;
     servers: {
         [id: string]: IServer
     };
@@ -62,6 +71,7 @@ export interface IState {
 export const initialState: IState = {
     title: "System Status",
     view: EView.servers,
+    loading: false,
     servers: {
 
     },
@@ -87,12 +97,14 @@ const reducer = (state = initialState, action: any) => {
 
         case actionTypes.SERVER_POLL:
             return {
-                ...state
+                ...state,
+                loading: true
             };
 
         case actionTypes.SERVER_POLL_SUCCESS:
             return {
                 ...state,
+                loading: false,
                 servers: {
                     ...state.servers,
                     ...payload

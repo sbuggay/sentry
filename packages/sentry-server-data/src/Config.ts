@@ -8,11 +8,7 @@ interface IService {
     test: string;
 }
 
-// interface IConfig {
-//     services: IService[];
-// }
-
-function serverQuestions(service: IService): inquirer.Questions<any> {
+function serverQuestions(): inquirer.Questions<any> {
     return [
         {
             type: "input",
@@ -56,20 +52,19 @@ export async function editConfig(config: Config) {
         ]
     });
     const answer = answers["edit_config"];
-    // if (answer == "new_service") {
-    //     inquirer.prompt(serverQuestions()).then((input) => {
-    //         services.push(input as IService);
-    //         config.set("services", services);
-    //     });
-    // }
-    // else {
-    //     const index = parseInt(answer);
-    //     const service = services[index];
-    //     inquirer.prompt(serverQuestions()).then((input) => {
-    //         services.push(input as IService);
-    //         config.set("services", services);
-    //     });
-    // }
+    if (answer == "new_service") {
+        inquirer.prompt(serverQuestions()).then((input) => {
+            services.push(input as IService);
+            config.set("services", services);
+        });
+    }
+    else {
+        const index = parseInt(answer);
+        inquirer.prompt(serverQuestions()).then((input) => {
+            services[index] = input as IService;
+            config.set("services", services);
+        });
+    }
 }
 
 export default class Config {

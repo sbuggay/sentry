@@ -13,6 +13,7 @@ import { EView } from "../constants";
 
 interface IListProps {
     view?: EView;
+    loading?: boolean;
     servers?: {
         [id: string]: IServer
     };
@@ -79,9 +80,11 @@ export class List extends React.Component<IListProps, IListState> {
                 width: "100%",
                 height: "300px"
             };
-            return (
-                <MessageBox message={"No servers"} style={style} />
-            );
+            if (this.props.loading) {
+                return <MessageBox message={"Loading..."} style={style} />;
+            } else {
+                return <MessageBox message={"No servers"} style={style} />;
+            }
         }
     }
 
@@ -110,9 +113,11 @@ export class List extends React.Component<IListProps, IListState> {
                 width: "100%",
                 height: "300px"
             };
-            return (
-                <MessageBox message={"No servers"} style={style} />
-            );
+            if (this.props.loading) {
+                return <MessageBox message={"Loading..."} style={style} />;
+            } else {
+                return <MessageBox message={"No servers"} style={style} />;
+            }
         }
     }
 
@@ -131,6 +136,7 @@ export class List extends React.Component<IListProps, IListState> {
 const mapStateToProps = (state: any) => {
     return {
         view: state.view,
+        loading: state.loading,
         servers: state.servers
     };
 };

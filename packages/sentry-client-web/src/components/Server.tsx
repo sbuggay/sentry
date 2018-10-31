@@ -236,7 +236,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                         {this.renderStatus()}
                         {this.props.server.name}
                     </span>
-                    {this.state.hover ? this.renderChevron() : null}
+                    {this.state.hover && this.props.server.status === EStatus.available ? this.renderChevron() : null}
                 </div>
                 {this.state.expanded ? this.renderDetails() : null}
             </div>

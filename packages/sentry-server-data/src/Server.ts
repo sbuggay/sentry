@@ -1,6 +1,7 @@
 import * as os from "os";
 import * as express from "express";
 import { exec } from "child_process";
+import * as getos from "getos";
 
 const app = express();
 const packageConfig = require("../package.json");
@@ -70,6 +71,9 @@ export default class Server {
         this.port = port;
         this.cache = new Cache();
         this.cache.set("staticInfo", staticInfo);
+        getos((error, os) => {
+            this.cache.set("os", os);
+        });
         this.cache.addCacheFunction("dynamicInfo", dynamicInfo);
         this.cache.addCacheFunctions("serviceInfo", serviceInfo(config.get("services")));
         this.cache.runCacheFunctions();
@@ -79,6 +83,7 @@ export default class Server {
         return {
             "version": packageConfig.version,
             "staticInfo": this.cache.get("staticInfo"),
+            "os": this.cache.get("os"),
             "dynamicInfo": this.cache.get("dynamicInfo"),
             "serviceInfo": this.cache.get("serviceInfo")
         }
