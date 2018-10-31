@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { loadState, saveState } from "../actions";
+import { loadState, saveState } from "../../actions";
 
 export class Storage extends React.Component<any, any> {
     public render() {

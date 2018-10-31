@@ -1,10 +1,9 @@
 var path = require("path");
-var webpack = require("webpack");
 
 module.exports = {
     entry: "./src/index",
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "public"),
         filename: "bundle.js"
     },
     devtool: "source-map",
@@ -17,9 +16,7 @@ module.exports = {
                 test: /\.tsx$/,
                 enforce: "pre",
                 loader: "tslint-loader",
-                options: {
-                    
-                }
+                exclude: /node_modules/
             },
             {
                 test: /\.tsx?$/,

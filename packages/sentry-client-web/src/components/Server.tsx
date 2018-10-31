@@ -9,6 +9,7 @@ import { EStatus } from "../constants";
 import { formatBytes } from "../lib/utils";
 
 import { pretty } from "../utils/prettyTime";
+import osmapping from "../utils/osmapping";
 
 interface IStateProps {
     server: IServer;
@@ -100,15 +101,6 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         const cpuSpeed = dynamicInfo.cpus[0].model.split("@")[1];
 
         function renderCpuCores() {
-
-            function getCpuContainerStyle(): React.CSSProperties {
-                return {
-                    width: "100%",
-                    padding: "1px",
-                    display: "flex"
-                };
-            }
-
             const bars = dynamicInfo.cpus.map((core: any, index: number) => {
 
                 // Calulate total by summing up all the times
@@ -122,12 +114,10 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 const percent = (used * 100) / total;
 
                 return (
-                    <div style={getCpuContainerStyle()}>
-                        <Bar
-                            key={index}
-                            style={{ height: "8px", flex: "0 50%", boxSizing: "border-box" }}
-                            percentage={percent} />
-                    </div>
+                    <Bar
+                        key={index}
+                        style={{ height: "8px", flex: "0 50%", boxSizing: "border-box" }}
+                        percentage={percent} />
                 );
             });
 
@@ -221,6 +211,11 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
         );
     }
 
+    public renderOs(): JSX.Element | null {
+        if (!this.props.server.os) return null;
+        return <span className={`fo-${osmapping(this.props.server.os)}`}></span>;
+    }
+
     public render(): JSX.Element {
         return (
             <div
@@ -235,6 +230,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                     <span>
                         {this.renderStatus()}
                         {this.props.server.name}
+                        {this.renderOs()}
                     </span>
                     {this.state.hover && this.props.server.status === EStatus.available ? this.renderChevron() : null}
                 </div>

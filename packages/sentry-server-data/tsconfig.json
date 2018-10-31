@@ -3,9 +3,9 @@
         "sourceMap": true,
         "removeComments": true,
         "module": "commonjs",
-        "target": "es2017",
-        "lib": ["es2017"],
-        "noEmit": true,
+        "target": "es6",
+        "lib": ["es6"],
+        "outDir": "dist",
         "types": [
             "node",
             "jest"

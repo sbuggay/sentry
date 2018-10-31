@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import List from "./List";
 import LastUpdated from "./LastUpdated";
 import Legend from "./Legend";
-import DebugPanel from "./DebugPanel";
+import DebugPanel from "./debug/DebugPanel";
 import GroupSelect from "./GroupSelect";
 
 import { EView } from "../constants";
