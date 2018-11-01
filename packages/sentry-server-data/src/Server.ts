@@ -92,8 +92,7 @@ export default class Server {
     start() {
         app.get("/", (request, response) => {
             response.header("Access-Control-Allow-Origin", "*");
-            response.header("Content-Type: application/json");
-            response.send(JSON.stringify(this.serverInfo()));
+            response.json(this.serverInfo());
         });
 
         app.listen(this.port, (error: any) => {
