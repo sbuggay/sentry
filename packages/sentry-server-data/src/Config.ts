@@ -8,35 +8,32 @@ interface IService {
     test: string;
 }
 
-function serverQuestions(): inquirer.Questions<any> {
+function serverQuestions(service?: IService): inquirer.Questions<any> {
+    const buildInput = (message: string, d: string = "") => ({
+        type: "input",
+        name: "name",
+        message,
+        ...(d ? { default: d } : {})
+    });
     return [
-        {
-            type: "input",
-            name: "name",
-            message: "Name (name of service)",
-        },
-        {
-            type: "input",
-            name: "script",
-            message: "Script (command to run)",
-        },
-        {
-            type: "input",
-            name: "test",
-            message: "Test (string to test against stdout)",
-        }
+        buildInput("Name (name of service)", service ? service.name : ""),
+        buildInput("Script (command to run)", service ? service.script : ""),
+        buildInput("Test (string to test against stdout)", service ? service.test : "")
     ]
 }
 
 export async function editConfig(config: Config) {
 
     const services: IService[] = config.get("services");
-    const serviceNames = services.map((service, index) => {
-        return {
-            name: service.name,
-            value: index.toString()
-        }
-    });
+    const serviceNames = services.map((service, index) => ({
+        name: service.name,
+        value: index.toString()
+    }));
+
+    enum EServicePrompt {
+        edit_config = "edit_config",
+        new_service = "new_service"
+    }
 
     const answers: any = await inquirer.prompt({
         type: "list",
@@ -47,24 +44,21 @@ export async function editConfig(config: Config) {
             new inquirer.Separator(),
             {
                 name: "New Service",
-                value: "new_service"
+                value: EServicePrompt.new_service
             }
         ]
     });
-    const answer = answers["edit_config"];
-    if (answer == "new_service") {
-        inquirer.prompt(serverQuestions()).then((input) => {
-            services.push(input as IService);
-            config.set("services", services);
-        });
+    const answer = answers.EServicePrompt.edit_config;
+    if (answer == EServicePrompt.new_service) {
+        const input = await inquirer.prompt(serverQuestions());
+        services.push(input as IService);
     }
     else {
         const index = parseInt(answer);
-        inquirer.prompt(serverQuestions()).then((input) => {
-            services[index] = input as IService;
-            config.set("services", services);
-        });
+        const input = await inquirer.prompt(serverQuestions());
+        services[index] = input as IService;
     }
+    config.set("services", services);
 }
 
 export default class Config {
