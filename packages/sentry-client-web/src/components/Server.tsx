@@ -179,20 +179,22 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     public renderDetails(): JSX.Element {
-        const expanded = this.props.expanded;
+        const expanded = this.state.expanded;
         function getDetailStyle() {
+            const baseStyle = {
+                maxHeight: 0,
+                transition: "max-height 0.5s ease-out",
+                overflow: "hidden"
+            };
             if (expanded) {
                 return {
-                    overflowY: "hidden",
-                    transitionProperty: "all",
-                    transitionDuration: ".5s",
-                    transitionTimingFunction: "cubic-bezier(0, 1, 0.5, 1)",
-                }
-            }
-            else {
+                    ...baseStyle,
+                    maxHeight: "500px"
+                };
+            } else {
                 return {
-                    maxHeight: 0
-                }
+                    ...baseStyle
+                };
             }
         }
 
@@ -205,10 +207,23 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     public renderChevron(): JSX.Element {
+
+        const hidden: React.CSSProperties = {
+            visibility: "hidden",
+            opacity: 0
+        };
+
+        const visible: React.CSSProperties = {
+            visibility: "visible",
+            opacity: 1
+        };
+
         const style: React.CSSProperties = {
             marginLeft: "10px",
             float: "right",
-            cursor: "pointer"
+            cursor: "pointer",
+            transition: "visibility 0s, opacity 0.5s linear"
+            ...(this.state.hover ? visible : hidden)
         };
 
         const className = this.state.expanded ? "fa fa-chevron-down" : "fa fa-chevron-right";
@@ -222,14 +237,15 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     public renderOs(): JSX.Element | null {
-        if (!this.props.server.os) return null;
+        if (!this.props.server.os) {
+            return null;
+        }
         return <span className={`fo-${osmapping(this.props.server.os)}`}></span>;
     }
 
     public render(): JSX.Element {
         return (
             <div
-                tabIndex={0}
                 onFocus={() => this.handleOnMouseEnter()}
                 onBlur={() => this.handleOnMouseLeave()}
                 onMouseEnter={() => this.handleOnMouseEnter()}
@@ -244,7 +260,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                     </span>
                     {this.state.hover && this.props.server.status === EStatus.available ? this.renderChevron() : null}
                 </div>
-                {this.state.expanded ? this.renderDetails() : null}
+                {this.renderDetails()}
             </div>
         );
     }
