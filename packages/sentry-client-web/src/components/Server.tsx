@@ -179,11 +179,21 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     public renderDetails(): JSX.Element {
+        const expanded = this.props.expanded;
         function getDetailStyle() {
-            return {
-                fontSize: "14px",
-                marginBottom: "10px"
-            };
+            if (expanded) {
+                return {
+                    overflowY: "hidden",
+                    transitionProperty: "all",
+                    transitionDuration: ".5s",
+                    transitionTimingFunction: "cubic-bezier(0, 1, 0.5, 1)",
+                }
+            }
+            else {
+                return {
+                    maxHeight: 0
+                }
+            }
         }
 
         return (
