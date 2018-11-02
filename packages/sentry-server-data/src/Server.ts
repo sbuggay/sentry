@@ -53,7 +53,7 @@ export const serviceInfo = (services: any) => {
         return () => new Promise((resolve) => {
             exec(service.script, (error, stdout, stderr) => {
                 resolve({
-                    ...service,
+                    name: service.name,
                     status: (stdout.indexOf(service.test) > -1)
                 });
             });
