@@ -38,7 +38,7 @@ export default class Data extends React.Component<IDataProps, any> {
 				{renderRow("host", this.props.server.host)}
 				{renderOs()}
 				{renderRow("uptime", pretty(dynamicInfo.uptime, 2))}
-				{renderRowSpan("cpu", <span>{cpuModel.replace("(TM)", "™").replace("(R)", "®")}</span>)}
+				{renderRowSpan("cpu", <span>{cpuModel.replace(/\(TM\)/g, "™").replace(/\(R\)/g, "®")}</span>)}
 				{renderRow("", `${cpuCores} core${cpuCores === 1 ? "" : "s"} @ ${cpuSpeed}`)}
 			</div>
 		);

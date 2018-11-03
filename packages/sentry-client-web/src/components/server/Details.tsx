@@ -11,7 +11,7 @@ export function renderRow(label: string, data: string) {
 			display: "flex",
 			justifyContent: "space-between",
 			height: "20px",
-			padding: "2px 4px",
+			padding: "2px 0",
 			alignItems: "center"
 		};
 	}
@@ -30,7 +30,7 @@ export function renderRowSpan(label: string, data: JSX.Element) {
 			display: "flex",
 			justifyContent: "space-between",
 			height: "20px",
-			padding: "2px 4px",
+			padding: "2px 0",
 			alignItems: "center"
 		};
 	}
