@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { renderRow, renderRowSpan } from "./Details";
+import { renderRow, renderRowSpan } from "./Rows";
 import { pretty } from "../../utils/prettyTime";
 import { IServer } from "../../reducer";
 import osmapping from "../../utils/osmapping";

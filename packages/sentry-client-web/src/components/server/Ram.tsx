@@ -2,7 +2,7 @@
 import * as React from "react";
 import { IServer } from "../../reducer";
 import Bar from "../Bar";
-import { renderRow } from "./Details";
+import { renderRow } from "./Rows";
 import { formatBytes } from "../../lib/utils";
 
 interface IDataProps {

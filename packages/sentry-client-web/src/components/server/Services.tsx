@@ -3,7 +3,7 @@ import * as React from "react";
 import Status from "../Status";
 import { EStatus } from "../../constants";
 
-import { renderRow } from "./Details";
+import { renderRow } from "./Rows";
 
 export default class Services extends React.Component<any, any> {
 	public render() {
