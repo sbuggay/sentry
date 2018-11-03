@@ -9,7 +9,7 @@ export function pretty(seconds: number, scale: number = 1): string {
     let hours = (minutes / 60) | 0;
     minutes -= hours * 60;
 
-    let days = (hours / 24) | 0;
+    const days = (hours / 24) | 0;
     hours -= days * 24;
 
     // const weeks = (days / 7) | 0;

@@ -70,7 +70,7 @@ export class List extends React.Component<IListProps, IListState> {
                 width: "280px",
                 padding: "5px 10px",
                 fontSize: "14px"
-            }
+            };
 
             const headerBin: JSX.Element[] = [];
             const detailBin: JSX.Element[] = [];

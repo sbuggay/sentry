@@ -25,8 +25,8 @@
         "forin": false,
         "space-before-function-paren": false,
         "indent": [
-            "error",
-            "space"
+            true,
+            "tabs"
         ],
         "quotes": [
             "error",

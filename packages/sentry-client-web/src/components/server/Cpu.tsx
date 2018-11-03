@@ -9,10 +9,11 @@ interface IDataProps {
 
 export default class Cpu extends React.Component<IDataProps, any> {
 
-
     public render() {
         const dynamicInfo = this.props.server.dynamicInfo;
-        if (!dynamicInfo) return null;
+        if (!dynamicInfo) {
+            return null;
+        }
 
         const bars = dynamicInfo.cpus.map((core: any, index: number) => {
 
