@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node ./scripts/server",
     "serve": "nodemon ./scripts/server --watch src",
-    "build": "",
-    "test": "node ./node_modules/jest/bin/jest.js . --coverage"
+    "build": "tsc",
+    "test": "jest . --coverage"
   },
   "author": "",
   "license": "MIT",

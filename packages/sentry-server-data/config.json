@@ -1,14 +1,5 @@
 {
   "services": [
-    {
-      "name": "MBP openssh.ssh-agent",
-      "script": "launchctl list | grep ssh",
-      "test": "com.openssh.ssh-agent"
-    },
-    {
-      "name": "MBP screensharing.agent",
-      "script": "launchctl list | grep screensharing.agent",
-      "test": "screensharing.agent"
-    }
+
   ]
 }
