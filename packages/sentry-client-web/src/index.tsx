@@ -11,14 +11,14 @@ import App from "./components/App";
 import rootReducer from "./rootReducer";
 
 export const store = createStore(
-    rootReducer,
-    applyMiddleware(thunk)
+	rootReducer,
+	applyMiddleware(thunk)
 );
 
 // Initial render entry point
 export default ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById("app") || document.createElement("div")
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById("app") || document.createElement("div")
 );

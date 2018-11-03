@@ -26,7 +26,8 @@
         "space-before-function-paren": false,
         "indent": [
             true,
-            "tabs"
+            "tabs",
+            4
         ],
         "quotes": [
             "error",

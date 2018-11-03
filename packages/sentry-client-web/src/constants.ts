@@ -2,14 +2,14 @@
 export const POLLING_TIME = 10000;
 
 export enum EStatus {
-    outage,
-    available,
-    unknown,
-    issue,
-    maintenence
+	outage,
+	available,
+	unknown,
+	issue,
+	maintenence
 }
 
 export enum EView {
-    servers = "Servers",
-    services = "Services"
+	servers = "Servers",
+	services = "Services"
 }

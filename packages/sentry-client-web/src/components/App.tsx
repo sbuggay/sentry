@@ -13,109 +13,109 @@ import { EView } from "../constants";
 import { initialize, addServer, changeView } from "../actions";
 
 interface IStateProps {
-    title?: string;
-    view?: EView;
+	title?: string;
+	view?: EView;
 }
 
 interface IDispatchProps {
-    initialize?: () => any;
-    addServer?: (values: object) => any;
-    changeView?: (view: EView) => void;
+	initialize?: () => any;
+	addServer?: (values: object) => any;
+	changeView?: (view: EView) => void;
 }
 
 export class App extends React.Component<IStateProps & IDispatchProps, any> {
 
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            debug: false
-        };
+	constructor(props: any) {
+		super(props);
+		this.state = {
+			debug: false
+		};
 
-        document.addEventListener("keypress", (e) => {
-            switch (e.key) {
-                case "i":
-                    this.setState({
-                        debug: !this.state.debug
-                    });
-                    break;
-            }
-        });
-    }
+		document.addEventListener("keypress", (e) => {
+			switch (e.key) {
+				case "i":
+					this.setState({
+						debug: !this.state.debug
+					});
+					break;
+			}
+		});
+	}
 
-    public componentWillMount() {
-        if (this.props.initialize) {
-            this.props.initialize();
-        }
-    }
+	public componentWillMount() {
+		if (this.props.initialize) {
+			this.props.initialize();
+		}
+	}
 
-    public onServerInputSubmit(values: object) {
-        if (this.props.addServer) {
-            this.props.addServer(values);
-        }
-    }
+	public onServerInputSubmit(values: object) {
+		if (this.props.addServer) {
+			this.props.addServer(values);
+		}
+	}
 
-    public getStyle(): React.CSSProperties {
-        return {
-            maxWidth: "900px",
-            marginLeft: "auto",
-            marginRight: "auto"
-        };
-    }
+	public getStyle(): React.CSSProperties {
+		return {
+			maxWidth: "900px",
+			marginLeft: "auto",
+			marginRight: "auto"
+		};
+	}
 
-    public handleSelectChange(index: EView) {
-        if (this.props.changeView) {
-            this.props.changeView(index);
-        }
-    }
+	public handleSelectChange(index: EView) {
+		if (this.props.changeView) {
+			this.props.changeView(index);
+		}
+	}
 
-    public renderDebugPanel(): JSX.Element | null {
-        return this.state.debug ? <DebugPanel /> : null;
-    }
+	public renderDebugPanel(): JSX.Element | null {
+		return this.state.debug ? <DebugPanel /> : null;
+	}
 
-    public render() {
+	public render() {
 
-        const options = [];
-        for (const option in EView) {
-            options.push(EView[option]);
-        }
+		const options = [];
+		for (const option in EView) {
+			options.push(EView[option]);
+		}
 
-        return (
-            <div>
-                <h1 style={{ textAlign: "center", fontWeight: 500 }}>
-                    {this.props.title}
-                </h1>
-                <div style={this.getStyle()}>
-                    <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <GroupSelect
-                            onChange={(index) => this.handleSelectChange(index)}
-                            options={options}
-                            selectedOption={this.props.view || EView.servers} />
-                    </div>
-                    <List />
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <LastUpdated />
-                        <Legend />
-                    </div>
-                </div>
-                {this.renderDebugPanel()}
-            </div>
-        );
-    }
+		return (
+			<div>
+				<h1 style={{ textAlign: "center", fontWeight: 500 }}>
+					{this.props.title}
+				</h1>
+				<div style={this.getStyle()}>
+					<div style={{ display: "flex", justifyContent: "flex-end" }}>
+						<GroupSelect
+							onChange={(index) => this.handleSelectChange(index)}
+							options={options}
+							selectedOption={this.props.view || EView.servers} />
+					</div>
+					<List />
+					<div style={{ display: "flex", justifyContent: "space-between" }}>
+						<LastUpdated />
+						<Legend />
+					</div>
+				</div>
+				{this.renderDebugPanel()}
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = (state: any) => {
-    return {
-        title: state.title,
-        view: state.view
-    };
+	return {
+		title: state.title,
+		view: state.view
+	};
 };
 
 const mapDispatchToProps = (dispatch: any) => {
-    return bindActionCreators({
-        addServer,
-        initialize,
-        changeView
-    }, dispatch);
+	return bindActionCreators({
+		addServer,
+		initialize,
+		changeView
+	}, dispatch);
 };
 
 export default connect<IStateProps & IDispatchProps, any, any>(mapStateToProps, mapDispatchToProps)(App);
