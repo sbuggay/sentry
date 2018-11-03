@@ -1,9 +1,5 @@
 import * as React from "react";
 
-import Data from "./Data";
-import Services from "./Services";
-import { IServer } from "../../reducer";
-
 // Helper function to render a flex row with left/right spans
 export function renderRow(label: string, data: string) {
 	function getStyle(): React.CSSProperties {
@@ -41,26 +37,4 @@ export function renderRowSpan(label: string, data: JSX.Element) {
 			{data}
 		</div >
 	);
-}
-
-interface IDetailsProps {
-	server: IServer;
-}
-
-export default class Details extends React.Component<IDetailsProps, any> {
-	public render() {
-		function getDetailStyle() {
-			return {
-				fontSize: "14px",
-				marginBottom: "10px"
-			};
-		}
-
-		return (
-			<div style={getDetailStyle()}>
-				<Data server={this.props.server} />
-				<Services services={this.props.server.serviceInfo} />
-			</div>
-		);
-	}
 }

@@ -23,6 +23,9 @@ export default class Data extends React.Component<IDataProps, any> {
 		const cpuCores = dynamicInfo.cpus.length;
 		const cpuSpeed = dynamicInfo.cpus[0].model.split("@")[1];
 
+		const loadAvg = dynamicInfo.loadavg.map((load) => load.toFixed(2));
+		const loadAvgStr = `[${loadAvg.join(", ")}]`;
+
 		function renderOs(): JSX.Element | null {
 			if (!os || !staticInfo) {
 				return null;
@@ -39,7 +42,7 @@ export default class Data extends React.Component<IDataProps, any> {
 				{renderOs()}
 				{renderRow("uptime", pretty(dynamicInfo.uptime, 2))}
 				{renderRowSpan("cpu", <span>{cpuModel.replace(/\(TM\)/g, "™").replace(/\(R\)/g, "®")}</span>)}
-				{renderRow("", `${cpuCores} core${cpuCores === 1 ? "" : "s"} @ ${cpuSpeed}`)}
+				{renderRow("", `${cpuCores} core${cpuCores === 1 ? "" : "s"} @ ${cpuSpeed} ${loadAvgStr}`)}
 			</div>
 		);
 	}

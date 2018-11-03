@@ -29,6 +29,7 @@ export interface IDynamicInfo {
 	freemem: number;
 	totalmem: number;
 	cpus: ICPU[];
+	loadavg: number[];
 }
 
 export interface IService {
