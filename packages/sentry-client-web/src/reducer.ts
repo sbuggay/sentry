@@ -105,6 +105,7 @@ const reducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 loading: false,
+                lastUpdated: Date.now(),
                 servers: {
                     ...state.servers,
                     ...payload
@@ -113,7 +114,9 @@ const reducer = (state = initialState, action: any) => {
 
         case actionTypes.SERVER_POLL_FAILURE:
             return {
-                ...state
+                ...state,
+                lastUpdated: Date.now(),
+                loading: false
             };
 
         case actionTypes.VIEW_CHANGE:
@@ -126,12 +129,6 @@ const reducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 ...payload
-            };
-
-        case actionTypes.UPDATE_LAST_UPDATED:
-            return {
-                ...state,
-                lastUpdated: payload
             };
 
         default:

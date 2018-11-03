@@ -9,8 +9,7 @@ export class LastUpdated extends React.Component<any, any> {
 
     public getStyle() {
         return {
-            fontSize: "14px",
-            color: "#adb0af"
+            fontSize: "14px"
         };
     }
 

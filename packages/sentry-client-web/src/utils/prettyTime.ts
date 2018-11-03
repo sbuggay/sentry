@@ -12,13 +12,12 @@ export function pretty(seconds: number, scale: number = 1): string {
     let days = (hours / 24) | 0;
     hours -= days * 24;
 
-    const weeks = (days / 7) | 0;
-    days -= weeks * 7;
+    // const weeks = (days / 7) | 0;
+    // days -= weeks * 7;
 
-    const times = [weeks, days, hours, minutes, seconds];
+    const times = [days, hours, minutes, seconds];
 
     const types = [
-        "week",
         "day",
         "hour",
         "minute",
