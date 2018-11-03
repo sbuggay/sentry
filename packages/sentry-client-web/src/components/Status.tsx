@@ -9,7 +9,7 @@ interface IStatusProps {
 export class Status extends React.Component<IStatusProps, any> {
     public getStyle() {
         return {
-            marginRight: "0.5em"
+            marginRight: "2px"
         };
     }
 

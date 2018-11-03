@@ -2,7 +2,6 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import Server from "./server/Server";
 import Service from "./Service";
 import MessageBox from "./MessageBox";
 
@@ -10,6 +9,11 @@ import { initializePolling, pollServers } from "../actions";
 import { IServer } from "../reducer";
 
 import { EView } from "../constants";
+import Cpu from "./server/Cpu";
+import Ram from "./server/Ram";
+import Data from "./server/Data";
+import Services from "./server/Services";
+import Header from "./server/Header";
 
 interface IListProps {
     view?: EView;
@@ -23,7 +27,7 @@ interface IListProps {
 
 // TODO: Figure out what the actual type of a component ref is
 interface IListState {
-    refs: any[];
+    expanded: any;
 }
 
 export class List extends React.Component<IListProps, IListState> {
@@ -60,19 +64,35 @@ export class List extends React.Component<IListProps, IListState> {
     }
 
     public renderServers(): JSX.Element {
-        if (this.props.servers && Object.keys(this.props.servers).length > 0) {
+        const servers = this.props.servers;
+        if (servers && Object.keys(servers).length > 0) {
+            const binStyle = {
+                width: "280px",
+                padding: "5px 10px",
+                fontSize: "14px"
+            }
+
+            const headerBin: JSX.Element[] = [];
+            const detailBin: JSX.Element[] = [];
+            const cpuBin: JSX.Element[] = [];
+            const ramBin: JSX.Element[] = [];
+            const serviceBin: JSX.Element[] = [];
+
+            Object.keys(servers).forEach((id, index) => {
+                const server = servers[id];
+                headerBin.push(<div><Header server={server} /></div>);
+                detailBin.push(<div style={binStyle}><Data server={server} /></div>);
+                cpuBin.push(<div style={binStyle}><Cpu server={server} /></div>);
+                ramBin.push(<div style={binStyle}><Ram server={server} /></div>);
+                serviceBin.push(<div style={binStyle}><Services services={server.serviceInfo} /></div>);
+            });
             return (
                 <div style={this.getStyle()}>
-                    {Object.keys(this.props.servers).map((id, index) => {
-                        if (!this.props.servers || !this.props.servers[id]) {
-                            return null;
-                        }
-
-                        return <Server
-                            index={index}
-                            key={index}
-                            server={this.props.servers[id]} />;
-                    })}
+                    {headerBin}
+                    {detailBin}
+                    {cpuBin}
+                    {ramBin}
+                    {serviceBin}
                 </div>
             );
         } else {

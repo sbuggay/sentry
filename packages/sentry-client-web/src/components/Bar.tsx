@@ -16,6 +16,7 @@ export class Bar extends React.Component<IBarProps, any> {
             boxSizing: "border-box",
             border: "1px solid gray",
             borderRadius: "1px",
+            position: "relative",
             ...this.props.style
         };
     }
@@ -32,21 +33,21 @@ export class Bar extends React.Component<IBarProps, any> {
 
     public getTextStyle(): React.CSSProperties {
         return {
-            float: "right",
+            position: "absolute",
+            right: "4px",
             fontSize: "12px",
-            marginRight: "4px",
-            clear: "both",
-            lineHeight: this.getStyle().height
+            ...this.props.barStyle
         };
     }
 
     public render(): JSX.Element | null {
         return (
             <div style={this.getStyle()}>
-                <div style={this.getTextStyle()}>
-                    {this.props.text ? this.props.text : null}
-                </div>
+
                 <div style={this.getBarStyle()}>
+                    <div style={this.getTextStyle()}>
+                        {this.props.text ? this.props.text : null}
+                    </div>
                 </div>
             </div>
         );

@@ -21,14 +21,20 @@ export default class Services extends React.Component<any, any> {
         }
 
         function getServices() {
+            const style = {
+                height: "20px",
+                display: "flex",
+                justifyContent: "space-between"
+            }
+
             return Object.keys(services).map((key, index) => {
                 const status = services[key].status ? EStatus.available : EStatus.outage;
                 return (
                     <div
                         key={index}
-                        style={{ height: "20px" }}>
-                        <Status status={status} />
+                        style={style}>
                         {services[key].name}
+                        <Status status={status} />
                     </div>
                 );
             });

@@ -15,7 +15,9 @@ export class Service extends React.Component<IStateProps, any> {
         return {
             width: "280px",
             padding: "5px 10px",
-            borderBottom: "1px solid #adb0af"
+            borderBottom: "1px solid #adb0af",
+            display: "flex",
+            justifyContent: "space-between"
         };
     }
 
@@ -31,12 +33,8 @@ export class Service extends React.Component<IStateProps, any> {
         return (
             <div
                 style={this.getStyle()}>
-                <div>
-                    <span>
-                        {this.renderStatus()}
-                        {this.props.service.name}
-                    </span>
-                </div>
+                {this.props.service.name}
+                {this.renderStatus()}
             </div>
         );
     }

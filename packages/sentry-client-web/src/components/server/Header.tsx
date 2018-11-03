@@ -1,13 +1,11 @@
 import * as React from "react";
 
-import Details from "./Details";
 import { IServer } from "../../reducer";
 import Status from "../Status";
 import { EStatus } from "../../constants";
 
 interface IStateProps {
     server: IServer;
-    index: number;
     expanded?: boolean;
 }
 
@@ -15,7 +13,7 @@ interface IDispatchProps {
     removeServer?: () => any;
 }
 
-export class Server extends React.Component<IStateProps & IDispatchProps, any> {
+export class Header extends React.Component<IStateProps & IDispatchProps, any> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -58,8 +56,7 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     public getStyle(): React.CSSProperties {
         return {
             width: "280px",
-            padding: "5px 10px",
-            borderBottom: "1px solid #adb0af"
+            padding: "5px 10px"
         };
     }
 
@@ -72,8 +69,6 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
     }
 
     public renderChevron(): JSX.Element {
-
-
         const style: React.CSSProperties = {
             marginLeft: "10px",
             float: "right",
@@ -92,7 +87,11 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
 
     public renderHeader(): JSX.Element {
         const style = {
-            cursor: "pointer"
+            cursor: "pointer",
+            borderBottom: "1px solid #adb0af",
+            padding: "4px 0",
+            display: "flex",
+            justifyContent: "space-between"
         }
 
         return (
@@ -103,10 +102,10 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 onClick={() => this.handleClick()}
                 style={style}>
                 <span>
-                    <span style={{ padding: "0px 2px" }}>{this.renderStatus()}</span>
                     {this.props.server.dynamicInfo ? this.props.server.dynamicInfo.hostname : this.props.server.name}
                 </span>
-                {this.state.hover && this.props.server.status === EStatus.available ? this.renderChevron() : null}
+                {this.renderStatus()}
+                {/* {this.state.hover && this.props.server.status === EStatus.available ? this.renderChevron() : null} */}
             </div>
         );
     }
@@ -117,10 +116,9 @@ export class Server extends React.Component<IStateProps & IDispatchProps, any> {
                 onKeyDown={(e) => this.handleKeyDown(e)}
                 style={this.getStyle()}>
                 {this.renderHeader()}
-                {this.state.expanded ? <Details server={this.props.server} /> : null}
             </div>
         );
     }
 }
 
-export default Server;
+export default Header;

@@ -28,7 +28,7 @@ export class GroupSelect extends React.Component<IGroupSelectProps, any> {
     public getSelectedOptionStyle(): React.CSSProperties {
         return {
             color: "white",
-            backgroundColor: "#3595FD"
+            backgroundColor: "rgb(112, 152, 207)"
         };
     }
 
