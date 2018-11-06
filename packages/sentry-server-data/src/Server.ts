@@ -1,7 +1,8 @@
 import * as os from "os";
 import * as express from "express";
 import { exec } from "child_process";
-import * as getos from "getos";
+
+import { battery, graphics, osInfo, fsSize, cpuTemperature, Systeminformation } from "systeminformation";
 
 const app = express();
 const packageConfig = require("../package.json");
@@ -24,6 +25,11 @@ interface IDynamicInfo {
     totalmem: number;
     cpus: any;
     loadavg: any;
+    battery: Systeminformation.BatteryData;
+    graphics: Systeminformation.GraphicsData;
+    osInfo: Systeminformation.OsData;
+    fsSize: Systeminformation.FsSizeData[];
+    cpuTemp: Systeminformation.CpuTemperatureData;
 }
 
 export const staticInfo: IStaticInfo = {
@@ -35,15 +41,32 @@ export const staticInfo: IStaticInfo = {
 };
 
 export function dynamicInfo(): Promise<IDynamicInfo> {
-    return new Promise((resolve) => {
-        resolve({
+    function getOsData() {
+        return {
             hostname: os.hostname(),
             uptime: os.uptime(),
             freemem: os.freemem(),
             totalmem: os.totalmem(),
             cpus: os.cpus(),
             loadavg: os.loadavg()
-        });
+        }
+    }
+
+    return Promise.all([
+        battery(),
+        graphics(),
+        osInfo(),
+        fsSize(),
+        cpuTemperature()
+    ]).then(([battery, graphics, osInfo, fsSize, cpuTemp]) => {
+        return {
+            ...getOsData(),
+            battery,
+            graphics,
+            osInfo,
+            fsSize,
+            cpuTemp,
+        }
     });
 }
 
@@ -71,9 +94,6 @@ export default class Server {
         this.port = port;
         this.cache = new Cache();
         this.cache.set("staticInfo", staticInfo);
-        getos((error, os) => {
-            this.cache.set("os", os);
-        });
         this.cache.addCacheFunction("dynamicInfo", dynamicInfo);
         this.cache.addCacheFunctions("serviceInfo", serviceInfo(config.get("services")));
         this.cache.runCacheFunctions();
