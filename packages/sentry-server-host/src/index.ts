@@ -14,7 +14,7 @@ export function start(port = 3030) {
     app.use("/api", apiRoute);
 
     // Path must be relative to package
-    configInit("./config.json");
+    configInit("./cfg/config.json");
 
     // Listen for requests
     app.listen(port, () => {

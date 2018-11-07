@@ -2,6 +2,7 @@ node_modules/
 coverage/
 dist/
 
+config.json
 bundle*
 *.log
 .DS_Store

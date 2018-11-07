@@ -8,7 +8,7 @@
   },
   "bin": "./scripts/server",
   "files": [
-    "config.json",
+    "config/config.default.json",
     "scripts/**/*",
     "dist/**/*"
   ],

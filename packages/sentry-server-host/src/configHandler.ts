@@ -1,7 +1,13 @@
 import * as nconf from "nconf";
+import { existsSync, copyFileSync } from "fs";
 
-export function configInit(path: string) {
-    nconf.use("file", { file: path });
+export function configInit(configPath: string) {
+    if (!existsSync(configPath)) {
+        console.log("No config file present. Copying from config.default.json");
+        copyFileSync("./cfg/config.default.json", configPath);
+    }
+
+    nconf.use("file", { file: configPath });
     configLoad();
 }
 

@@ -1,6 +1,7 @@
 import * as nconf from "nconf";
 
 import * as inquirer from "inquirer";
+import { existsSync, copyFileSync } from "fs";
 
 interface IService {
     name: string;
@@ -66,9 +67,14 @@ export default class Config {
     path: string;
     config: nconf.Provider;
 
-    constructor(path: string) {
-        this.path = path;
-        this.config = nconf.file(path);
+    constructor(configPath: string) {
+        if (!existsSync(configPath)) {
+            console.log("No config file present. Copying from config.default.json");
+            copyFileSync("./cfg/config.default.json", configPath);
+        }
+
+        this.path = configPath;
+        this.config = nconf.file(configPath);
     }
 
     get(key: string) {
