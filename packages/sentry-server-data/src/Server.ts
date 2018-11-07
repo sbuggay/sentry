@@ -102,9 +102,10 @@ export default class Server {
 
 
         if (!config.get("apikey")) {
-            console.log("no apikey, generating");
+            console.log("No apikey found in config. Generating...");
             const apikey = crypto.randomBytes(32).toString("hex");
             console.log(apikey);
+            console.log("Please provide this as a header with the key \"apikey\" to any request made to this server");
             config.set("apikey", apikey);
         }
     }
