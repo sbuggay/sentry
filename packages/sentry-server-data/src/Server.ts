@@ -4,6 +4,8 @@ import { exec } from "child_process";
 
 import { battery, graphics, osInfo, fsSize, cpuTemperature, Systeminformation } from "systeminformation";
 
+import * as crypto from "crypto";
+
 const app = express();
 const packageConfig = require("../package.json");
 
@@ -97,22 +99,40 @@ export default class Server {
         this.cache.addCacheFunction("dynamicInfo", dynamicInfo);
         this.cache.addCacheFunctions("serviceInfo", serviceInfo(config.get("services")));
         this.cache.runCacheFunctions();
+
+
+        if (!config.get("apikey")) {
+            console.log("no apikey, generating");
+            const apikey = crypto.randomBytes(32).toString("hex");
+            console.log(apikey);
+            config.set("apikey", apikey);
+        }
     }
 
     serverInfo() {
         return {
-            "version": packageConfig.version,
-            "staticInfo": this.cache.get("staticInfo"),
-            "os": this.cache.get("os"),
-            "dynamicInfo": this.cache.get("dynamicInfo"),
-            "serviceInfo": this.cache.get("serviceInfo")
+            version: packageConfig.version,
+            staticInfo: this.cache.get("staticInfo"),
+            dynamicInfo: this.cache.get("dynamicInfo"),
+            serviceInfo: this.cache.get("serviceInfo")
         }
     }
 
     start() {
-        app.get("/", (request, response) => {
-            response.header("Access-Control-Allow-Origin", "*");
-            response.json(this.serverInfo());
+        app.use((req, res, next) => {
+            const apikey = this.config.get("apikey");
+
+            if (req.header("apikey") === apikey) {
+                next();
+            }
+            else {
+                res.sendStatus(401);
+            }
+        });
+
+        app.get("/", (req, res) => {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.json(this.serverInfo());
         });
 
         app.listen(this.port, (error: any) => {
