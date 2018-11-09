@@ -10,7 +10,7 @@ program
     .option('-e, --edit', 'edit server config')
     .parse(process.argv)
 
-const configPath = program.config ? program.config : "./config.json";
+const configPath = program.config ? program.config : "../cfg/config.json";
 const config = new Config(configPath);
 
 if (program.edit) {

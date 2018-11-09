@@ -93,11 +93,16 @@ export default class Server {
 
     constructor(config: Config, port = 3333) {
         this.config = config;
+        console.log(config);
+
         this.port = port;
         this.cache = new Cache();
         this.cache.set("staticInfo", staticInfo);
         this.cache.addCacheFunction("dynamicInfo", dynamicInfo);
-        this.cache.addCacheFunctions("serviceInfo", serviceInfo(config.get("services")));
+        const services = config.get("services");
+        if (services) {
+            this.cache.addCacheFunctions("serviceInfo", services);
+        }
         this.cache.runCacheFunctions();
 
 
