@@ -12,8 +12,6 @@ program
 	.parse(process.argv)
 
 
-const packageDir = (process as any).mainModule.paths[0].split('node_modules')[0].slice(0, -1);;
-console.log("running from", packageDir);
 const configPath = program.config ? program.config : "config.json";
 const config = new Config(configPath);
 

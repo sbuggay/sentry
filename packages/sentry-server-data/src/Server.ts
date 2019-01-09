@@ -94,8 +94,6 @@ export default class Server {
 
 	constructor(config: Config, port = 3333) {
 		this.config = config;
-		console.log(config);
-
 		this.port = port;
 		this.cache = new Cache();
 		this.cache.set("staticInfo", staticInfo);

@@ -1,9 +1,9 @@
 import * as nconf from "nconf";
 
 import * as inquirer from "inquirer";
-import { existsSync } from "fs";
+import { existsSync, writeFileSync } from "fs";
 
-const defaultConfig = {
+export const defaultConfig = {
 	apikey: "",
 	services: []
 };
@@ -81,7 +81,8 @@ export default class Config {
 
 	constructor(configPath: string) {
 		if (!existsSync(configPath)) {
-			console.log("No config file present. Copying from config.default.json");
+			console.log(`No config file present. Creating "${configPath}"`);
+			writeFileSync(configPath, JSON.stringify(defaultConfig));
 		}
 
 		this.path = configPath;
