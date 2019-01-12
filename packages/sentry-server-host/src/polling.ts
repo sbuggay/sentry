@@ -15,11 +15,9 @@ export function pollServers(servers: IServer[]) {
 }
 
 export function pollServer(host: string, apikey: string) {
-    return fetch(host, {
-        headers: {
-            "apikey": apikey
-        }
-    }).then((res: any) => res.json())
+    return fetch(`${host}?apikey=${apikey}`).then((res: any) => {
+            return res.json();
+        })
         .then((json: JSON) => {
             return {
                 name: host,
