@@ -86,6 +86,16 @@ export class List extends React.Component<IListProps, IListState> {
                 ramBin.push(<div style={binStyle}><Ram server={server} /></div>);
                 serviceBin.push(<div style={binStyle}><Services services={server.serviceInfo} /></div>);
             });
+
+            // If the bin isn't full for the row yet, fill them.
+            function fillBin(bin: JSX.Element[]) {
+                while(bin.length % 3 !== 0) {
+                    bin.push(<div style={binStyle}></div>);
+                }
+            }
+
+            [headerBin, detailBin, cpuBin, ramBin, serviceBin].forEach(fillBin);
+
             return (
                 <div style={this.getStyle()}>
                     {headerBin}
