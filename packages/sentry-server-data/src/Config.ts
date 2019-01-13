@@ -1,7 +1,7 @@
 import * as nconf from "nconf";
 
 import * as inquirer from "inquirer";
-import { existsSync, writeFileSync } from "fs";
+import { existsSync, writeFileSync, watchFile } from "fs";
 
 export const defaultConfig = {
 	apikey: "",
@@ -84,6 +84,10 @@ export default class Config {
 			console.log(`No config file present. Creating "${configPath}"`);
 			writeFileSync(configPath, JSON.stringify(defaultConfig));
 		}
+
+		watchFile(configPath, () => {
+			this.config = nconf.file(configPath);
+		});
 
 		this.path = configPath;
 		this.config = nconf.file(configPath);
