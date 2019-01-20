@@ -19,12 +19,7 @@ function serverQuestions(service?: IService): inquirer.Questions<any> {
 		type: "input",
 		name: "name",
 		message,
-		...(
-			d
-				? {
-					default: d
-				}
-				: {})
+		...(d ? { default: d } : {})
 	});
 	return [
 		buildInput(
