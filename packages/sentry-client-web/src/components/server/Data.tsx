@@ -31,7 +31,7 @@ export default class Data extends React.Component<IDataProps, any> {
 				return null;
 			}
 
-			const str = ` ${staticInfo.platform} ${staticInfo.arch}`;
+			const str = ` ${staticInfo.type}`;
 			return renderRowSpan("platform", <span><span className={`fo-${osmapping(os)}`}></span>{str}</span>);
 		}
 
