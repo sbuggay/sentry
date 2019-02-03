@@ -1,5 +1,5 @@
 {
-  "name": "sentry-server-data",
+  "name": "sentry-data",
   "version": "0.6.0",
   "description": "A server that provides system and service information.",
   "repository": {

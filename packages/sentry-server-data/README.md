@@ -1,5 +1,5 @@
-# sentry-server-data [![npm version](https://badge.fury.io/js/sentry-server-data.svg)](https://badge.fury.io/js/sentry-server-data)
-sentry-server-data is a small express server that will report back information about the system.
+# sentry-data [![npm version](https://badge.fury.io/js/sentry-server-data.svg)](https://badge.fury.io/js/sentry-server-data)
+sentry-data is a small express server that will report back information about the system.
 
 ### Installation and Use
 The server can be acquired on npm.
@@ -9,9 +9,9 @@ npm i -g sentry-server-data
 
 It can be run with these options.
 ```bash
-$ sentry-server-data -h
+$ sentry-data -h
 
-  Usage: sentry-server-data [options]
+  Usage: sentry-data [options]
 
   Options:
 
@@ -22,7 +22,7 @@ $ sentry-server-data -h
 
 For example:
 ```bash
-$ sentry-server-data -p 3333
+$ sentry-data -p 3333
 sentry-server-data is running on port 3333
 ```
 

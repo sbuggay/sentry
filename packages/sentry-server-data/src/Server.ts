@@ -2,14 +2,7 @@ import * as os from "os";
 import * as express from "express";
 import { exec } from "child_process";
 
-import {
-	battery,
-	graphics,
-	osInfo,
-	fsSize,
-	cpuTemperature,
-	Systeminformation
-} from "systeminformation";
+import * as si from "systeminformation";
 
 import * as crypto from "crypto";
 
@@ -33,12 +26,12 @@ interface IDynamicInfo {
 	freemem: number;
 	totalmem: number;
 	cpus: any;
-	loadavg: any;
-	battery: Systeminformation.BatteryData;
-	graphics: Systeminformation.GraphicsData;
-	osInfo: Systeminformation.OsData;
-	fsSize: Systeminformation.FsSizeData[];
-	cpuTemp: Systeminformation.CpuTemperatureData;
+	loadavg: number[];
+	battery: si.Systeminformation.BatteryData;
+	graphics: si.Systeminformation.GraphicsData;
+	osInfo: si.Systeminformation.OsData;
+	fsSize: si.Systeminformation.FsSizeData[];
+	cpuTemp: si.Systeminformation.CpuTemperatureData;
 }
 
 export const staticInfo: IStaticInfo = {
@@ -49,28 +42,34 @@ export const staticInfo: IStaticInfo = {
 	endianness: os.endianness()
 };
 
-export function dynamicInfo(): Promise<IDynamicInfo> {
-	function getOsData() {
-		return {
-			hostname: os.hostname(),
-			uptime: os.uptime(),
-			freemem: os.freemem(),
-			totalmem: os.totalmem(),
-			cpus: os.cpus(),
-			loadavg: os.loadavg()
-		};
+export async function dynamicInfo(): Promise<IDynamicInfo> {
+	const osData = {
+		hostname: os.hostname(),
+		uptime: os.uptime(),
+		freemem: os.freemem(),
+		totalmem: os.totalmem(),
+		cpus: os.cpus(),
+		loadavg: os.loadavg()
 	}
 
-	return Promise.all([battery(), graphics(), osInfo(), fsSize(), cpuTemperature()]).then(([battery, graphics, osInfo, fsSize, cpuTemp]) => {
-		return {
-			...getOsData(),
-			battery,
-			graphics,
-			osInfo,
-			fsSize,
-			cpuTemp
-		};
-	});
+	const promises = [
+		si.battery(),
+		si.graphics(),
+		si.osInfo(),
+		si.fsSize(),
+		si.cpuTemperature()
+	];
+
+	const [battery, graphics, osInfo, fsSize, cpuTemp] = await Promise.all(promises);
+	return {
+		...osData,
+		battery,
+		graphics,
+		osInfo,
+		fsSize,
+		cpuTemp
+	};
+
 }
 
 export const serviceInfo = (services: any) => {
@@ -114,7 +113,12 @@ export default class Server {
 	}
 
 	serverInfo() {
-		return { version: packageConfig.version, staticInfo: this.cache.get("staticInfo"), dynamicInfo: this.cache.get("dynamicInfo"), serviceInfo: this.cache.get("serviceInfo") };
+		return {
+			version: packageConfig.version,
+			staticInfo: this.cache.get("staticInfo"),
+			dynamicInfo: this.cache.get("dynamicInfo"),
+			serviceInfo: this.cache.get("serviceInfo")
+		};
 	}
 
 	start() {

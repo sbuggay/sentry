@@ -5,8 +5,6 @@
 
 ![demo1](https://raw.githubusercontent.com/sbuggay/sentry/master/demo/demo3.png)
 
-Sentry comprises of three packages: the client, the data server, and the host server.
-
 | package | version |
 | ------- | ------- |
 | [sentry-client-web](https://github.com/sbuggay/sentry/tree/master/packages/sentry-client/dist) | [![npm version](https://badge.fury.io/js/sentry-client-dist.svg)](https://badge.fury.io/js/sentry-client-dist) |
