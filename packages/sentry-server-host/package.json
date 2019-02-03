@@ -9,6 +9,11 @@
     "build": "tsc",
     "test": "jest . --coverage"
   },
+  "files": [
+    "config/config.default.json",
+    "scripts/**/*",
+    "dist/**/*"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -29,7 +34,5 @@
   "devDependencies": {
     "@types/jest": "^23.3.7",
     "ts-jest": "^23.10.4"
-    
-
   }
 }

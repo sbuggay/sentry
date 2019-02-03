@@ -6,12 +6,11 @@ import { pollServers } from "./polling";
 import { configGet } from "./configHandler";
 
 router.get("/", (req, res) => {
-    const hosts = configGet("servers").map((server: any) => server.host);  
+    const servers = configGet("servers");
 
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Content-Type: application/json");
-    pollServers(hosts).then((result) => {
-        res.send(result);
+    pollServers(servers).then((result) => {
+        res.json(result);
     });
 });
 

@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/sbuggay/sentry/branch/master/graph/badge.svg)](https://codecov.io/gh/sbuggay/sentry)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-![demo1](https://raw.githubusercontent.com/sbuggay/sentry/master/demo/demo1.png)
+![demo1](https://raw.githubusercontent.com/sbuggay/sentry/master/demo/demo3.png)
 
 Sentry comprises of three packages: the client, the data server, and the host server.
 

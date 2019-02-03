@@ -1,6 +1,6 @@
 {
   "name": "sentry-server-data",
-  "version": "0.3.9",
+  "version": "0.6.0",
   "description": "A server that provides system and service information.",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   },
   "bin": "./scripts/server",
   "files": [
-    "config.json",
+    "config/config.default.json",
     "scripts/**/*",
     "dist/**/*"
   ],
@@ -41,7 +41,8 @@
     "getos": "^3.1.0",
     "inquirer": "^6.2.0",
     "nconf": "^0.10.0",
-    "prompt": "^1.0.0"
+    "prompt": "^1.0.0",
+    "systeminformation": "^3.46.0"
   },
   "devDependencies": {
     "@types/express": "^4.16.0",
@@ -50,6 +51,7 @@
     "@types/jest": "^23.3.7",
     "@types/nconf": "0.0.37",
     "@types/node": "^10.12.0",
+    "@types/systeminformation": "^3.23.0",
     "jest": "^23.6.0",
     "ts-jest": "^23.10.4",
     "typescript": "^3.1.3"

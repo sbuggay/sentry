@@ -2,17 +2,22 @@ import fetch from "node-fetch";
 
 import { EStatus } from "./constants";
 
-export function pollServers(hosts: string[]) {
-    const promises = hosts.map((host) => {
-        console.log(`polling ${host}`);
-        return pollServer(host);
+export interface IServer {
+    host: string;
+    apikey: string;
+}
+
+export function pollServers(servers: IServer[]) {
+    const promises = servers.map((server) => {
+        return pollServer(server.host, server.apikey);
     });
     return Promise.all(promises);
 }
 
-export function pollServer(host: string) {
-    return fetch(host)
-        .then((res: any) => res.json())
+export function pollServer(host: string, apikey: string) {
+    return fetch(`${host}?apikey=${apikey}`).then((res: any) => {
+            return res.json();
+        })
         .then((json: JSON) => {
             return {
                 name: host,
