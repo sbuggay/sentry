@@ -1,8 +1,4 @@
 # :eye: Sentry 
-[![Build Status](https://travis-ci.org/sbuggay/sentry.svg?branch=master)](https://travis-ci.org/sbuggay/sentry)
-[![codecov](https://codecov.io/gh/sbuggay/sentry/branch/master/graph/badge.svg)](https://codecov.io/gh/sbuggay/sentry)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
 ![demo1](https://raw.githubusercontent.com/sbuggay/sentry/master/demo/demo3.png)
 
 | package | version |
