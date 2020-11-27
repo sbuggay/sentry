@@ -42,7 +42,7 @@
     "inquirer": "^6.2.0",
     "nconf": "^0.10.0",
     "prompt": "^1.0.0",
-    "systeminformation": "^3.46.0"
+    "systeminformation": "^4.30.5"
   },
   "devDependencies": {
     "@types/express": "^4.16.0",
